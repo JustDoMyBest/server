@@ -1,0 +1,9 @@
+mysql数据库备份Percona Xtrabackup
+lvm分区扩容
+svn
+vsftp
+nagios
+python
+好商城
+NGINX
+docker

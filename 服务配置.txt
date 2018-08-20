@@ -1,0 +1,9 @@
+vsftp
+	allow_writeable_chroot=YES
+	listen_port=811
+
+mysql
+	expire_logs_days=3
+
+crontab
+	/var/spool/cron/user

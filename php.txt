@@ -1,0 +1,7 @@
+phpÀ©Õ¹°²×°
+	tar zxvf memcache-2.2.5.tgz
+	cd memcache-2.2.5/
+	/usr/local/webserver/php/bin/phpize
+	./configure ¨Cwith-php-config=/usr/local/webserver/php/bin/php-config
+	make
+	make install
