@@ -1,0 +1,3 @@
+disable_functions = shell_exec, system, passthru, exec, popen, proc_open
+disable_functions = shell_exec, system, passthru, exec, popen
+display_errors = On

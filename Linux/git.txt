@@ -1,0 +1,5 @@
+$ git config --global -l
+credential.helper=wincred
+user.email=Sam@Sam.com
+user.name=Sam
+http.proxy=http://127.0.0.1:3128

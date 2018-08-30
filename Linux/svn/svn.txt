@@ -1,0 +1,6 @@
+yum install -y subversion
+
+svnadmin create myProject
+
+svnserve -d -r root_directory
+

@@ -1,0 +1,5 @@
+yum -y install vnc *vnc-server*
+vncpasswd
+vncserver # open and print port
+firewall-cmd --add-port=5901/tcp # add port to firewalld
+vncserver -kill :7 # close port

@@ -1,0 +1,14 @@
+chroot_local_user=YES
+chroot_list_enable=YES
+chroot_list_file=/etc/vsftpd/chroot_list
+
+pam_service_name=vsftpd
+userlist_enable_enable=YES
+#userlist_deny=YES # blacklist 
+#userlist_deny=NO # whitelist 使用白名单后，匿名用户将无法登入！除非显式在user_list中加入一行：anonymous
+tcp_wrappers=YES
+allow_writeable_chroot=YES
+use_localtime-YES
+
+useradd -s /sbin/nologin -d /home/wwwroot/ -M -G www,ftp huxizhi
+#userdel -r huxizhi

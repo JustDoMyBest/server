@@ -1,0 +1,160 @@
+### This file is an example authorization file for svnserve.
+### Its format is identical to that of mod_authz_svn authorization
+### files.
+### As shown below each section defines authorizations for the path and
+### (optional) repository specified by the section name.
+### The authorizations follow. An authorization line can refer to:
+###  - a single user,
+###  - a group of users defined in a special [groups] section,
+###  - an alias defined in a special [aliases] section,
+###  - all authenticated users, using the '$authenticated' token,
+###  - only anonymous users, using the '$anonymous' token,
+###  - anyone, using the '*' wildcard.
+###
+### A match can be inverted by prefixing the rule with '~'. Rules can
+### grant read ('r') access, read-write ('rw') access, or no access
+### ('').
+[aliases]
+# joe = /C=XZ/ST=Dessert/L=Snake City/O=Snake Oil, Ltd./OU=Research Institute/CN=Joe Average
+[groups]
+# harry_and_sally = harry,sally
+# harry_sally_and_joe = harry,sally,&joe
+#chen_and_deng = dengyun,zhangwei
+
+g_admin = zhangwei,chenjianbo,hujianxin,wangziyuan,guoyuanmei,zhuocanbin
+g_b.goldjet.com.cn = chenfeixiong,litaotao
+g_Btransport = chenfeixiong,litaotao,miaojingsi
+g_customs_gz = huangguanhua,miaojingsi,chenshufang,chenbaoxia,wenxin,kongjiancong,duhengjun
+g_gaopost = kongjiancong,xiaoliangtang,duhengjun,zhongmingtao,luoyijun,chenlizhi,linjiaming
+g_manage = huangguanhua,kongjiancong,miaojingsi,chenshufang,chenbaoxia,wenxin
+g_monitor = huangguanhua,miaojingsi,chenshufang,chenbaoxia,wenxin
+g_oms.ejbuy.com = huangguanhua,chenfeixiong,kongjiancong,miaojingsi,chenshufang,chenbaoxia,wenxin,xiaoliangtang,litaotao,huangwenchao,duhengjun,shenjiaming,chenlizhi,chengziliang,luoguosheng,linjiaming,huxizhi,caominling,chenjiahao
+g_system_api = huangguanhua,miaojingsi,chenshufang,chenbaoxia,wenxin
+g_transport = chenfeixiong,litaotao
+g_www.ejbuy.com = chenshufang,miaojingsi,duhengjun
+g_sj = caominling
+g_Scan = zengzilong
+
+#g_wms
+#g_yii
+#g_ejshop 
+#g_goldjet
+#g_test.ejbuy.com
+#g_testmall
+#g_oms
+
+
+[repos:/]
+@g_admin = rw
+* = rw
+
+[repos:/b.goldjet.com.cn]
+@g_admin = rw
+@g_b.goldjet.com.cn = rw
+* = 
+
+[repos:/btransport]
+@g_admin = rw
+@g_Btransport = rw
+* = 
+
+
+[repos:/customs_gz]
+@g_admin = rw
+@g_customs_gz = rw
+* = 
+
+
+[repos:/ejshop]
+@g_admin = rw
+* = 
+
+[repos:/gaopost]
+@g_admin = rw
+@g_gaopost = rw
+* = 
+
+
+[repos:/goldjet]
+@g_admin = rw
+* = 
+
+[repos:/manage]
+@g_admin = rw
+@g_manage = rw
+* = 
+
+[repos:/monitor]
+@g_admin = rw
+@g_monitor = rw
+* = 
+
+
+[repos:/oms]
+@g_admin = rw
+* = 
+
+[repos:/oms.ejbuy.com]
+@g_admin = rw
+@g_oms.ejbuy.com = rw
+* = 
+
+[repos:/system_api]
+@g_admin = rw
+@g_system_api = rw
+* = 
+
+[repos:/test.ejbuy.com]
+@g_admin = rw
+* = 
+
+[repos:/testmall]
+@g_admin = rw
+* = 
+
+[repos:/transport]
+@g_admin = rw
+@g_transport = rw
+* = 
+
+
+[repos:/wms]
+@g_admin = rw
+huangguanhua =rw
+* = 
+
+[repos:/yii]
+@g_admin = rw
+* = 
+
+[repos:/www.ejbuy.com]
+@g_admin = rw
+@g_www.ejbuy.com = rw
+* = 
+
+[repos:/www.ejbuy.com]
+@g_sj = rw
+
+
+[repos:/Express_Scan]
+@g_Scan = rw
+
+[repos:/Oversea_Scan]
+@g_Scan = rw
+
+[repos:/Tally_Scan]
+@g_Scan = rw
+
+[repos:/Ems_Scan]
+@g_Scan = rw
+
+[repos:/HKOMS]
+@g_oms.ejbuy.com =rw
+
+# [/foo/bar]
+# harry = rw
+# &joe = r
+# * =
+#[repos:/svnroot/repos/]
+#@chen-and_deng = rw
+#*= r

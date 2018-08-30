@@ -1,0 +1,93 @@
+## init
+scripts/mysql_install_db --user=mysql \
+         --basedir=/opt/mysql/mysql \
+         --datadir=/opt/mysql/mysql/data
+
+## backup
+cd /home/db_backup
+innobackupex --user=user --password=passwd --stream=tar | gzip > `date +'%Y%m%d_%H%M%S'.tgz`
+
+## recovery
+innobackupex --apply-log alldatabase
+innobackupex --copy-back alldatabase # 将备份还原到 my.cnf 指定的 datadir 中，不指定 --defaults-file，默认 /etc/my.cnf
+
+
+## parameter
+show variables like '%test%'
+slow_query_log
+long_query_time=2 # second
+log-bin=mysql-bin
+expire_logs_days = 4 # minute
+max_connections = 1000
+max_connect_errors = 10
+
+
+init-file=file_name.sql
+init-connect='sql' # disable when user is root
+set sql_safe_updates=1
+
+
+## SQL
+mysql -h192.168.1.102 -uroot -p123456 --default-character-set=utf8 -A -N -e 'sql'
+-A的含义是不去预读全部数据表信息，这样可以解决在数据表很多的时候卡死的问题
+-N，很简单，Don't write column names in results，获取的数据信息省去列名称
+
+
+## master-slave-copy
+# master
+[mysqld]
+log-bin=mysql-bin #开启二进制日志
+server-id=1 #设置server-id
+CREATE USER 'repl'@'123.57.44.85' IDENTIFIED BY 'slavepass';#创建用户
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'123.57.44.85';#分配权限
+flush privileges;   #刷新权限
+SHOW MASTER STATUS;
+
+# 不同步哪些数据库  
+binlog-ignore-db = mysql  
+binlog-ignore-db = test  
+binlog-ignore-db = information_schema  
+  
+# 只同步哪些数据库，除此之外，其他不同步  
+binlog-do-db = game  
+
+# slave
+[mysqld]
+server-id=2 #设置server-id，必须唯一
+mysql> CHANGE MASTER TO
+    ->     MASTER_HOST='182.92.172.80',
+    ->     MASTER_USER='rep1',
+    ->     MASTER_PASSWORD='slavepass',
+    ->     MASTER_LOG_FILE='mysql-bin.000003',
+    ->     MASTER_LOG_POS=73;
+mysql>start slave;
+mysql> show slave status\G;
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 182.92.172.80
+                  Master_User: rep1
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: mysql-bin.000013
+          Read_Master_Log_Pos: 11662
+               Relay_Log_File: mysqld-relay-bin.000022
+                Relay_Log_Pos: 11765
+        Relay_Master_Log_File: mysql-bin.000013
+             Slave_IO_Running: Yes
+            Slave_SQL_Running: Yes
+              Replicate_Do_DB: 
+          Replicate_Ignore_DB: 
+        ...
+
+
+
+
+
+
+
+
+
+
+
+
+

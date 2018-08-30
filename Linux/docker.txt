@@ -1,0 +1,9 @@
+{
+#    "registry-mirrors": ["<your accelerate address>"]
+    "registry-mirrors": ["https://registry.docker-cn.com"], "live-restore": true
+}
+
+docker pull library/hello-world
+docker images
+docker save -o 要保存的文件名 要保存的镜像
+docker load < 文件名

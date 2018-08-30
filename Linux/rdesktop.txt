@@ -1,0 +1,1 @@
+rdesktop -a 16 -f -r clipboard:PRIMARYCLIPBOARD sound:local disk:MyDisk=/home/comet/temp ip

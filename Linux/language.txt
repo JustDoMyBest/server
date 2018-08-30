@@ -1,0 +1,1 @@
+sudo apt-get -y install language-pack-zh-hant language-pack-zh-hans

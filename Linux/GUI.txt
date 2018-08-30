@@ -1,0 +1,2 @@
+yum groupinstall "GNOME Desktop" "Graphical Administration Tools"
+systemctl set-default runlevel5.target
