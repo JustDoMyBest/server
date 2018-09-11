@@ -1,0 +1,13 @@
+1. 生成私钥KEY
+openssl genrsa -des3 -out server.key 2048
+
+2. 生成证书请求文件CSR
+openssl req -new -key server.key -out server.csr
+
+3. 生成CA的证书
+openssl req -new -x509 -key server.key -out ca.crt -days 3650
+
+4. 最后用第3步的CA证书给自己颁发一个证书玩玩
+openssl x509 -req -days 3650 -in server.csr \
+  -CA ca.crt -CAkey server.key \
+  -CAcreateserial -out server.crt

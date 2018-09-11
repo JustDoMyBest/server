@@ -53,6 +53,9 @@ docker tag docker/whalesay xibeifeng/whalesay
 docker login
 docker push xibeifeng/whalesay
 curl -L https://github.com/docker/compose/release/download/1.9.0/docker-compose-$(uname -s)-$(uname -m) > /usr/local/bin/docker-compose
+docker-compose up -d
+docker-compose stop
+docker-compose rm
 
 ÈÝÆ÷×ª³É¾µÏñ£º
 sudo docker commit <CONTAINER ID> imagename
