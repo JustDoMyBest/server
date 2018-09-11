@@ -31,6 +31,6 @@ services:
       MYSQL_USER: ghost
       MYSQL_PASSWORD: ghost
     volumes:
-      - $PWD/data:/var/libmysql
+      - $PWD/data:/var/lib/mysql
     ports:
       - "3306:3306"
