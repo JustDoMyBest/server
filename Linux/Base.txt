@@ -6,6 +6,7 @@ top -d1
 top -p pid -H -d1
 iotop
 htop
+iftop
 find . -mindepth 3 -print
 find . -empty
 ll -rt|sed -n '2p'
@@ -19,7 +20,7 @@ netstat -alnput
 echo -n '打印后不换行'
 read -s -t 99 -p '请在99秒内输入密码：' passwd
 echo $passwd
-df -lh
+df -lhT
 du -lh --max-depth=1 /
 du -sh *
 time -f  "start:`date` \truntime:\%E  file:file_name  "
@@ -43,3 +44,9 @@ iconv file1 -f EUC-JP-MS -t UTF-8 -o file2
 locale -a
 rsync -avzpog /source/ /destination/
 htpasswd -bc .passwd www.linuxde.net php
+usermod -l newUsername oldUsername
+/etc/fstab
+systemctl mask
+systemctl unmask
+uname -s
+uname -m

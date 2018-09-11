@@ -10,5 +10,5 @@ tcp_wrappers=YES
 allow_writeable_chroot=YES
 use_localtime-YES
 
-useradd -s /sbin/nologin -d /home/wwwroot/ -M -G www,ftp huxizhi
+useradd -s /sbin/nologin -d /home/wwwroot/ -M -g www -G ftp huxizhi
 #userdel -r huxizhi

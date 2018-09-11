@@ -1,9 +1,79 @@
+# Set up repository
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+# Use Aliyun Docker
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+# Install docker
+# on a new system with yum repo defined, forcing older version and ignoring obsoletes introduced by 17.06.0
+yum install -y --setopt=obsoletes=0 \
+   docker-ce-17.03.2.ce-1.el7.centos.x86_64 \
+   docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch
+or
+yum install docker
+
+
 {
-#    "registry-mirrors": ["<your accelerate address>"]
-    "registry-mirrors": ["https://registry.docker-cn.com"], "live-restore": true
+  "registry-mirrors": ["https://registry.docker-cn.com"],
+  "live-restore": true,
+  "storage-driver": "devicemapper" # xfs only
 }
 
+
+docker search whalesay
 docker pull library/hello-world
+docker build -t hello_docker .
+docker build -t xbf/hello-nginx .
+docker push myname/whalesay
 docker images
-docker save -o 要保存的文件名 要保存的镜像
-docker load < 文件名
+docker image ls
+docker ps
+docker ps -a
+docker ps -aq
+docker rm ${CID}
+docker rm $(docker ps -aq)
+docker container ls -l
+docker rmi ${IID}
+docker run -it --rm ubuntu:16.04 bash
+docker run -d --name vm1 -p 80:80 ubuntu:16.04
+
+docker run -p 80:80 -d -v $PWD/html:/usr/share/nginx/html nginx
+docker create -v $PWD/data:/var/mydata --name data_container ubuntu # container only have data
+docker run -it --volumes-from data_container ubuntu bash
+
+docker inspect vm1
+docker exec -it ${CID} bash
+docker stop ${CID}
+docker restart ${CID}
+docker info
+docker version
+docker cp index.html ${CID}://usr/share/nginx/html
+docker commit -m 'fun' ${CID} nginx
+docker tag docker/whalesay xibeifeng/whalesay
+docker login
+docker push xibeifeng/whalesay
+curl -L https://github.com/docker/compose/release/download/1.9.0/docker-compose-$(uname -s)-$(uname -m) > /usr/local/bin/docker-compose
+
+容器转成镜像：
+sudo docker commit <CONTAINER ID> imagename
+
+容器转成文件：
+sudo docker export <CONTAINER ID> > /home/exportname.tar
+
+镜像转成文件：
+sudo docker save imagename01 > /home/savename.tar
+注：一般情况下，savename.tar比exportname.tar大一点点而已，export比较小，因为它丢失了历史和数据元metadata
+
+文件转成镜像：
+cat /home/exportname.tar | sudo docker import - imagename:latest
+
+save.tar文件转成镜像：
+docker load < /home/savename.tar
+
+查看转成的镜像：
+sudo docker images
+
+注意：这里一个镜像经过n次转化之后，可以用sudo docker images --tree查看历史，用docker tag <LAYER ID> <IMAGE NAME>你可以回到某个层（只针对save命令可以回到某个层！）
+
+
+

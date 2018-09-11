@@ -11,6 +11,8 @@ innobackupex --user=user --password=passwd --stream=tar | gzip > `date +'%Y%m%d_
 innobackupex --apply-log alldatabase
 innobackupex --copy-back alldatabase # 将备份还原到 my.cnf 指定的 datadir 中，不指定 --defaults-file，默认 /etc/my.cnf
 
+## tools
+./mysqlbinlog --start-datetime='2018-9-5 16:50:00' --stop-datetime='2018-9-5 17:02:00' /home/mariadb_var/mysql-copy.002368 -s | grep 'ej_kaola_order_abnormal'
 
 ## parameter
 show variables like '%test%'

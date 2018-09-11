@@ -1,0 +1,76 @@
+# install openvpn and easyrsa
+yum install -y openvpn wget
+wget -O /tmp/easyrsa https://github.com/OpenVPN/easy-rsa-old/archive/2.3.3.tar.gz
+tar xfz /tmp/easyrsa
+cp -rf easy-rsa-old-2.3.3/easy-rsa/2.0/* /etc/openvpn/easy-rsa
+chown sammy /etc/openvpn/easy-rsa/
+
+# configure server.conf
+cp /usr/share/doc/openvpn-2.4.4/sample/sample-config-files/server.conf /etc/openvpn
+nano /etc/openvpn/server.conf
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+user nobody
+group nobody
+topology subnet
+;remote-cert-eku "TLS Web Client Authentication"
+;tls-auth ta.key 0
+tls-crypt myvpn.tlsauth
+openvpn --genkey --secret /etc/openvpn/myvpn.tlsauth
+
+# Generating Keys and Certificates
+mkdir /etc/openvpn/easy-rsa/keys
+nano /etc/openvpn/easy-rsa/vars
+source ./vars
+./clean-all
+./build-ca
+./build-key-server server
+./build-dh
+cd /etc/openvpn/easy-rsa/keys
+cp dh2048.pem ca.crt server.crt server.key /etc/openvpn
+cd /etc/openvpn/easy-rsa
+./build-key client
+cp /etc/openvpn/easy-rsa/openssl-1.0.0.cnf /etc/openvpn/easy-rsa/openssl.cnf
+
+# Routing
+firewall-cmd --get-active-zones
+firewall-cmd --zone=trusted --add-service openvpn
+firewall-cmd --zone=trusted --add-service openvpn --permanent
+firewall-cmd --list-services --zone=trusted
+firewall-cmd --add-masquerade
+firewall-cmd --permanent --add-masquerade
+firewall-cmd --query-masquerade
+SHARK=$(ip route get 8.8.8.8 | awk 'NR==1 {print $(NF-2)}')
+firewall-cmd --permanent --direct --passthrough ipv4 -t nat -A POSTROUTING -s 10.8.0.0/24 -o $SHARK -j MASQUERADE
+firewall-cmd --reload
+nano /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+systemctl restart network.service
+
+# Starting OpenVPN
+systemctl -f enable openvpn@server.service
+systemctl start openvpn@server.service
+systemctl status openvpn@server.service
+
+# Configuring a Client
+/etc/openvpn/easy-rsa/keys/ca.crt
+/etc/openvpn/easy-rsa/keys/client.crt
+/etc/openvpn/easy-rsa/keys/client.key
+/etc/openvpn/myvpn.tlsauth
+
+nano client.ovpn
+client
+tls-client
+ca /path/to/ca.crt
+cert /path/to/client.crt
+key /path/to/client.key
+tls-crypt /path/to/myvpn.tlsauth
+;remote-cert-eku "TLS Web Client Authentication"
+proto udp
+remote your_server_ip 1194 udp
+dev tun
+topology subnet
+pull
+user nobody
+group nobody
