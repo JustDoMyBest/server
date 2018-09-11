@@ -36,8 +36,14 @@ fi
 
 cd $emacs_src_dir
 #./configure --prefix=$emacs_installed_dir --with-x-toolkit=no --with-gif=no --with-tiff=no && make && make install
-./configure --prefix=$emacs_installed_dir --without-x --without-selinux && make && sudo make install
-#./configure && make && sudo make install
+read -p 'please input with x or not:(y or n,default n)' x
+if test $x -eq 'y'
+then
+    ./configure --prefix=$emacs_installed_dir --without-selinux && make && sudo make install
+else
+    ./configure --prefix=$emacs_installed_dir --without-x --without-selinux && make && sudo make install
+fi
+#./configure --prefix=$emacs_installed_dir && make && sudo make install
 cd ..
 
 
