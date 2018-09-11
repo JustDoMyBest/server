@@ -1,0 +1,5 @@
+执行命令 md autorun.inf\nul\\ 创建无法被删除的 autorun.inf 文件夹。
+执行命令 attrib autorun.inf +h /s /d 隐藏 autorun.inf 文件夹。
+
+执行命令 rd autorun.inf\nul\ /s
+执行命令 rd autorun.inf /s

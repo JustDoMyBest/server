@@ -1,0 +1,11 @@
+ntsd -c q -pn ***.exe （***.exe 为进程名,exe不能省）
+ntsd -c q -p PID
+
+del /F /S /Q C：\TimeEventNSIS.log
+del /F /S /Q C：\XXX文件夹
+
+eventvwr
+shell:startup
+regedit
+ms-settings:network
+drivers
