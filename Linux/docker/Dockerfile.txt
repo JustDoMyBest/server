@@ -7,6 +7,10 @@ COPY index.html /var/www/html
 ENTRYPOINT ["/usr/sbin/nginx","-g","daemon off;"]
 EXPOSE 80
 
+FROM ghost
+COPY ./config.js /var/lib/ghost/config.js
+EXPOSE 2368
+#CMD ["npm", "start", "--production"]
 
 ADD
 CMD
