@@ -1,8 +1,15 @@
 ntsd -c q -pn ***.exe （***.exe 为进程名,exe不能省）
 ntsd -c q -p PID
 
+netstat -aon|findstr "8080"
+taskkill /pid 4136 -t -f
+
+tasklist|findstr "127704"
+taskkill /f /t /im java.exe
+
 del /F /S /Q C：\TimeEventNSIS.log
 del /F /S /Q C：\XXX文件夹
+Process Explorer
 
 eventvwr
 shell:startup

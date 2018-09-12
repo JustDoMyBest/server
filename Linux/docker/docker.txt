@@ -53,9 +53,6 @@ docker tag docker/whalesay xibeifeng/whalesay
 docker login
 docker push xibeifeng/whalesay
 curl -L https://github.com/docker/compose/release/download/1.9.0/docker-compose-$(uname -s)-$(uname -m) > /usr/local/bin/docker-compose
-docker-compose up -d
-docker-compose stop
-docker-compose rm
 
 容器转成镜像：
 sudo docker commit <CONTAINER ID> imagename
@@ -77,6 +74,10 @@ docker load < /home/savename.tar
 sudo docker images
 
 注意：这里一个镜像经过n次转化之后，可以用sudo docker images --tree查看历史，用docker tag <LAYER ID> <IMAGE NAME>你可以回到某个层（只针对save命令可以回到某个层！）
+
+
+
+
 
 
 

@@ -50,3 +50,6 @@ systemctl mask
 systemctl unmask
 uname -s
 uname -m
+echo "123456" | passwd --stdin root
+chpasswd < chpass.txt
+history -c
