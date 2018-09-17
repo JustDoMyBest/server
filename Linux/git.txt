@@ -1,3 +1,7 @@
+# install
+yum ¨Cy install git
+git init --bare learngit.git
+
 $ git config --global -l
 credential.helper=wincred
 user.email=Sam@Sam.com

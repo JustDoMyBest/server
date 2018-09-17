@@ -1,0 +1,15 @@
+virtualenv -p /usr/local/python3_7/bin/python3 python3_7
+
+os.path.getsize
+os.path.getctime
+os.path.getatime
+os.path.getmtime
+os.utime("a2.py",(1330712280, 1330712292))
+
+;;; Fix junk characters in shell-mode
+(add-hook 'shell-mode-hook 
+          'ansi-color-for-comint-mode-on)
+
+echo ";;; Fix junk characters in shell-mode" > ~/.emacs
+echo "(add-hook 'shell-mode-hook" >> ~/.emacs
+echo "          'ansi-color-for-comint-mode-on)" >> ~/.emacs

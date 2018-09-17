@@ -1,1 +1,17 @@
 ./check_ping -H8.8.8.8 -w200,20% -c300,50% -p3 -t2 -4
+
+# mail
+yum install -y sendmail* mailx
+firewall-cmd --add-port=25/tcp
+firewall-cmd --add-port=25/tcp --permanent
+service sendmail restart
+echo "Nagios Test Email " | mail -s "Alert" 616043155@qq.com
+vim /etc/nagios/nagios.cfg
+enable_notifications=1
+
+vi /etc/mail.rc
+set from=vip_star_hr@163.com
+set smtp=smtp.163.com
+set smtp-auth-user=vip_star_hr
+set smtp-auth-password=Passwd
+set smtp-auth=login

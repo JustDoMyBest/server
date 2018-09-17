@@ -77,12 +77,24 @@ group nobody
 script-security 2
 route-up  ÄãµÄ½Å±¾Â·¾¶/fix-routes.sh
 
-#  fix-routes.sh
-#!/bin/sh
 
-echo "Adding default route to $route_vpn_gateway with /0 mask..."
-/usr/sbin/ip route add default via $route_vpn_gateway
 
-echo "Removing /1 routes..."
-/usr/sbin/ip route del 0.0.0.0/1 via $route_vpn_gateway
-/usr/sbin/ip route del 128.0.0.0/1 via $route_vpn_gateway
+
+
+
+
+
+# auth-user-pass-verify
+auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
+client-cert-not-required
+username-as-common-name
+script-security 3
+
+vim psw-file
+test 123456
+chmod 400 psw-file
+chown nobody.nobody psw-file
+#cert client1.crt
+#key client1.key
+auth-user-pass
+
