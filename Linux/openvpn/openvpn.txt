@@ -84,7 +84,7 @@ route-up  ÄãµÄ½Å±¾Â·¾¶/fix-routes.sh
 
 
 
-# auth-user-pass-verify
+# server.conf auth-user-pass-verify
 auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
 client-cert-not-required
 username-as-common-name

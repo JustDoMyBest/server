@@ -1,0 +1,5 @@
+amix/vimrc
+
+%s/xxx//gn
+C-U ":set scroll=10
+C-E

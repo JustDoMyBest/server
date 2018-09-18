@@ -1,2 +1,3 @@
+# Plugins
 Easy WP SMTP
 WP User Avatar
