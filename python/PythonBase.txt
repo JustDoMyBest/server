@@ -1,0 +1,26 @@
+./configure --prefix=/usr/local/python3_7 --enable-shared && make && make install \
+    && cp -p /etc/ld.so.conf /etc/ld.so.conf_bak && echo '/usr/local/python3_7/lib' >> /etc/ld.so.conf && ldconfig
+    && cp -p /root/.bashrc /root/.bashrc_bak && echo 'PATH=$PATH:/usr/local/python3_7/bin' >> /root/.bashrc
+source /root/.bashrc
+vi /etc/ld.so.conf
+ldconfig
+#export LD_LIBRARY_PATH=/usr/local/lib
+virtualenv -p /usr/local/python3_7/bin/python3 python3_7
+
+os.path.getsize
+os.path.getctime
+os.path.getatime
+os.path.getmtime
+os.utime("a2.py",(1330712280, 1330712292))
+
+rm -f /usr/local/bin/python*
+rm -f /usr/local/bin/pip*
+rm -f /usr/local/bin/pydoc
+rm -rf /usr/local/bin/include/python*
+rm -f /usr/local/lib/libpython*.a
+rm -rf /usr/local/lib/python*
+
+rm -f /usr/local/share/man/python*
+rm -rf /usr/local/lib/pkgconfig
+rm -f /usr/local/bin/idle
+rm -f /usr/local/bin/easy_install*

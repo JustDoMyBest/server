@@ -1,0 +1,7 @@
+LoadFile yourxampppath/php7/php7ts.dll
+LoadFile yourxampppath/php7/libpq.dll
+LoadModule php7_module yourxampppath/php7/php7apache2_4.dll
+
+<IfModule php7_module>
+    PHPINIDir "yourxampppath/php7"
+</IfModule>

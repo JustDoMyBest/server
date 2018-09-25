@@ -1,0 +1,145 @@
+
+2018/04/27 14:17:40 [notice] 25191#0: signal process started
+2018/04/28 16:22:35 [notice] 12771#0: signal process started
+2018/05/21 16:31:20 [notice] 19810#0: signal process started
+2018/06/08 11:11:19 [notice] 27584#0: signal process started
+2018/06/22 13:57:57 [warn] 45693#0: conflicting server name "" on 0.0.0.0:8803, ignored
+2018/06/22 13:58:07 [warn] 46051#0: conflicting server name "" on 0.0.0.0:8803, ignored
+2018/06/22 13:58:07 [notice] 46051#0: signal process started
+2018/06/22 13:58:39 [notice] 46570#0: signal process started
+2018/06/27 11:21:25 [notice] 3491#0: signal process started
+2018/06/27 11:24:04 [notice] 5590#0: signal process started
+2018/06/27 11:26:07 [notice] 7300#0: signal process started
+2018/06/27 11:29:56 [notice] 10119#0: signal process started
+2018/06/27 11:31:38 [notice] 11797#0: signal process started
+2018/06/28 13:44:47 [notice] 46959#0: signal process started
+2018/07/04 09:59:40 [notice] 45120#0: signal process started
+2018/07/20 14:29:40 [notice] 21665#0: signal process started
+2018/07/20 14:30:25 [notice] 22681#0: signal process started
+2018/07/20 14:30:26 [notice] 22728#0: signal process started
+2018/07/25 17:47:35 [notice] 15136#0: signal process started
+2018/08/13 11:36:55 [notice] 22104#0: signal process started
+2018/08/13 11:37:35 [notice] 24004#0: signal process started
+2018/08/13 12:00:27 [notice] 20309#0: signal process started
+2018/09/03 22:17:58 [notice] 31575#0: signal process started
+2018/09/06 09:23:37 [notice] 41536#0: signal process started
+2018/09/06 09:27:25 [notice] 2875#0: signal process started
+2018/09/06 14:20:52 [notice] 41185#0: signal process started
+2018/09/06 14:23:38 [notice] 47213#0: signal process started
+2018/09/06 14:28:49 [emerg] 10296#0: invalid port in "80123" of the "listen" directive in /usr/local/nginx/conf/vhost/eusacn.com.conf:3
+2018/09/06 14:29:13 [notice] 11383#0: signal process started
+2018/09/06 14:30:34 [notice] 15304#0: signal process started
+2018/09/06 14:33:21 [notice] 22174#0: signal process started
+2018/09/06 14:35:41 [emerg] 27274#0: invalid number of arguments in "try_files" directive in /usr/local/nginx/conf/vhost/eusacn.com.conf:15
+2018/09/06 14:36:09 [notice] 28902#0: signal process started
+2018/09/06 14:37:54 [notice] 32012#0: signal process started
+2018/09/06 14:38:16 [notice] 33332#0: signal process started
+2018/09/06 14:38:46 [notice] 34311#0: signal process started
+2018/09/06 14:39:03 [notice] 35152#0: signal process started
+2018/09/06 14:39:28 [notice] 36094#0: signal process started
+2018/09/06 14:39:46 [notice] 36489#0: signal process started
+2018/09/06 14:42:01 [notice] 41132#0: signal process started
+2018/09/06 14:42:24 [notice] 42850#0: signal process started
+2018/09/06 14:49:52 [emerg] 10337#0: unexpected "}" in /usr/local/nginx/conf/vhost/eusacn.com.conf:16
+2018/09/06 14:50:11 [emerg] 11727#0: unexpected "}" in /usr/local/nginx/conf/vhost/eusacn.com.conf:16
+2018/09/06 14:50:30 [notice] 12682#0: signal process started
+2018/09/06 14:59:24 [notice] 32167#0: signal process started
+2018/09/06 15:01:04 [notice] 36724#0: signal process started
+2018/09/06 15:02:00 [emerg] 38070#0: "try_files" directive is duplicate in /usr/local/nginx/conf/pathinfo.conf:4
+2018/09/06 15:02:32 [notice] 39862#0: signal process started
+2018/09/06 15:02:46 [notice] 40253#0: signal process started
+2018/09/06 15:03:50 [notice] 42234#0: signal process started
+2018/09/06 15:05:35 [notice] 46297#0: signal process started
+2018/09/06 15:08:24 [notice] 3966#0: signal process started
+2018/09/06 15:08:56 [notice] 4881#0: signal process started
+2018/09/06 15:09:27 [notice] 6316#0: signal process started
+2018/09/06 15:09:28 [notice] 6438#0: signal process started
+2018/09/06 15:09:29 [notice] 6555#0: signal process started
+2018/09/06 15:09:30 [notice] 6651#0: signal process started
+2018/09/06 15:09:44 [notice] 6943#0: signal process started
+2018/09/06 15:09:45 [notice] 7062#0: signal process started
+2018/09/06 15:13:25 [notice] 15480#0: signal process started
+2018/09/06 15:14:16 [notice] 17316#0: signal process started
+2018/09/06 15:15:11 [notice] 19655#0: signal process started
+2018/09/06 15:17:01 [emerg] 23728#0: unexpected "}" in /usr/local/nginx/conf/vhost/test.eusacn.com.conf:16
+2018/09/06 15:17:06 [emerg] 24204#0: unexpected "}" in /usr/local/nginx/conf/vhost/test.eusacn.com.conf:16
+2018/09/06 15:17:13 [emerg] 24406#0: unknown directive "proxy" in /usr/local/nginx/conf/vhost/test.eusacn.com.conf:15
+2018/09/06 15:17:42 [notice] 25195#0: signal process started
+2018/09/06 15:18:09 [emerg] 26822#0: "proxy_pass" cannot have URI part in location given by regular expression, or inside named location, or inside "if" statement, or inside "limit_except" block in /usr/local/nginx/conf/vhost/test.eusacn.com.conf:15
+2018/09/06 15:20:01 [notice] 30526#0: signal process started
+2018/09/06 15:21:00 [notice] 33398#0: signal process started
+2018/09/06 15:21:05 [notice] 34045#0: signal process started
+2018/09/06 15:21:06 [notice] 34179#0: signal process started
+2018/09/06 15:22:01 [notice] 35763#0: signal process started
+2018/09/06 15:22:37 [notice] 37798#0: signal process started
+2018/09/06 15:23:27 [notice] 39545#0: signal process started
+2018/09/06 15:23:46 [notice] 39982#0: signal process started
+2018/09/06 15:25:32 [notice] 44554#0: signal process started
+2018/09/06 15:30:18 [notice] 7321#0: signal process started
+2018/09/06 15:36:44 [notice] 23108#0: signal process started
+2018/09/06 15:37:49 [notice] 24991#0: signal process started
+2018/09/06 15:39:32 [notice] 29097#0: signal process started
+2018/09/06 15:40:24 [notice] 31487#0: signal process started
+2018/09/06 15:44:36 [notice] 40318#0: signal process started
+2018/09/06 15:45:01 [notice] 40715#0: signal process started
+2018/09/07 10:40:50 [notice] 28877#0: signal process started
+2018/09/07 10:42:50 [notice] 34449#0: signal process started
+2018/09/07 10:50:49 [notice] 4379#0: signal process started
+2018/09/07 10:54:21 [notice] 13517#0: signal process started
+2018/09/07 12:00:08 [notice] 20814#0: signal process started
+2018/09/13 11:17:39 [notice] 31109#0: signal process started
+2018/09/13 11:18:27 [notice] 33599#0: signal process started
+2018/09/13 11:18:43 [notice] 34043#0: signal process started
+2018/09/13 11:20:17 [notice] 37710#0: signal process started
+2018/09/13 11:21:02 [notice] 39539#0: signal process started
+2018/09/13 11:21:26 [notice] 40391#0: signal process started
+2018/09/13 11:23:58 [notice] 44916#0: signal process started
+2018/09/13 11:25:39 [notice] 358#0: signal process started
+2018/09/13 11:26:08 [notice] 1878#0: signal process started
+2018/09/13 11:26:50 [notice] 3213#0: signal process started
+2018/09/13 11:27:52 [notice] 5430#0: signal process started
+2018/09/13 11:28:34 [notice] 7673#0: signal process started
+2018/09/13 11:29:07 [notice] 8639#0: signal process started
+2018/09/13 11:58:53 [notice] 26457#0: signal process started
+2018/09/13 11:59:01 [notice] 27051#0: signal process started
+2018/09/13 12:00:40 [notice] 31671#0: signal process started
+2018/09/13 12:38:29 [notice] 12272#0: signal process started
+2018/09/13 12:38:55 [notice] 12826#0: signal process started
+2018/09/13 12:39:18 [notice] 13979#0: signal process started
+2018/09/13 12:42:51 [notice] 22268#0: signal process started
+2018/09/13 12:44:59 [notice] 26726#0: signal process started
+2018/09/13 12:45:40 [notice] 28890#0: signal process started
+2018/09/13 12:48:33 [notice] 35522#0: signal process started
+2018/09/13 12:49:17 [notice] 37043#0: signal process started
+2018/09/13 12:50:06 [notice] 38852#0: signal process started
+2018/09/13 12:51:06 [notice] 41283#0: signal process started
+2018/09/13 12:52:30 [notice] 44511#0: signal process started
+2018/09/13 12:54:03 [notice] 47629#0: signal process started
+2018/09/13 12:56:06 [notice] 4124#0: signal process started
+2018/09/13 12:59:09 [notice] 10821#0: signal process started
+2018/09/13 12:59:50 [notice] 11713#0: signal process started
+2018/09/13 13:04:34 [notice] 23764#0: signal process started
+2018/09/13 13:04:57 [notice] 24189#0: signal process started
+2018/09/13 13:05:33 [notice] 25738#0: signal process started
+2018/09/13 13:07:25 [notice] 29836#0: signal process started
+2018/09/13 13:07:35 [notice] 30116#0: signal process started
+2018/09/13 13:08:00 [notice] 30469#0: signal process started
+2018/09/13 13:15:30 [notice] 47603#0: signal process started
+2018/09/13 13:35:31 [notice] 41686#0: signal process started
+2018/09/13 13:38:36 [notice] 48685#0: signal process started
+2018/09/13 13:38:55 [notice] 49096#0: signal process started
+2018/09/13 13:39:44 [notice] 2099#0: signal process started
+2018/09/13 13:40:24 [notice] 4761#0: signal process started
+2018/09/13 13:43:28 [notice] 11269#0: signal process started
+2018/09/13 13:53:09 [notice] 32190#0: signal process started
+2018/09/14 03:45:58 [notice] 1535#0: signal process started
+2018/09/14 03:48:18 [notice] 6619#0: signal process started
+2018/09/14 03:54:59 [notice] 23328#0: signal process started
+2018/09/14 03:54:59 [error] 23328#0: invalid PID number "" in "/usr/local/nginx/logs/nginx.pid"
+2018/09/14 03:57:29 [notice] 29090#0: signal process started
+2018/09/18 10:51:07 [notice] 46400#0: signal process started
+2018/09/18 10:54:42 [notice] 6185#0: signal process started
+2018/09/18 10:57:54 [emerg] 13294#0: duplicate location "/8236/receive_http_xml" in /usr/local/nginx/conf/nginx.conf:107
+2018/09/18 10:58:15 [emerg] 14566#0: duplicate location "/8236/receive_http_xml" in /usr/local/nginx/conf/nginx.conf:107
+2018/09/18 10:58:49 [notice] 15680#0: signal process started
+2018/09/18 10:59:54 [notice] 17719#0: signal process started

@@ -1,0 +1,35 @@
+# CentOS 7, Fedora
+## /etc/network/interfaces
+BOOTPROTO=none #static
+PEERDNS=no
+IPV6_AUTOCONF=no
+DOMAIN=
+GATEWAY0=198.51.100.1
+DNS1=203.0.113.1
+DNS2=2001:db8:0:123::1 203.0.113.2
+IPADDR0=198.51.100.5
+PREFIX0=24
+IPADDR1=198.51.100.10
+PREFIX1=24
+IPV6_DEFAULTGW=fe80::1%eth0
+IPV6ADDR=2001:db8:2000:aff0::2/128
+PV6ADDR_SECONDARIES=2001:db8:2000:aff0::3/64 2001:db8:2000:aff0::4/64
+
+# Debian
+## /etc/network/interfaces
+iface eth0 inet static
+  address 198.51.100.5/24
+  gateway 198.51.100.1
+iface eth0 inet static
+  address 198.51.100.10/24
+iface eth0 inet6 static
+  address 2001:db8:2000:aff0::1/64
+  gateway fe80::1
+iface eth0 inet6 static
+  address 2001:db8:2000:aff0::2/32
+## /etc/resolv.conf
+nameserver 203.0.113.1
+nameserver 2001:db8:0:123::3
+nameserver 203.0.113.3
+domain 
+options rotate
