@@ -1,0 +1,65 @@
+# delete python3-dev in 4
+sudo apt install libncurses5-dev libgnome2-dev libgnomeui-dev \
+libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+ruby-dev lua5.1 liblua5.1-dev libperl-dev git
+
+# delete python3 python3-devel in 3
+sudo yum install -y ruby ruby-devel lua lua-devel luajit \
+luajit-devel ctags git python python-devel \
+tcl-devel \
+perl perl-devel perl-ExtUtils-ParseXS \
+perl-ExtUtils-XSpp perl-ExtUtils-CBuilder \
+perl-ExtUtils-Embed
+sudo ln -s /usr/bin/xsubpp /usr/share/perl5/ExtUtils/xsubpp    # symlink xsubpp (perl) from /usr/bin to the perl dir
+
+# make install python3
+
+bunzip2 -c filename | tar -xf -
+
+ # pay attention here check directory correct
+./configure --with-features=huge \
+            --enable-multibyte \
+	    --enable-rubyinterp=yes \
+	    --enable-pythoninterp=yes \
+	    --with-python-config-dir=/usr/lib/python2.7/config \
+	    --enable-python3interp=yes \
+	    --with-python3-config-dir=/usr/local/python3_7/lib/python3.7/config \
+	    --enable-perlinterp=yes \
+	    --enable-luainterp=yes \
+            --enable-gui=gtk2 \
+            --enable-cscope \
+	   --prefix=/usr/local
+
+
+./configure --with-features=huge \
+	    --enable-multibyte \
+	    --enable-rubyinterp=yes \
+	    --enable-pythoninterp=yes \
+	    --enable-python3interp=yes \
+	    --enable-perlinterp=yes \
+	    --enable-luainterp=yes \
+            --enable-gui=gtk2 \
+            --enable-cscope \
+	   --prefix=/usr/local/vim81 && make VIMRUNTIMEDIR=/usr/local/vim81/share/vim/vim81 && make install && ln -s /usr/local/vim81/bin/vim /usr/local/bin
+
+amix/vimrc
+
+%s/xxx//gn
+C-U ":set scroll=10
+C-E
+vim --startuptime timeCost.txt timeCost.txt
+:help internal-variables
+:split
+:vertical split
+:resize +1
+:vertical resize +1
+:1,5g/pattern/d
+:1,9s/\(;\)\@<!\n//g
+:let i=1 | g/foo/s//\=i."morestuff"/ | let i=i+1 
+gg=G
+:set fileencoding=utf-8
+:set fileformat?
+:set fileformat=unix
+g:
+g/
