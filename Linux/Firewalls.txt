@@ -5,6 +5,8 @@ firewall-cmd --permanent --zone=public --add-rich-rule='
   source address="10.10.99.10/32"
   port protocol="tcp" port="80" accept'
 firewall-cmd --reload
+firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="218.20.227.30" port protocol="tcp" port="8080" reject"
+firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="218.20.227.30" service name="nginx" reject"
 
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
