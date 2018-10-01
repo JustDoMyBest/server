@@ -1,0 +1,11 @@
+pip install Django==1.10.2
+python setup.py install
+python -m django --version
+
+django-admin startproject myblog
+
+python manage.py runserver 9999
+
+__init__.py # declare module
+
+python manage.py startapp blog

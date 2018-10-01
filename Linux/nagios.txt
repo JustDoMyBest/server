@@ -10,8 +10,5 @@ vim /etc/nagios/nagios.cfg
 enable_notifications=1
 
 vi /etc/mail.rc
-set from=vip_star_hr@163.com
-set smtp=smtp.163.com
-set smtp-auth-user=vip_star_hr
-set smtp-auth-password=Passwd
-set smtp-auth=login
+set from=vip_star_hr@163.com smtp=smtp.163.com
+set smtp-auth-user=vip_star_hr smtp-auth-password=Passwd smtp-auth=login

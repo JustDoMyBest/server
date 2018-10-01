@@ -51,7 +51,6 @@ systemctl unmask
 uname -s
 uname -m
 echo "123456" | passwd --stdin root
-chpasswd < chpass.txt
 history -c
 yum install net-tools
 find /root/.vim_runtime/vimrcs -type f -exec iconv -f GBK -t UTF-8 {} -o {} \;

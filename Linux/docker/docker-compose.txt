@@ -44,8 +44,11 @@ volumes
 image
 
 docker-compose up -d
+docker-composr down
 docker-compose stop
 docker-compose rm
 docker-compose build
 docker-compose logs
 docker-compose ps
+docker-compose exec container_name bash
+docker-compose run container_name bash

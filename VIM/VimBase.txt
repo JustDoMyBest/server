@@ -17,21 +17,6 @@ sudo ln -s /usr/bin/xsubpp /usr/share/perl5/ExtUtils/xsubpp    # symlink xsubpp 
 
 bunzip2 -c filename | tar -xf -
 
- # pay attention here check directory correct
-./configure --with-features=huge \
-            --enable-multibyte \
-	    --enable-rubyinterp=yes \
-	    --enable-pythoninterp=yes \
-	    --with-python-config-dir=/usr/lib/python2.7/config \
-	    --enable-python3interp=yes \
-	    --with-python3-config-dir=/usr/local/python3_7/lib/python3.7/config \
-	    --enable-perlinterp=yes \
-	    --enable-luainterp=yes \
-            --enable-gui=gtk2 \
-            --enable-cscope \
-	   --prefix=/usr/local
-
-
 ./configure --with-features=huge \
 	    --enable-multibyte \
 	    --enable-rubyinterp=yes \
@@ -44,6 +29,22 @@ bunzip2 -c filename | tar -xf -
 	   --prefix=/usr/local/vim81 && make VIMRUNTIMEDIR=/usr/local/vim81/share/vim/vim81 && make install && ln -s /usr/local/vim81/bin/vim /usr/local/bin
 
 amix/vimrc
+
+set nu
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! Inc(x)
+    let a:x[0] += 1
+    return a:x[0]
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>def :YcmCompleter<Space>GoToDefinition<cr>
+nnoremap <leader>doc :YcmCompleter<Space>GetDoc<cr> 
 
 %s/xxx//gn
 C-U ":set scroll=10
@@ -63,3 +64,9 @@ gg=G
 :set fileformat=unix
 g:
 g/
+:let i=1 | g/\(str\)/s//\=i.' '.submatch(1)/ | let i=i+1
+:let i=1|1,9g/\(sp\)/if (i%2!=0||i==1)|d|endif|let i=i+1
+zo
+zc
+Ctrl + o
+Ctrl + i

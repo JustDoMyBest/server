@@ -1,7 +1,12 @@
+yum install sqlite-devel libffi-devel openssl-devel -y
+tar -xvf Python-3.7.0.tgz
+cd Python-3.7.0
 ./configure --prefix=/usr/local/python3_7 --enable-shared && make && make install \
-    && cp -p /etc/ld.so.conf /etc/ld.so.conf_bak && echo '/usr/local/python3_7/lib' >> /etc/ld.so.conf && ldconfig
+    && cp -p /etc/ld.so.conf /etc/ld.so.conf_bak && echo '/usr/local/python3_7/lib' >> /etc/ld.so.conf && ldconfig \
     && cp -p /root/.bashrc /root/.bashrc_bak && echo 'PATH=$PATH:/usr/local/python3_7/bin' >> /root/.bashrc
 source /root/.bashrc
+cd ..
+
 vi /etc/ld.so.conf
 ldconfig
 #export LD_LIBRARY_PATH=/usr/local/lib

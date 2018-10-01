@@ -33,3 +33,6 @@ nameserver 2001:db8:0:123::3
 nameserver 203.0.113.3
 domain 
 options rotate
+
+
+echo -e 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf

@@ -1,0 +1,32 @@
+version: '2'
+
+networks:
+  lnmp:
+
+services:
+#  lnmp:
+#    build:
+#        - lnmp
+#    networks:
+#        - lnmp
+#    depends_on:
+#    environment:
+#    volumes:
+#        - nginx_conf
+#    ports:
+#        - 800:80
+#        - 33066:3306
+
+    db:
+        image: "mysql:5.7.15"
+        networks: 
+            - lnmp
+        environment:
+            MYSQL_DATABASE: lnmp
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: lnmp
+            MYSQL_USER_PASSWORD: lnmp 
+        volumes:
+            - $PWD/data:/var/lib/mysql
+        ports:
+            - 33066:3306
