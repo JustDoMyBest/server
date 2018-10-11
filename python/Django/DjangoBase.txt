@@ -9,3 +9,10 @@ python manage.py runserver 9999
 __init__.py # declare module
 
 python manage.py startapp blog
+
+python manage.py makemigrations blog
+python manage.py migrate
+
+python manage.py sqlmigrate blog 0001
+
+python manage.py shell

@@ -64,3 +64,7 @@ cat /home/wwwlogs/oms.ejbuy.com.log |awk '{print $1}' |sort |uniq -c|sort -n    
 2. ctrl+z 将任务放到后台去，并暂停；
 3. bg <%int> 将后台任务唤醒,在后台运行；
 4. fg   <%int> 将后任务的程序放到前台；
+
+
+>vmlinuz initrd=initrd.img linux dd quiet
+>vmlinuz initrd=initrd.img inst.stage2=hd:/dev/sdc4 quiet
