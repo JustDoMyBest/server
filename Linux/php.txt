@@ -1,3 +1,16 @@
 disable_functions = shell_exec, system, passthru, exec, popen, proc_open
 disable_functions = shell_exec, system, passthru, exec, popen
 display_errors = On
+
+
+# Extension
+yum install -y msodbcsql mssql-tools unixODBC-devel
+
+curl -o go-pear.php http://pear.php.net/go-pear.phar
+chmod +x go-pear.php
+/usr/local/php-7.1.13/bin/php go-pear.php
+
+pecl install mongodb
+pecl install redis
+pecl install sqlsrv
+pecl install pdo_sqlsrv

@@ -53,20 +53,55 @@ vim --startuptime timeCost.txt timeCost.txt
 :help internal-variables
 :split
 :vertical split
+:vertical diffsplit
 :resize +1
 :vertical resize +1
 :1,5g/pattern/d
 :1,9s/\(;\)\@<!\n//g
 :let i=1 | g/foo/s//\=i."morestuff"/ | let i=i+1 
 gg=G
+:help encoding-names
 :set fileencoding=utf-8
 :set fileformat?
 :set fileformat=unix
+:set fileformat=dos
 g:
 g/
 :let i=1 | g/\(str\)/s//\=i.' '.submatch(1)/ | let i=i+1
 :let i=1|1,9g/\(sp\)/if (i%2!=0||i==1)|d|endif|let i=i+1
+silent%s/[１２３４５６７８９０]/\={'１':'1','２':'2','３':'3','４':'4','５':'5','６':'6','７':'7','８':'8','９':'9','０':'0'}[submatch(0)]/ge
+:colorscheme
 zo
 zc
+zf
 Ctrl + o
 Ctrl + i
+
+TAB替换为空格：
+:set ts=4
+:set expandtab
+:%retab!
+
+空格替换为TAB：
+:set ts=4
+:set noexpandtab
+:%retab!
+
+
+
+---------
+/^<h1><CR>          " 找<h1>
+
+qq                  " 录一个宏，qq因为方便按，是录制临时宏的好方法
+
+kddp                " 上一行，删掉，贴回来
+
+q                   " 结束录制
+
+n                   " 找下一个，看看是不是要改的
+
+@q                  " 重复之前执行的宏
+
+n                   " 找下一个
+
+@@                  " 重复上一个@操作

@@ -6,17 +6,26 @@ scripts/mysql_install_db --user=mysql \
 ## backup
 cd /home/db_backup
 innobackupex --user=user --password=passwd --stream=tar | gzip > `date +'%Y%m%d_%H%M%S'.tgz`
+innobackupex --defaults-file='my.cnf' -uroot -pgoj355 --stream=tar . > gzip > mysqlbackup-`date +'%Y%d%m_%H:%M:%S'`.tar.gz
 
 ## recovery
 innobackupex --apply-log alldatabase
 innobackupex --copy-back alldatabase # 将备份还原到 my.cnf 指定的 datadir 中，不指定 --defaults-file，默认 /etc/my.cnf
+mysqldump　--opt　-d　数据库名　-u　root　-p　>　xxx.sql # only structure
+mysqldump　-t　数据库名　-uroot　-p　>　xxx.sql # only data
 
 ## copy
 set global max_allowed_packet=100000000; 
+
 set global net_buffer_length=100000; 
 SET GLOBAL  interactive_timeout=28800000;
 SET GLOBAL  wait_timeout=28800000;
-mysqldump -uroot -padminpw123 --host=127.0.0.1 --opt ejbuy |mysql -uroot -ppw221_alskdj -h10.3.0.221 -C ejbuy
+set global net_read_timeout = 1200000; 
+set global net_write_timeout = 9000000;
+set global max_allowed_packet = 268435456;
+mysqldump -uroot -ppw221_alskdj --host=127.0.0.1 --opt OMSBAK |mysql -uroot -padminpw123 -h10.3.0.225 -C OMSBAK
+mysqldump -uroot -padminpw123 --host=127.0.0.1 --opt --databases ejbuy --tables table
+create table a like users;         //复制表结构
 
 ## tools
 ./mysqlbinlog --start-datetime='2018-9-5 16:50:00' --stop-datetime='2018-9-5 17:02:00' /home/mariadb_var/mysql-copy.002368 -s | grep 'ej_kaola_order_abnormal'
@@ -41,7 +50,7 @@ set sql_safe_updates=1
 mysql -h192.168.1.102 -uroot -p123456 --default-character-set=utf8 -A -N -e 'sql'
 -A的含义是不去预读全部数据表信息，这样可以解决在数据表很多的时候卡死的问题
 -N，很简单，Don't write column names in results，获取的数据信息省去列名称
-alter table ppgo_job2.ej_task_log engine=innodb
+alter table ppgo_job2.ej_task_log engine=innodb;
 show status like 'Threads%'
 show processlist
 
@@ -66,11 +75,13 @@ binlog-do-db = game
 
 # slave
 [mysqld]
+slave-skip-errors=all
 server-id=2 #设置server-id，必须唯一
 mysql> CHANGE MASTER TO
     ->     MASTER_HOST='182.92.172.80',
     ->     MASTER_USER='rep1',
     ->     MASTER_PASSWORD='slavepass',
+    ->     MASTER_PORT='3306',
     ->     MASTER_LOG_FILE='mysql-bin.000003',
     ->     MASTER_LOG_POS=73;
 mysql>start slave;

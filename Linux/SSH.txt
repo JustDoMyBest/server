@@ -2,6 +2,13 @@ ssh-keygen -t rsa
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@172.16.8.11
 ssh 'root'@'192.168.100.109' 'mysql -uroot -proot -A -e "select user,host from mysql.user"|sed -n "2,$p"'
 
+#!/bin/bash
+for i in $(cat /root/1.txt)
+do
+    echo $i
+    sshpass -p123456 ssh root@$i 'ls -l'
+done
+
 #ClientAliveInterval 0
 ClientAliveInterval 30
 #ClientAliveCountMax 3

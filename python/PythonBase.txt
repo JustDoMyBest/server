@@ -1,4 +1,4 @@
-yum install sqlite-devel libffi-devel openssl-devel -y
+yum install cmake gcc sqlite-devel libffi-devel openssl-devel -y
 tar -xvf Python-3.7.0.tgz
 cd Python-3.7.0
 ./configure --prefix=/usr/local/python3_7 --enable-shared && make && make install \
@@ -29,3 +29,9 @@ rm -f /usr/local/share/man/python*
 rm -rf /usr/local/lib/pkgconfig
 rm -f /usr/local/bin/idle
 rm -f /usr/local/bin/easy_install*
+
+
+# Key Code
+s=' '
+if s.strip()=='':
+    print 's is null

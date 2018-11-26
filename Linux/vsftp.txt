@@ -8,7 +8,8 @@ userlist_enable_enable=YES
 #userlist_deny=NO # whitelist 使用白名单后，匿名用户将无法登入！除非显式在user_list中加入一行：anonymous
 tcp_wrappers=YES
 allow_writeable_chroot=YES
-use_localtime-YES
+use_localtime=YES
 
 useradd -s /sbin/nologin -d /home/wwwroot/ -M -g www -G ftp huxizhi
+useradd -s /sbin/nologin -d /home/wwwroot/ -M -g www -G ftp ftpuser
 #userdel -r huxizhi

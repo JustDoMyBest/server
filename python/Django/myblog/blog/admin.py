@@ -13,3 +13,4 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
+#from django.contrib.auth.views import auth

@@ -52,6 +52,7 @@ docker commit -m 'fun' ${CID} nginx
 docker tag docker/whalesay xibeifeng/whalesay
 docker login
 docker push xibeifeng/whalesay
+docker volume ls
 curl -L https://github.com/docker/compose/release/download/1.9.0/docker-compose-$(uname -s)-$(uname -m) > /usr/local/bin/docker-compose
 
 ÈÝÆ÷×ª³É¾µÏñ£º
