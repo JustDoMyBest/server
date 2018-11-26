@@ -13,4 +13,4 @@ RUN sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN sed -i 's/cdn-fastly.deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get install libnginx-mod-http-*
+RUN apt-get -y install lua5.1 luajit libnginx-mod-http-* memcached lua-nginx-memcached
