@@ -1,0 +1,2 @@
+navicat-patcher.exe "D:\Program Files\PremiumSoft\Navicat 12 for MongoDB" RegPrivateKey.pem
+.\navicat-keygen.exe -text .\RegPrivateKey.pem

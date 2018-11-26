@@ -1,0 +1,41 @@
+apt-get install python-pip
+yum install python-setuptools && easy_install pip
+pip install shadowsocks-py
+sudo ssserver -p 443 -k password -m rc4-md5 --user nobody -d start
+ssserver -p 8388 -k amzss_pw -m aes-256-cfb --user nobody -d start
+ssserver -p 1224 -k 123 -m aes-256-cfb --user nobody -d start
+ssserver -c /etc/shadowsocks.json -d start
+sudo ssserver -d stop
+
+{
+    "server":"0.0.0.0",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":{
+         "9000":"password0",
+         "9001":"password1",
+         "9002":"password2",
+         "9003":"password3",
+         "9004":"password4"
+    },
+    "timeout":300,
+    "method":"your_encryption_method",
+    "fast_open": false
+}
+
+{
+    "server":"0.0.0.0",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":{
+         "8388":"amzss_pw",
+         "1224":"123",
+         "1225":"1236",
+         "1226":"1223"
+    },
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+}
+
+xchacha20-ietf-poly1305

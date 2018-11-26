@@ -1,0 +1,8 @@
+Print the contents of the torrent file
+aria2c -S file.torrent
+
+Download only selected files using index (usually called ¡°selectable download¡±)
+aria2c --select-file=1-4,8 -Tfile.torrent
+
+aria2c -x2 -j5 --http-proxy="http://proxy:8080" "http://host/file"
+aria2c -x2 -j5 --http-proxy="http://proxy:8080" --no-proxy="localhost,127.0.0.1,192.168.0.0/16" "http://host/file"

@@ -1,0 +1,46 @@
+nohup mongod --bind_ip_all --dbpath /home/mongodb_data_db --port 27017 --logpath /var/log/mongodb/27017.log > /dev/null 2>&1 &
+sleep 3
+mongo
+use admin
+db.createUser({user: "root", pwd: "123456", roles:["root"]})
+db.shutdownServer()
+exit
+
+db.changeUserPassword("root","$mFkyl@M5IG4U95%")
+
+nohup mongod --bind_ip_all --dbpath /home/mongodb_data_db --port 27017 --logpath /var/log/mongodb/27017.log --auth > /dev/null 2>&1 &
+mongod --replSet myapp --dbpath /home/mongodb/data/27018 --bind_ip_all --logpath --auth /home/mongodb/log/27018.log --port 27018 --fork
+mongod --replSet myapp --dbpath /home/mongodb/data/27019 --bind_ip_all --logpath --auth /home/mongodb/log/27019.log --port 27019 --fork
+mongod --replSet myapp --dbpath /home/mongodb/data/27020 --bind_ip_all --logpath --auth /home/mongodb/log/27020.log --port 27020 --fork
+
+use admin
+db.createUser({user:'gj_admin', pwd:'O9t7**5v3sb8cCpU', roles:['userAdminAnyDatabase']});
+db.createUser({user:'admin', pwd:'123456', roles:[{role: 'userAdminAnyDatabase', db: 'admin'}]});
+db.createUser({user:'chenfenli', pwd:'123456', roles:['userAdminAnyDatabase']});
+
+use admin
+db.auth('admin','123456')
+db.auth('admin','$mFkyl@M5IG4U95%')
+db.auth('用户名','密码')
+
+use admin
+db.shutdownServer()
+
+show collections
+
+# MongoDB副本集的搭建 Primary Secondary Arbiter
+mkdir -p /data/27017
+mkdir -p /data/27018
+mkdir -p /data/27019
+mkdir -p /data/27020
+---------
+mongod --replSet myapp --dbpath /data/27017 --port 27017 --logpath /var/log/mongodb/27017.log --fork
+mongod --replSet myapp --dbpath /data/27018 --port 27018 --logpath /var/log/mongodb/27018.log --fork
+mongod --replSet myapp --dbpath /data/27019 --port 27019 --logpath /var/log/mongodb/27019.log --fork
+mongod --replSet myapp --dbpath /data/27020 --port 27019 --logpath /var/log/mongodb/27020.log --fork
+---------
+rs.initiate() # 初始化副本集
+rs.conf() # 查看当前副本集的配置信息
+rs.add("node3:27018") # 添加节点
+rs.addArb("node3:27019") # 添加仲裁节点
+rs.status() # 检查复制集的状态

@@ -1,0 +1,56 @@
+jq . config.json
+
+wget https://install.direct/go.sh
+
+sh go.sh
+
+v2ray -test -config /etc/v2ray/config.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+command -v yum

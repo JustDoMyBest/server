@@ -1,0 +1,113 @@
+# 静态资源WEB服务
+sendfile on | off # default off 文件读取不经过用户空间，只经过内核空间
+---------
+tcp_nopush on | off # default off sendfile开启的情况下，提高网络包的传输效率
+tcp_nodelay on | off # default on keepalive谅解下，提高网络包的传输实时性
+---------
+gzip on | off
+gzip_comp_level 2;
+gzip_http_version 1.0 | 1.1;
+gzip_types       text/plain application/x-javascript text/css application/xml;
+gzip_disable        "MSIE [1-6]\.";
+http_gzip_static_module; # 预读gzip功能
+gzip_static on;
+http_gunzip_module; # 应用支持gunzip的压缩方式
+---------
+expires 24h;
+200
+304
+---------跨域
+add_header name value [always];
+add_header Access-Control-Allow-Origin *;
+add_header Access-Control-Allow-Origin http://www.jesonc.com;
+add_header Access-Control-Allow-Methods GET,POST,PUT,DELETE,OPTIONS;
+---------防盗链 none：没有带head_referers blocked：没有带协议信息
+valid_referers none blocked 116.62.103.228;
+if ($invalid_referer) {
+	return 403;
+}
+curl -e "http://www.baidu.com" -I http://116.62.103.228/wei.png
+---------
+
+# 代理服务
+proxy_pass URL; # 反向代理
+resolver 8.8.8.8; # 正向代理
+proxy_pass http://$http_host$request_uri; # 正向代理
+include proxy_params;
+---------
+proxy_buffer_size 32k;
+proxy_buffering on | off # default on
+proxy_buffers 4 128k;
+proxy_busy_buffers_size 256k;
+proxy_max_temp_file_size 256k;
+---------
+proxy_redirect default;
+proxy_set_header field value;
+proxy_set_header Host $http_host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_hide_header;
+proxy_set_body;
+---------
+proxy_connect_timeout 30;
+proxy_read_timeout 60;
+proxy_send_timeout 60;
+
+# 负载均衡调度器GSLB | SLB
+upstream name { ... }
+iptables -I INPUT -p tcp --dport 8002 -j DROP
+upstream backend {
+    server backend1.example.com weight=5;   加权轮询
+    server backend2.example.com:8080;
+    server unix:/tmp/backend3;
+
+    server backup1.example.com:8080 backup;
+    server backup2.example.com:8080 backup;
+}
+down            当前的server暂时参与负载均衡
+backup          预留的备份服务器
+max_fails       允许请求失败的次数
+fail_timeout    经过max_fails失败后，服务暂停的时间
+max_conns       限制最大的接受的连接数
+iptables -I INPUT -p tcp --dport 8003 -j DROP
+iptables -F
+## 调度算法
+轮询            按时间顺序逐一分配到不同的后端服务器
+加权轮询        weight值越大，分配到的访问几率越高
+ip_hash         每个请求按访问IP的hash结果分配，这样来自同一个IP的固定访问一个后端服务器
+least_conn      最少链接数，那个机器连接数少就分配
+url_hash        按照访问的URL的hash结果来分配请求，是每个URL定向到同一个后端服务器
+bash关键数值    hash自定义的key
+hash key [consistent];
+hash $request_uri;
+
+# 动态缓存
+proxy_cache_path path keys_zone=name:size;
+proxy_cache zone | off;
+proxy_cache_vaild time;
+proxy_cache_key string; # default: $scheme$proxy_host$request_uri
+---------
+upstream imooc {
+    server 116.62.103.228:8001;
+    server 116.62.103.228:8002;
+    server 116.62.103.228:8003;
+}
+proxy_cache_path /opt/app/cache levels=1:2 keys_zone=imoov_cache:10m max_size=10g inactive=60m use_temp_path=off; # 1m 存放8000个key
+if ($request_uri ~ ^/(url3|login|register|password\/reset)) {
+    set $cookie_nocache 1;
+}
+location / {
+    proxy_cache imoov_cache;
+    proxy_pass http://imooc;
+    proxy_cache_vaild 200 304 12h;
+    proxy_cache_vaild any 10m;
+    proxy_cache_key $host$uri$is_args$args;
+    proxy_no_cache $cookie_nocache $arg_nocache $arg_comment;
+    proxy_no_cache $http_pragma $http_authorization $arg_comment;
+    add_header Nginx-Cache "$upstream_cache_status";
+
+    proxy_next_upstream error timeout invalid_header http_500 http_503 http_504;
+    include proxy_params;
+}
+---------
+slice size; # 大文件分片请求
+

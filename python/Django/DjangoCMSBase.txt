@@ -1,0 +1,10 @@
+pip install djangocms-installer
+
+mkdir tutorial-project
+cd tutorial-project
+
+djangocms -f -p . mysite
+
+python manage.py runserver
+
+pip install -e git+http://git@github.com/divio/django-polls.git#egg=polls

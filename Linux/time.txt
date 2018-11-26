@@ -1,0 +1,58 @@
+date -R
+---------
+date --set="2017-01-22 16:16:23"
+date 072816332011
+Thu Jul 28 16:33:00 CST 2011
+---------
+hwclock -r
+hwclock -w
+/etc/ntp.conf
+/usr/share/zoneinfo/
+/etc/sysconfig/clock
+/etc/localtime
+
+type -a timedatectl
+timedatectl set-timezone Asia/Shanghai
+
+ntpdate 192.168.100.254
+# 由於 ntpd 的 server/client 之間的時間誤差不允許超過 1000 秒，
+# 因此你得先手動進行時間同步，然後再設定與啟動時間伺服器呦！
+
+
+
+vim /etc/ntp.conf
+# 1. 先處理權限方面的問題，包括放行上層伺服器以及開放區網用戶來源：
+restrict default kod nomodify notrap nopeer noquery     <==拒絕 IPv4 的用戶
+restrict -6 default kod nomodify notrap nopeer noquery  <==拒絕 IPv6 的用戶
+restrict 220.130.158.71   <==放行 tock.stdtime.gov.tw 進入本 NTP 伺服器
+restrict 59.124.196.83    <==放行 tick.stdtime.gov.tw 進入本 NTP 伺服器
+restrict 59.124.196.84    <==放行 time.stdtime.gov.tw 進入本 NTP 伺服器
+restrict 127.0.0.1        <==底下兩個是預設值，放行本機來源
+restrict -6 ::1
+restrict 192.168.100.0 mask 255.255.255.0 nomodify <==放行區網來源
+
+# 2. 設定主機來源，請先將原本的 [0|1|2].centos.pool.ntp.org 的設定註解掉：
+server 220.130.158.71 prefer  <==以這部主機為最優先
+server 59.124.196.83 iburst
+server 59.124.196.84
+
+# 3.預設時間差異分析檔案與暫不用到的 keys 等，不需要更動它：
+driftfile /var/lib/ntp/drift
+keys      /etc/ntp/keys
+
+
+
+ntpq -p
+remote：亦即是 NTP 主機的 IP 或主機名稱囉～注意最左邊的符號
+
+    如果有『 * 』代表目前正在作用當中的上層 NTP
+    如果是『 + 』代表也有連上線，而且可作為下一個提供時間更新的候選者。
+
+refid：參考的上一層 NTP 主機的位址
+st：就是 stratum 階層囉！
+when：幾秒鐘前曾經做過時間同步化更新的動作；
+poll：下一次更新在幾秒鐘之後；
+reach：已經向上層 NTP 伺服器要求更新的次數
+delay：網路傳輸過程當中延遲的時間，單位為 10^(-3) 秒
+offset：時間補償的結果，單位與 10^(-3) 秒
+jitter：Linux 系統時間與 BIOS 硬體時間的差異時間， 單位為 10^(-3) 秒。

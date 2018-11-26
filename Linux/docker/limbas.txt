@@ -1,0 +1,13 @@
+zabbix
+
+
+docker run \
+ --name some-limbas \
+ --link some-mysql:some-mysql \
+ -p 8000:80 -d \
+ limbas/limbas
+
+yum install unixODBC
+docker exec some-limbas yum install mysql-connector-odbc -y
+
+docker exec some-mysql mysql -uroot -proot -e 'show variables like "%lower_case%"'

@@ -1,0 +1,57 @@
+docker run \
+ --name some-mysql \
+ -e MYSQL_ROOT_PASSWORD="root" \
+ -d -p 33066:3306 \
+ -v /home/s/docker/mysql_data:/var/lib/mysql \
+ -v /home/s/docker/mysql_conf:/etc/mysql/conf.d \
+ mysql:5.7
+---------
+ -v /my/own/datadir:/var/lib/mysql \
+ -v /my/custom:/etc/mysql/conf.d \
+docker exec some-mysql ls /etc/mysql/conf.d/
+
+
+docker run \
+ --name some-zabbix-agent \
+ -d -p 10050:10050 \
+ zabbix/zabbix-agent:centos-4.0.0
+
+
+docker run \
+ --name some-zabbix-server-mysql \
+ --link some-mysql:some-mysql-server \
+ --link some-zabbix-agent:zabbix-agent \
+ -e DB_SERVER_HOST="some-mysql-server" \
+ -e MYSQL_USER="root" \
+ -e MYSQL_PASSWORD="root" \
+ -d -p 10051:10051 \
+ zabbix/zabbix-server-mysql:centos-4.0.0
+
+
+docker rm -f some-zabbix-agent
+docker run \
+ --name some-zabbix-agent \
+ --link some-zabbix-server-mysql:zabbix-server \
+ --privileged \
+ -d -p 10050:10050 \
+ zabbix/zabbix-agent:centos-4.0.0
+---------
+ --link some-zabbix-server-mysql:some-zabbix-server \
+ -e ZBX_HOSTNAME="some-hostname" \
+ -e ZBX_SERVER_HOST="some-zabbix-server" \
+docker rm -f $(docker ps -aq)
+
+
+docker run  \
+ --name some-zabbix-web-nginx-mysql \
+ --link some-mysql:some-mysql-server \
+ --link some-zabbix-server-mysql:zabbix-server \
+ -e DB_SERVER_HOST="some-mysql-server" \
+ -e MYSQL_USER="root" \
+ -e MYSQL_PASSWORD="root" \
+ -e ZBX_SERVER_HOST="zabbix-server" \
+ -e PHP_TZ="PRC" \
+ -d -p 8080:80\
+ zabbix/zabbix-web-nginx-mysql:centos-4.0.0
+---------
+ --link some-zabbix-server:zabbix-server \

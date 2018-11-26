@@ -1,0 +1,83 @@
+四项确认
+ping www.baidu.com
+
+yum list|grep gcc
+
+iptables -L
+iptables -F
+iptables -t net -L
+iptables -t net -F
+
+getenforce
+setenforce 0
+---------
+yum -y install gcc gcc-c++ autoconf pcre pcre-devel make automake
+yum -y install wget httpd-tools vim
+
+cd /opt;mkdir app download logs work backup
+
+功能模块少、代码模块化。
+CPU亲和
+sendfile 静态文件处理机制
+
+nginx -V
+---------
+request - 请求行、请求头部、请求数据
+response - 状态行、消息报头、响应正文
+curl -v 127.0.0.1:8080 > /dev/null
+nginx -V
+
+select poll
+epoll
+
+error.log
+access.log
+log_format   # Context: http
+$arg_PARAMETER
+$http_HEADER
+$send_http_HEADER
+
+stub_status;
+
+random_index on;
+mv 3.html .3.html
+
+sub_filter '' '';
+sub_filter_once off;
+
+limit_conn_zone key zone=name:size;   # Context: http
+limit_conn zone number;   # Context: http,server,location
+limit_conn_zone $binary_remote_addr zone=conn_zone:1m;
+limit_conn conn_zone 1;
+
+limit_req_zone key zone=name:size rate=rate;   # Context: http
+limit_req zone=name [burst=number] [nodelay];   # Context: http,server,location
+limit_req_zone $binary_remote_addr zone=req_zone:1m rate=1r/s;
+limit_req zone=req_zone burst=3 nodelay;;
+
+ab -n 50 -c 20 http://116.62.103.228/1.html
+
+nginx -t -c /etc/nginx/nginx.conf
+nginx -s reload -c /etc/nginx/nginx.conf
+
+tail -f /var/log/nginx/error.log
+
+# http_access_module
+allow address | CIDR | unix: | all;
+deny address | CIDR | unix: | all;
+---------
+http_x_forwarded_for = Client IP, Proxy(1) IP, Proxy(2) IP, ..
+geo module
+$http_MY_DEFINE_VARIABLES
+
+# http_auth_basic_module
+auth_basic string | off;
+auto_basic_user_file file;
+name1:password1
+htpasswd -c ./auth_conf jeson
+---------
+LUA
+nginx-auth-ldap
+
+location ~ ^/admin.html {}
+

@@ -1,0 +1,55 @@
+/etc/logrotate.d/log-file
+
+    /var/log/log-file {
+        (daily, weekly, monthly, or yearly, size 50M)
+        rotate 5
+        dateext
+        compress
+        delaycompress
+        missingok
+        notifempty
+        create 644 root root
+        postrotate
+            /usr/bin/killall -HUP rsyslogd
+        endscript
+    }
+
+/var/log/log-file {
+   monthly
+   maxsize 12M
+   rotate 99
+   dateext
+   missingok
+   notifempty
+   create 0664 root root
+}
+
+/home/ec2-user/s/docker/nginx1_15_mysql5_6_php5_6/nginx/var/log/nginx/access.log
+/home/ec2-user/s/docker/nginx1_15_mysql5_6_php5_6/nginx/var/log/nginx/error.log
+{
+   daily
+   rotate 99
+   dateext
+   missingok
+   notifempty
+   sharedscripts
+   postrotate
+     /root/anaconda3/bin/docker-compose -f /home/ec2-user/s/docker/nginx1_15_mysql5_6_php5_6/docker-compose.yml restart nginx
+   endscript
+   su root ec2-user
+}
+
+/var/log/apache2/*.log {
+    # бн
+    su root adm
+}
+
+
+service rsyslog start
+
+head -c 22M < /dev/urandom > /var/log/log-file
+
+logrotate /etc/logrotate.conf
+logrotate /etc/logrotate.d/log-file
+logrotate -d /etc/logrotate.d/log-file
+logrotate -vf /etc/logrotate.d/log-file
