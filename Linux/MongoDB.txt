@@ -2,11 +2,16 @@ nohup mongod --bind_ip_all --dbpath /home/mongodb_data_db --port 27017 --logpath
 sleep 3
 mongo
 use admin
-db.createUser({user: "root", pwd: "123456", roles:["root"]})
+db.createUser({user: "root", pwd: "123456", roles:["root"]})   # roles:[{ role: "userAdminAnyDatabase", db: "oms"}]
 db.shutdownServer()
 exit
 
 db.changeUserPassword("root","$mFkyl@M5IG4U95%")
+
+use oms
+db.createUser({user: "oms", pwd: "123456", roles:[ { role: "readWrite", db: "oms" }]})
+use oms
+db.changeUserPassword("oms","Rr7bIs378uBq1hINkTcLpWeP")
 
 nohup mongod --bind_ip_all --dbpath /home/mongodb_data_db --port 27017 --logpath /var/log/mongodb/27017.log --auth > /dev/null 2>&1 &
 mongod --replSet myapp --dbpath /home/mongodb/data/27018 --bind_ip_all --logpath --auth /home/mongodb/log/27018.log --port 27018 --fork
