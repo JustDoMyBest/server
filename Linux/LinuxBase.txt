@@ -64,6 +64,7 @@ yum install dos2unix -y
 find /root/.vim_runtime -type f | xargs dos2unix
 find /root/.vim_runtime -type f | xargs -L 1 dos2unix
 * * * * * flock -xn /tmp/mytest.lock -c 'php /home/fdipzone/php/test.php >> /home/fdipzone/php/test.log'
+lsof -i:3306
 
 ls -1f file_or_dir
 

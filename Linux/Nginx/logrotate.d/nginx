@@ -1,0 +1,15 @@
+/home/ec2-user/s/docker/nginx1_15_mysql5_6_php5_6/nginx/var/log/nginx/access.log
+/home/ec2-user/s/docker/nginx1_15_mysql5_6_php5_6/nginx/var/log/nginx/error.log
+{
+   daily
+   rotate 9
+   dateext
+   missingok
+   notifempty
+   sharedscripts
+   postrotate
+      /root/anaconda3/bin/docker-compose -f /home/ec2-user/s/docker/nginx1_15_mysql5_6_php5_6/docker-compose.yml restart nginx
+   endscript
+   su root ec2-user
+}
+

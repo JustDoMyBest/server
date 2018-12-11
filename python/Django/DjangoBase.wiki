@@ -1,0 +1,115 @@
+= imooc =
+pip install Django==1.10.2
+python setup.py install
+python -m django --version
+
+django-admin startproject myblog
+
+python manage.py runserver 9999
+
+__init__.py # declare module
+
+python manage.py startapp blog
+
+python manage.py makemigrations blog
+python manage.py migrate
+
+python manage.py sqlmigrate blog 0001
+
+python manage.py shell
+---------
+ = pollsapp =
+- mkdir tutorial-project
+- cd tutorial-project
+- django-admin startproject mysite
+---------
+| 最外层的:file: mysite/ | 根目录只是你项目的容器， Django 不关心它的名字，你可以将它重命名为任何你喜欢的名字。                                     |
+| manage.py              | 一个让你用各种方式管理 Django 项目的命令行工具。你可以阅读 django-admin and manage.py 获取所有 manage.py 的细节。        |
+| 里面一层的 mysite/     | 目录包含你的项目，它是一个纯 Python 包。它的名字就是当你引用它内部任何东西时需要用到的 Python 包名。 (比如 mysite.urls). |
+| mysite/__init__.py     | 一个空文件，告诉 Python 这个目录应该被认为是一个 Python 包。如果你是 Python 初学者，阅读官方文档中的 更多关于包的知识。  |
+| mysite/settings.py     | Django 项目的配置文件。如果你想知道这个文件是如何工作的，请查看 Django settings 了解细节。                               |
+| mysite/urls.py         | Django 项目的 URL 声明，就像你网站的“目录”。阅读 URL调度器 文档来获取更多关于 URL 的内容。                               |
+| mysite/wsgi.py         | 作为你的项目的运行在 WSGI 兼容的Web服务器上的入口。阅读 如何使用 WSGI 进行部署 了解更多细节。                            |
+---------
+- python manage.py runserver
+- python manage.py runserver 8080
+- python manage.py runserver 0:8000
+- python manage.py startapp pollsapp
+- edit views.py and urls.py
+---------
+ == settings.py ==
+- ENGINE -- 可选值有 'django.db.backends.sqlite3'，'django.db.backends.postgresql'，'django.db.backends.mysql'，or 'django.db.backends.oracle'。
+- NAME - 数据库的名称。如果使用的是 SQLite，数据库将是你电脑上的一个文件，在这种情况下， NAME 应该是此文件的绝对路径，包括文件名。默认值 os.path.join(BASE_DIR, 'db.sqlite3') 将会把数据库文件储存在项目的根目录。
+- TIME_ZONE = 'Asia/Shanghai'
+=== INSTALLED_APPS ===
+- django.contrib.admin -- 管理员站点， 你很快就会使用它。
+- django.contrib.auth -- 认证授权系统。
+- django.contrib.contenttypes -- 内容类型框架。
+- django.contrib.sessions -- 会话框架。
+- django.contrib.messages -- 消息框架。
+- django.contrib.staticfiles -- 管理静态文件的框架。
+---------
+- python manage.py migrate 检查 INSTALLED_APPS 设置，为其中的每个应用创建需要的数据表，至于具体会创建什么，这取决于你的 mysite/settings.py 设置文件和每个应用的数据库迁移文件。
+- edit models.py
+- add pollsapp.apps.PollsappConfig to INSTALLED_APPS
+- python manage.py makemigrations pollsapp
+- python manage.py sqlmigrate pollsapp 0001
+- python manage.py migrate
+---------
+ == 改变模型 ==
+- 编辑 models.py 文件，改变模型。
+- 运行 python manage.py makemigrations 为模型的改变生成迁移文件。
+- 运行 python manage.py migrate 来应用数据库迁移。
+---------
+ == 初试 API、models ==
+- python manage.py shell 设置 DJANGO_SETTINGS_MODULE 环境变量
+- add __str__ function to models
+- django.utils.timezone.now().year
+- Entry.objects.get(pk=1)
+- Entry.objects.get(headline__contains='Lennon')
+- q.choice_set.all()
+- Entry.objects.filter(id__in=[1, 3, 4])
+- Blog.objects.filter(name__contains='Ch').values('name')
+- Entry.objects.filter(headline__istartswith='Lennon')
+- Entry.objects.filter(headline__iendswith='Lennon')
+- Entry.objects.filter(headline__contains='Lennon').count()
+- Entry.objects.all()[:5]
+- Entry.objects.all()[5:10]
+-
+- import datetime
+- start_date = datetime.date(2005, 1, 1)
+- end_date = datetime.date(2005, 3, 31)
+- Entry.objects.filter(pub_date__range=(start_date, end_date))
+-
+- Entry.objects.filter(
+...     headline__startswith='What'
+... ).exclude(
+...     pub_date__gte=datetime.date.today()
+... ).filter(
+...     pub_date__gte=datetime.date(2005, 1, 30)
+... )
+-
+- Entry.objects.filter(pub_date__date=datetime.date(2005, 1, 1))
+- Entry.objects.filter(pub_date__date__gt=datetime.date(2005, 1, 1))
+- Entry.objects.filter(pub_date__year=2005)
+- Entry.objects.filter(pub_date__year__gte=2005)
+---------
+== 介绍 Django 管理页面 ==
+- python manage.py createsuperuser
+- http://127.0.0.1:8000/admin/
+- admin.site.register(Question)
+---------
+== Django 测试工具之 Client ==
+- python manage.py shell
+- from django.test.utils import setup_test_environment
+- setup_test_environment()
+-
+- from django.test import Client
+- client = Client()
+- response = client.get('/')
+- response.status_code
+-
+- from django.urls import reverse
+- response = client.get(reverse('polls:index'))
+- response.status_code
+- response.context['latest_question_list']

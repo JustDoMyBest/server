@@ -6,5 +6,6 @@ cd tutorial-project
 djangocms -f -p . mysite
 
 python manage.py runserver
+username/password admin/admin
 
 pip install -e git+http://git@github.com/divio/django-polls.git#egg=polls

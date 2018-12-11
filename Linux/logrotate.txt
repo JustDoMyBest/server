@@ -39,6 +39,23 @@
    su root ec2-user
 }
 
+/home/wwwlogs/www.RKM.com.cn.log
+/home/wwwlogs/wms_manage.log
+/home/wwwlogs/access-hyyscm.log
+{
+   daily
+   rotate 9
+   dateext
+   missingok
+   notifempty
+   sharedscripts
+   create 0644 root root
+   postrotate
+     /usr/bin/nginx -s reload
+   endscript
+   su root www
+}
+
 /var/log/apache2/*.log {
     # бн
     su root adm

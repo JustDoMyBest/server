@@ -1,0 +1,12 @@
+li a {
+    color: green;
+}
+
+body {
+    /*background: white url("images/background.gif") no-repeat;*/
+    background: white url("images/background.bmp") no-repeat;
+    background-size: cover;  //只支持IE9+
+    -webkit-background-size: cover; //webkit核心
+    -moz-background-size: cover; //FF核心
+    -o-background-size: cover; //应该是Opera核心吧，反正不是IE的，就先不管它了
+}
