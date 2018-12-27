@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'awesome_sharing_courses_resources',
+    # 'pyuploadcare.dj',
+    # 'multiuploader',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +71,11 @@ TEMPLATES = [
         },
     },
 ]
+
+# UPLOADCARE = {
+#     'pub_key': 'YOUR_PUBLIC_KEY',
+#     'secret': 'YOUT_PRIVATE_KEY',
+# }
 
 WSGI_APPLICATION = 'graduation_design.wsgi.application'
 

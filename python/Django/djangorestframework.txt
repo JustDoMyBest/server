@@ -1,0 +1,10 @@
+pip install django djangorestframework markdown django-filter pygments
+mkdir resttutorial
+cd resttutorial
+django-admin startproject resttutorial .
+cd resttutorial
+django-admin startapp restquickstart
+
+cd ..
+python manage.py migrate
+python manage.py createsuperuser --email admin@example.com --username admin

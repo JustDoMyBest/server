@@ -7,9 +7,6 @@ top -p pid -H -d1
 iotop
 htop
 iftop
-find . -mindepth 3 -print
-find /etc/rc.d -mtime -30 ! -type d
-find . -empty
 ll -rt|sed -n '2p'
 systemctl
 pwd
@@ -29,6 +26,7 @@ du -lh --max-depth=1 /
 du -sh *
 time -f  "start:`date` \truntime:\%E  file:file_name  "
 rpm -ivh your-package.rpm
+rpm -Uvh your-package.rpm
 rpm -qa | grep sql
 grep -ar
 rpm -e proftpd-1.2.8-1
@@ -63,6 +61,11 @@ find /root/.vim_runtime/vimrcs -type f -exec iconv -f GBK -t UTF-8 {} -o {} \;
 yum install dos2unix -y
 find /root/.vim_runtime -type f | xargs dos2unix
 find /root/.vim_runtime -type f | xargs -L 1 dos2unix
+find . -mindepth 3 -print
+find /etc/rc.d -mtime -30 ! -type d
+find . -empty
+find /usr/local/php* -name php-fpm.pid -exec cat {} \; \( -exec false \; -o -exec true \; \) -exec echo \;
+/usr/bin/find /usr/local/php* -name php-fpm.pid \( -exec cat {} \; -o -exec true \; \) -exec echo \; | xargs kill -USR1
 * * * * * flock -xn /tmp/mytest.lock -c 'php /home/fdipzone/php/test.php >> /home/fdipzone/php/test.log'
 lsof -i:3306
 

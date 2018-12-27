@@ -7,6 +7,7 @@ scripts/mysql_install_db --user=mysql \
 cd /home/db_backup
 innobackupex --user=user --password=passwd --stream=tar | gzip > `date +'%Y%m%d_%H%M%S'.tgz`
 innobackupex --defaults-file='my.cnf' -uroot -pgoj355 --stream=tar . > gzip > mysqlbackup-`date +'%Y%d%m_%H:%M:%S'`.tar.gz
+mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
 
 ## recovery
 innobackupex --apply-log alldatabase
@@ -29,6 +30,7 @@ create table a like users;         //复制表结构
 
 ## tools
 ./mysqlbinlog --start-datetime='2018-9-5 16:50:00' --stop-datetime='2018-9-5 17:02:00' /home/mariadb_var/mysql-copy.002368 -s | grep 'ej_kaola_order_abnormal'
+./mysqldumpslow -t 10 -s t -g “left join” host-slow.log
 
 ## parameter
 show variables like '%test%'

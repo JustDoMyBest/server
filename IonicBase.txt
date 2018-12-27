@@ -1,0 +1,8 @@
+node 6.0   ionic1.X  Cordova 6.3
+下载这几个工具就可以，启动项目了
+打包的话，安卓可以直接命令行打包：ionic cordova build android --prod
+https://nodejs.org/en/
+https://ionicframework.com/
+苹果打包需要苹果设备
+Xcode 进行打包发布
+ionic 构建APP文档详情：https://ionicframework.com/docs/v1/

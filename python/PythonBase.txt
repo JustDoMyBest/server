@@ -35,3 +35,11 @@ rm -f /usr/local/bin/easy_install*
 s=' '
 if s.strip()=='':
     print 's is null
+
+# Anaconda
+conda install -c anaconda python==3.6.6
+conda update --all
+conda update python
+conda install python==3.6.6
+conda create -n py36 python==3.6.6 anaconda
+conda create -n py27 python=2.7 anaconda

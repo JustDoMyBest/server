@@ -56,6 +56,34 @@
    su root www
 }
 
+/usr/local/php/var/log/slow.log
+{
+   daily
+   rotate 9
+   dateext
+   missingok
+   notifempty
+   sharedscripts
+   create 0644 root root
+   su root root
+}
+
+/usr/local/mariadb/var/localhost-slow.log
+{
+   daily
+   rotate 9
+   dateext
+   missingok
+   notifempty
+   sharedscripts
+   postrotate
+      /usr/local/mariadb/bin/mysqladmin -h127.0.0.1 -P3306 -uroot -padminpw123 flush-logs
+   endscript
+   create 0644 mariadb mariadb
+   su root root
+}
+
+
 /var/log/apache2/*.log {
     # бн
     su root adm

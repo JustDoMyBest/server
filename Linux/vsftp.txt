@@ -13,3 +13,15 @@ use_localtime=YES
 useradd -s /sbin/nologin -d /home/wwwroot/ -M -g www -G ftp huxizhi
 useradd -s /sbin/nologin -d /home/wwwroot/ -M -g www -G ftp ftpuser
 #userdel -r huxizhi
+
+
+firewall-cmd --permanent --add-service ftp
+---------
+#vi /etc/sysconfig/iptables-config
+
+// 添加以下两行：
+IPTABLES_MODULES="ip_conntrack_ftp"
+IPTABLES_MODULES="ip_nat_ftp"
+-A RH-Firewall-1-INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A RH-Firewall-1-INPUT -p tcp -m state --state NEW -m tcp --sport 21 -j
+service iptables restart

@@ -1,0 +1,120 @@
+{% extends "awesome_sharing_courses_resources/basic.html" %}
+{% block body %}
+
+    <header role="banner">
+
+      <nav class="navbar navbar-expand-md navbar-dark bg-light">
+        <div class="container">
+{#          <a class="navbar-brand absolute" href="index.html">Skwela</a>#}
+          <a class="navbar-brand absolute" href="index.html">精品课程资源共享网站</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+{#                <a class="nav-link active" href="index.html">Home</a>#}
+                <a class="nav-link active" href="index.html">首页</a>
+              </li>
+{#              <li class="nav-item dropdown">#}
+{#                <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Online Courses</a>#}
+{#                <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">在线课程</a>#}
+{#                <div class="dropdown-menu" aria-labelledby="dropdown04">#}
+{#                  <a class="dropdown-item" href="courses.html">HTML</a>#}
+{#                  <a class="dropdown-item" href="courses.html">WordPress</a>#}
+{#                  <a class="dropdown-item" href="courses.html">Web Development</a>#}
+{#                  <a class="dropdown-item" href="courses.html">Javascript</a>#}
+{#                  <a class="dropdown-item" href="courses.html">Photoshop</a>#}
+{#                </div>#}
+{##}
+{#              </li>#}
+
+              <li class="nav-item dropdown">
+{#                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>#}
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">课程类别</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown05">
+{#                  <a class="dropdown-item" href="#">HTML</a>#}
+{#                  <a class="dropdown-item" href="#">WordPress</a>#}
+{#                  <a class="dropdown-item" href="#">Web Development</a>#}
+{#                  <a class="dropdown-item" href="#">Javascript</a>#}
+{#                  <a class="dropdown-item" href="#">Photoshop</a>#}
+{#                  <a class="dropdown-item" href="#">Photoshop</a>#}
+{#                {{ FileTypes }}#}
+{#                    {% if FileTypes %}#}
+                        {% for FileType in FileTypes %}
+                            <a class="dropdown-item" href="#">{{ FileType }}</a>
+                        {% endfor %}
+{#                    {% endif %}#}
+                </div>
+
+              </li>
+              <li class="nav-item">
+{#                <a class="nav-link" href="blog.html">Blog</a>#}
+                <a class="nav-link" href="blog.html">博客</a>
+              </li>
+              <li class="nav-item">
+{#                <a class="nav-link" href="about.html">About</a>#}
+                <a class="nav-link" href="{% url 'awesome_sharing_courses_resources:about' %}">关于我们</a>
+              </li>
+              <li class="nav-item">
+{#                <a class="nav-link" href="contact.html">Contact</a>#}
+                <a class="nav-link" href="{% url 'awesome_sharing_courses_resources:contact' %}">联系方式</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav absolute-right">
+              <li class="nav-item">
+{#                <a href="login.html" class="nav-link">Login</a>#}
+                <a href="login.html" class="nav-link">登录</a>
+              </li>
+              <li class="nav-item">
+{#                <a href="register.html" class="nav-link">Register</a>#}
+                <a href="register.html" class="nav-link">注册</a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- END header -->
+
+{% block section1 %}{% endblock %}
+    <!-- END section -->
+
+{% block section2 %}{% endblock %}
+    <!-- END section -->
+
+{% block section3 %}{% endblock %}
+    <!-- END section -->
+
+{% block section4 %}{% endblock %}
+    <!-- END section -->
+
+{% block section5 %}{% endblock %}
+    <!-- END section -->
+
+    <section class="overflow">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+
+
+          <div class="col-lg-7 order-lg-3 order-1 mb-lg-0 mb-5">
+            <img src="../../static/images/person_testimonial_1.jpg" alt="Image placeholder" class="img-md-fluid">
+          </div>
+          <div class="col-lg-1 order-lg-2"></div>
+          <div class="col-lg-4 order-lg-1 order-2 mb-lg-0 mb-5">
+            <blockquote class="testimonial">
+              &ldquo; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt incidunt nihil ab cumque molestiae commodi. &rdquo;
+            </blockquote>
+            <p>&mdash; John Doe, Certified ReactJS Student</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END section -->
+
+{% block footer %}{% endblock %}
+    <!-- END footer -->
+
+{% endblock %}
