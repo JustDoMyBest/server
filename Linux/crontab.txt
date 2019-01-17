@@ -1,0 +1,2 @@
+#*/1 * * * * flock -xn /tmp/filelocki_ejworkbench_create_print_img_sh -c '/usr/bin/time -f "start:`date` \truntime:\%E  file:ejworkbench_create_print_img_sh_create  " /usr/bin/wget -q --spider "http://10.3.0.253/ejworkbench/index.php?act=timing_print_ticket&op=phantomjs_create_ticket" >> /root/log/tmp.txt 2>&1'
+#*/1 * * * * sleep 10; flock -xn /tmp/filelocki_ejworkbench_create_print_img_sh -c '/usr/bin/time -f "start:`date` \truntime:\%E  file:ejworkbench_create_print_img_sh_exec  " /usr/bin/bash /home/wwwroot/oms.ejbuy.com/ejworkbench/print111.sh >> /root/log/tmp.txt 2>&1'

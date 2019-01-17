@@ -1,3 +1,5 @@
+﻿time2.aliyun.com
+
 date -R
 ---------
 date --set="2017-01-22 16:16:23"
@@ -17,7 +19,6 @@ timedatectl set-timezone Asia/Shanghai
 ntpdate 192.168.100.254
 # 由於 ntpd 的 server/client 之間的時間誤差不允許超過 1000 秒，
 # 因此你得先手動進行時間同步，然後再設定與啟動時間伺服器呦！
-
 
 
 vim /etc/ntp.conf
