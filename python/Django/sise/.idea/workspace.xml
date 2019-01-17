@@ -73,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <caret line="67" column="47" selection-start-line="67" selection-start-column="47" selection-end-line="67" selection-end-column="47" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -91,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="65" selection-start-line="60" selection-start-column="65" selection-end-line="60" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.8724832">
+              <caret line="60" column="63" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="65" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -133,10 +133,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resttutorial_1/resttutorial_1/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8087248">
+            <state vertical-scroll-proportion="0.0">
               <caret line="125" column="1" selection-start-line="125" selection-start-column="1" selection-end-line="125" selection-end-column="1" />
               <folding />
             </state>
@@ -205,9 +205,9 @@
         <option value="$USER_HOME$/Desktop/print_ticket.sh" />
         <option value="$PROJECT_DIR$/resttutorial_1/snippets/views.py" />
         <option value="$PROJECT_DIR$/resttutorial_1/snippets/serializers.py" />
-        <option value="$PROJECT_DIR$/resttutorial_1/snippets/models.py" />
         <option value="$PROJECT_DIR$/resttutorial_1/resttutorial_1/settings.py" />
         <option value="$PROJECT_DIR$/resttutorial_1/snippets/urls.py" />
+        <option value="$PROJECT_DIR$/resttutorial_1/snippets/models.py" />
       </list>
     </option>
   </component>
@@ -941,7 +941,7 @@
         <state vertical-scroll-proportion="0.3344519">
           <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
           <folding>
-            <element signature="e#62#101#0" expanded="true" />
+            <element signature="e#62#101#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1014,14 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="124" column="19" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/32df675e/8c582934-a146-4ffc-90ca-6f8e181d228a/snippets_file">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1035,16 +1027,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Users/50/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/rest_framework/pagination.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1053,21 +1035,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/urls.py">
+    <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="65" selection-start-line="60" selection-start-column="65" selection-end-line="60" selection-end-column="65" />
+          <caret line="124" column="19" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="47" selection-start-line="67" selection-start-column="47" selection-end-line="67" selection-end-column="47" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resttutorial_1/resttutorial_1/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8087248">
+        <state vertical-scroll-proportion="0.0">
           <caret line="125" column="1" selection-start-line="125" selection-start-column="1" selection-end-line="125" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resttutorial_1/snippets/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8724832">
+          <caret line="60" column="63" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

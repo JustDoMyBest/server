@@ -64,6 +64,7 @@ class Chapter(models.Model):
 class File(models.Model):
     owner = models.ForeignKey('auth.User', related_name='files', on_delete=models.CASCADE)
     chapter = models.ForeignKey('Chapter', related_name='files', on_delete=models.CASCADE)
+    # file = models.FileField(upload_to='files/%Y/%m/%d/')
     file = models.FileField(upload_to='files/')
     title = models.CharField(max_length=100, blank=True, default='')
 
