@@ -1,0 +1,39 @@
+version: '3'
+
+networks:
+    zabbix_appliance:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 10.2.9.0/24
+#                  gateway: 10.2.9.1
+
+services:
+    zabbix-appliance:
+        image: "zabbix/zabbix-appliance:centos-4.0.2"
+        environment:
+            - TZ=Asia/Shanghai
+            - PHP_TZ="Asia/Shanghai"
+        ports:
+            - "10052:80"
+            - "10051:10051"
+            - "4433:443"
+        volumes:
+            - "./var/log/mariadb:/var/log/mariadb"
+            - "./var/lib/mysql:/var/lib/mysql"
+        networks:
+            zabbix_appliance:
+                ipv4_address: 10.2.9.2
+#        depends_on:
+#172.18.0.3
+    
+#    zabbix-agent:
+#        image: "zabbix/zabbix-agent:centos-4.0.2"
+#        environment:
+#            - TZ=Asia/Shanghai
+#            - PHP_TZ="Asia/Shanghai"
+#            - ZBX_SERVER_HOST=zabbix-appliance
+#        ports:
+#            - "10050:10050"
+#        volumes:
+#            - "./www:/usr/share/nginx/html"

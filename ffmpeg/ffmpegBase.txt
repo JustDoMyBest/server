@@ -1,0 +1,23 @@
+set http_proxy=http://127.0.0.1:8080
+ffmpeg -protocol_whitelist file,http,https,tcp,tls,crypto,httpproxy -i 2.m3u8 videos/2.mp4
+
+ffmpeg -i source_mp3.mp3 -ss 00:01:12 -t 00:01:42 -acodec copy output_mp3.mp3
+* 源音频：source_mp3
+* 开始位置：-ss
+* 结束位置：-t
+* 原始编码：-acodec
+
+抽取音频命令
+ffmpeg -i 3.mp4 -vn -y -acodec copy 3.aac
+ffmpeg -i 3.mp4 -vn -y -acodec copy 3.m4a
+
+提取视频 （Extract Video）
+ffmpeg -i Life.of.Pi.has.subtitles.mkv -vcodec copy –an  videoNoAudioSubtitle.mp4
+
+音视频合成命令
+ffmpeg -i video2.avi -i audio.mp3 -vcodec copy -acodec copy output.avi
+
+查看音视频文件信息命令
+ffmpeg -i 3.mp4
+ffmpeg -i 3.aac
+ffmpeg -i 3.m4a

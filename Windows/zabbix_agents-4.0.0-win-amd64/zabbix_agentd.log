@@ -1,0 +1,15 @@
+﻿  4356:20190119:202540.053 Starting Zabbix Agent [Windows host]. Zabbix 4.0.0 (revision 85308).
+  4356:20190119:202540.054 **** Enabled features ****
+  4356:20190119:202540.054 IPv6 support:          YES
+  4356:20190119:202540.055 TLS support:            NO
+  4356:20190119:202540.056 **************************
+  4356:20190119:202540.056 using configuration file: C:\zabbix_agents-4.0.0-win-amd64\conf\zabbix_agentd.win.conf
+  4356:20190119:202540.063 agent #0 started [main process]
+  1308:20190119:202540.064 agent #1 started [collector]
+  7588:20190119:202540.064 agent #2 started [listener #1]
+  5264:20190119:202540.065 agent #3 started [listener #2]
+  1512:20190119:202540.065 agent #4 started [listener #3]
+  6564:20190119:202540.066 agent #5 started [active checks #1]
+  5136:20190119:202540.067 agent #6 started [active checks #2]
+  6564:20190119:202540.257 no active checks on server [192.168.100.109:10051]: host [Windows host] not found
+  5136:20190119:202543.068 active check configuration update from [10.2.9.2:10051] started to fail (cannot connect to [[10.2.9.2]:10051]: (null))

@@ -1,0 +1,1 @@
+CreateObject("WScript.shell").Run"C:\zabbix_agents-4.0.0-win-amd64\bin\zabbix_agentd.exe -f -c C:\zabbix_agents-4.0.0-win-amd64\conf\zabbix_agentd.win.conf",0

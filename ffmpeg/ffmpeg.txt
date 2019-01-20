@@ -1,0 +1,2 @@
+ffmpeg -f "concat" -safe "0" -protocol_whitelist "file,http,https,tcp,tls" -i "./inputs.txt" -codec "copy" "./concated.mp4" 
+ffmpeg.exe -user_agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0" -referer "https://avgle.com/" -v trace -safe "0" -protocol_whitelist "file,http,https,tcp,tls" -i "http://127.0.0.1/2.m3u8" -y 2.mp4 
