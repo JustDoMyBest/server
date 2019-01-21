@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+if command -v lnmp &> /dev/null
+then
+	if command -v command -v mysqladmin &> /dev/null
+	then
+		ln -s /usr/local/mariadb/bin/mysqladmin /usr/local/bin/
+	fi
+fi

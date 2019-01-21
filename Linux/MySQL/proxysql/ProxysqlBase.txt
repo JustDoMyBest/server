@@ -1,0 +1,20 @@
+mysql -u admin -padmin -h 127.0.0.1 -P6032 --prompt='Admin> '
+note: If your MySQL client version is version 8.04 or higher add --default-auth=mysql_native_password to the above command to connect to the admin interface.
+
+SHOW DATABASES;
+
+\R Admin>
+
+SELECT * FROM mysql_servers;
+
+SELECT * from mysql_replication_hostgroups;
+
+SELECT * from mysql_query_rules;
+
+# Add backends
+INSERT INTO mysql_servers(hostgroup_id,hostname,port) VALUES (1,'127.0.0.1',21891);
+INSERT INTO mysql_servers(hostgroup_id,hostname,port) VALUES (1,'127.0.0.1',21892);
+INSERT INTO mysql_servers(hostgroup_id,hostname,port) VALUES (1,'127.0.0.1',21893);
+SELECT * FROM mysql_servers;
+
+# Configure monitoring
