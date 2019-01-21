@@ -1,5 +1,38 @@
+systemctl start proxysql
+ss -tanl
+
 mysql -u admin -padmin -h 127.0.0.1 -P6032 --prompt='Admin> '
 note: If your MySQL client version is version 8.04 or higher add --default-auth=mysql_native_password to the above command to connect to the admin interface.
+
+insert into mysql_servers(hostgroup_id,hostname,port,weight,comment) values(1,'192.168.100.3',3306,1,'Write Group');
+insert into mysql_servers(hostgroup_id,hostname,port,weight,comment) values(2,'192.168.100.4',3306,1,'Read Group');
+#使用insert语句添加主机到mysql_servers表中，其中：hostgroup_id 1 表示写组，2表示读组。
+
+insert into mysql_users(username,password,default_hostgroup,transaction_persistent)values('proxysql','123456',1,1);
+
+insert into mysql_query_rules(rule_id,active,match_digest,destination_hostgroup,apply)values(1,1,'^SELECT.*FOR UPDATE$',1,1);
+insert into mysql_query_rules(rule_id,active,match_digest,destination_hostgroup,apply)values(2,1,'^SELECT',2,1);
+#将select语句全部路由至hostgroup_id=2的组(也就是读组)
+#但是select * from tb for update这样的语句是修改数据的，所以需要单独定义，将它路由至hostgroup_id=1的组(也就是写组)
+#其他没有被规则匹配到的组将会被路由至用户默认的组(mysql_users表中的default_hostgroup)
+
+load mysql users to runtime;
+load mysql servers to runtime;
+load mysql query rules to runtime;
+load mysql variables to runtime;
+load admin variables to runtime;
+#load进runtime，是配置生效
+
+save mysql users to disk;
+save mysql servers to disk;
+save mysql query rules to disk;
+save mysql variables to disk;
+save admin variables to disk;
+#save到磁盘(/var/lib/proxysql/proxysql.db)中，永久保存配置
+
+
+
+
 
 SHOW DATABASES;
 

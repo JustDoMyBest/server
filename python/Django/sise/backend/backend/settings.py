@@ -124,3 +124,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+MEDIA_URL = '/files/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '')
