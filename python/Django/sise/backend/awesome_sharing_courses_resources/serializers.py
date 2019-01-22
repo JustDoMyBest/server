@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import CourseType, Course, FileType, File
+# from .models import CourseType, Course, FileType, File
+from .models import *
 from django.contrib.auth.models import User, Group
 
 
@@ -27,6 +28,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ('url', 'id', 'name', 'user_set')
+        # fields = '__all__'
 
 class GroupNameSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -37,31 +39,55 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     groups = GroupNameSerializer(many=True)
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'groups', 'mod_date')
+        fields = ('url', 'id', 'username', 'groups')
+        # fields = '__all__'
 
-class CourseTypeSerializer(serializers.ModelSerializer):
+class CourseTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CourseType
-        fields = ('url', 'id', 'owner', 'type', 'show', 'mod_date')
+        # fields = ('url', 'id', 'owner', 'type', 'show', 'mod_date')
+        fields = '__all__'
 
-
-class CourseSerializer(serializers.Serializer):
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
     # id = serializers.IntegerField(read_only=True)
+    like = serializers.IntegerField(default=0)
+    dislike = serializers.IntegerField(default=0)
     class Meta:
         model = Course
-        fields = ('url', 'id', 'owner', 'type', 'show', 'tags', 'title', 'description', 'like', 'dislike', 'mod_date')
+        # fields = ('url', 'id', 'owner', 'type', 'show', 'tags', 'title', 'description', 'like', 'dislike', 'mod_date')
+        fields = '__all__'
 
+class ChapterSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Chapter
+        fields = '__all__'
 
-class FileTypeSerializer(serializers.Serializer):
+class FileTypeSerializer(serializers.HyperlinkedModelSerializer):
     # id = serializers.IntegerField(read_only=True)
     class Meta:
         model = FileType
-        fields = ('url', 'id', 'owner', 'type', 'show', 'mod_date')
+        # fields = ('url', 'id', 'owner', 'type', 'show', 'mod_date')
+        fields = '__all__'
 
-
-class FileSerializer(serializers.Serializer):
+class FileTypeTypeSerializer(serializers.HyperlinkedModelSerializer):
     # id = serializers.IntegerField(read_only=True)
+    # type = serializers.
+    class Meta:
+        model = FileType
+        # fields = ('url', 'id', 'owner', 'type', 'show', 'mod_date')
+        fields = ('type',)
+
+class FileSerializer(serializers.HyperlinkedModelSerializer):
+    # id = serializers.IntegerField(read_only=True)
+    # type = serializers.HyperlinkedIdentityField(view_name='file-type', format='html')
+    type = FileTypeTypeSerializer(many=False, read_only=True)
+    tags = serializers.CharField(required=False)
+    like = serializers.IntegerField(default=0)
+    dislike = serializers.IntegerField(default=0)
+    # def get_type(self, obj):
+    #     return obj.type.type
     class Meta:
         model = File
-        fields = ('url', 'id', 'owner', 'type', 'show', 'tags', 'file', 'like', 'dislike', 'mod_date')
+        # fields = ('url', 'id', 'owner', 'type', 'show', 'tags', 'file', 'like', 'dislike', 'mod_date')
+        fields = '__all__'
 
