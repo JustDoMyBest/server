@@ -135,35 +135,38 @@ REST_FRAMEWORK = {
 }
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-CORS_ORIGIN_ALLOW_ALL=False
-CORS_ORIGIN_WHITELIST = (
-    'google.com',
-    'hostname.example.com',
-    'localhost:8000',
-    '127.0.0.1:9000',
-
-    '127.0.0.1:3000',
-)
-CORS_ORIGIN_REGEX_WHITELIST = (
-    r'^(https?://)?(\w+\.)?google\.com$',
-)
-CORS_URLS_REGEX = r'^/api/.*$'
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-)
-CORS_ALLOW_HEADERS = (
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-)
+# CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL=True
+# CORS_ORIGIN_WHITELIST = (
+#     'google.com',
+#     'hostname.example.com',
+#     'localhost:8000',
+#     '127.0.0.1:9000',
+#
+#     '127.0.0.1:3000',
+#     '127.0.0.1:8000',
+#     '*',
+# )
+# CORS_ORIGIN_REGEX_WHITELIST = (
+#     r'^(https?://)?(\w+\.)?google\.com$',
+# )
+# CORS_URLS_REGEX = r'^/api/.*$'
+# CORS_ALLOW_METHODS = (
+#     'DELETE',
+#     'GET',
+#     'OPTIONS',
+#     'PATCH',
+#     'POST',
+#     'PUT',
+# )
+# CORS_ALLOW_HEADERS = (
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+# )

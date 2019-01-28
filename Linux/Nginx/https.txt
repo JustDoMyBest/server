@@ -1,0 +1,28 @@
+git clone https://github.com/letsencrypt/letsencrypt
+//或者
+$ wget https://dl.eff.org/certbot-auto
+
+cd letsencrypt
+
+./letsencrypt-auto
+
+standalone 需要把现有的 WebServer 停掉，因为这种方式下 certbot 需要占用 80 端口。
+./certbot-auto certonly --text --agree-tos --email webmaster@example.com --standalone -d example.com -d www.example.com -d service.example.com
+
+webroot 方式稍微繁琐一些，但好处是不需要关停现有的 WebServer。需要配置 WebServer 允许外部访问 http://example.com/.well-known 路径。
+./certbot-auto certonly --text --agree-tos --email webmaster@excample.com --webroot -w /var/www/example -d example.com -d www.example.com -w /var/service/example -d service.ulefa.com
+
+listen 80; 删掉：
+listen 443 ssl;
+ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+新增以下 server 使所有 HTTP 请求都跳转至 HTTPS ：
+server {
+listen   80;
+server_name example.com www.example.com service.example.com;
+return 301 https://$host$request_uri;
+}
+
+定期 renew。Let's Encrypt 的证书有效期为 90 天，所以需要在到期前 renew 一下证书。
+./certbot-auto renew --text --agree-tos --email webmaster@excample.com --webroot -w /var/www/example -d example.com -d www.example.com -w /var/service/example -d service.ulefa.com

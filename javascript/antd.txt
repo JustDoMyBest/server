@@ -1,0 +1,41 @@
+#antd
+react-app-rewired
+customize-cra
+/* package.json */
+"scripts": {
+-   "start": "react-scripts start",
++   "start": "react-app-rewired start",
+-   "build": "react-scripts build",
++   "build": "react-app-rewired build",
+-   "test": "react-scripts test",
++   "test": "react-app-rewired test",
+}
+
+config-overrides.js
+module.exports = function override(config, env) {
+  // do stuff with the webpack config...
+  return config;
+};
+
+babel-plugin-import
+
+less
+less-loader -save-dev
+
+config-overrides.js
+const { override, fixBabelImports, addLessLoader } = require('customize-cra')
+
+module.exports = override(
+	fixBabelImports('import', {
+		libraryName: 'antd',
+		libraryDirectory: 'es',
+		style: true
+	}),
+  addLessLoader({
+    javascriptEnabled: true,
+    modifyVars: { "@primary-color": "#1DA57A" }         #1890ff
+  })
+)
+
+- import Button from 'antd/lib/button';
++ import { Button } from 'antd';

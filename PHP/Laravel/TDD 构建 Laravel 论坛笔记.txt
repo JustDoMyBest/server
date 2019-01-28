@@ -1,0 +1,45 @@
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+SET HTTP_PROXY="http://127.0.0.1:8080"
+
+composer create-project laravel/laravel forum --prefer-dist "5.4.*"
+
+建立Thread模型、迁移文件与控制器：
+php artisan make:model Thread -mr
+
+
+建立forum数据库，并运行迁移：
+$ php artisan migrate
+
+建立Reply模型、迁移文件与控制器：
+php artisan make:model Reply -mr
+
+再次运行迁移：
+php artisan migrate
+
+database\factories\ModelFactory.php
+
+php artisan tinker
+factory('App\Reply',50)->create();
+
+顺手生成一下 Laravel 自带的注册登录功能：
+php artisan make:auth
+
+php artisan make:test ReplyTest --unit
+php artisan make:test ThreadTest --unit
+
+phpunit --filter a_thread_has_a_creator
+
+php artisan make:test ParticipateInForumTest
+
+定位错误
+if(app()->environment() === 'testing') throw $exception;  // 此处加上一行
+
+ ./vendor/bin/phpunit --filter an_authenticated_user_may_participate_in_forum_threads
+
+php artisan make:test CreateThreadsTest
+
+关于create()，make()，raw()三种方法的比较：
+    create()方法得到一个模型实例，并保存到数据库中；
+    make()方法得到一个模型实例（不保存）；
+    raw()方法是得到一个模型实例转化后的数组。
+

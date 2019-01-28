@@ -1,0 +1,29 @@
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+OpenSSL
+fileinfo
+
+composer global require laravel/installer
+
+storage and the bootstrap/cache directories should be writable by your web server¡£
+//php artisan key:generate 
+
+config/app.php 
+    'timezone' => 'Asia/Hong_Kong',
+    'locale' => 'zh',
+
+nginx
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
+
+php artisan config:cache
+
+php artisan down
+
+php artisan down --message="Upgrading Database" --retry=60
+
+php artisan down --allow=127.0.0.1 --allow=192.168.0.0/16
+
+php artisan up
+

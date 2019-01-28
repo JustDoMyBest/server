@@ -38,6 +38,6 @@ class FileViewSet(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
     @action(methods=['get'], detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
-    def type(self, request, *args, **kwargs):
+    def getType(self, request, *args, **kwargs):
         file = self.get_object()
         return Response(file.type.type)
