@@ -18,7 +18,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->disableExceptionHandling();
 
-        $this->thread = create('App\Thread');
+        // $this->thread = create('App\Thread');
     }
 
     protected function signIn($user = null)

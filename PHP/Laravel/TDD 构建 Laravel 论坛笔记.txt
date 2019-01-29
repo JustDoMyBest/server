@@ -72,10 +72,13 @@ public function register()
 $thread->replies()跟$thread->replies的区别：$thread->replies()返回的是一个hasMany对象，而$thread->replies返回的是一个Collection集合。
 
 
+composer require barryvdh/laravel-debugbar:~2.4
 
+$threads->toSql()
 
+php artisan make:controller FavoritesController
 
+php artisan make:migration create_favorites_table --create=favorites
 
-
-
+php artisan make:model Favorite
 

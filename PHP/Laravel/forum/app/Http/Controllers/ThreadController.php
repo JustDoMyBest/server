@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Thread;
 use App\Channel;
 use Illuminate\Http\Request;
+use App\Filters\ThreadsFilters;
 
 class ThreadController extends Controller
 {
@@ -18,24 +19,47 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Channel $channel)
+    public function index(Channel $channel, ThreadsFilters $filters)
     {
-        //
+        $threads = $this->getThreads($channel, $filters);
+        //    dd($threads);
+
+        if(request()->wantsJson()){
+            return $threads;
+        }
+
+        return view('threads.index', compact('threads'));
+    }
+
+    // protected function getThreads(Channel $channel)
+    // {
+    //     if ($channel->exists) {
+    //         $threads = $channel->threads()->latest();
+    //     } else {
+    //         $threads = Thread::latest();
+    //     }
+
+    //     if ($username = request('by')) {
+    //         $user = \App\User::where('name', $username)->firstOrFail();
+
+    //         $threads->where('user_id', $user->id);
+    //     }
+
+    //     $threads = $threads->get();
+    //     return $threads;
+    // }
+    protected function getThreads(Channel $channel, ThreadsFilters $filters)
+    {
+        $threads = Thread::latest()->filter($filters);
+
         if ($channel->exists) {
-            $threads = $channel->threads()->latest();
-        } else {
-            $threads = Thread::latest();
+            $threads->where('channel_id', $channel->id);
         }
 
-        if($username = request('by')){
-            $user = \App\User::where('name',$username)->firstOrFail();
-    
-            $threads->where('user_id',$user->id);
-        }
+        // dd($threads->toSql());
 
-        $threads  = $threads->get();
-    
-        return view('threads.index',compact('threads'));
+        $threads = $threads->get();
+        return $threads;
     }
 
     /**
@@ -83,7 +107,11 @@ class ThreadController extends Controller
     public function show($channelId,Thread $thread)
     {
         //
-        return view('threads.show',compact('thread')); 
+        //return view('threads.show',compact('thread')); 
+        return view('threads.show',[
+            'thread' => $thread,
+            'replies' => $thread->replies()->paginate(2)
+        ]);
     }
 
     /**
