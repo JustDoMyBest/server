@@ -43,3 +43,39 @@ php artisan make:test CreateThreadsTest
     make()方法得到一个模型实例（不保存）；
     raw()方法是得到一个模型实例转化后的数组。
 
+Route::resource('threads','ThreadsController');
+以上代码等同于：
+Route::get('/threads', 'threadsController@index')->name('threads.index');
+Route::get('/threads/create', 'threadsController@create')->name('threads.create');
+Route::get('/threads/{thread}', 'threadsController@show')->name('threads.show');
+Route::post('/threads', 'threadsController@store')->name('threads.store');
+Route::get('/threads/{thread}/edit', 'threadsController@edit')->name('threads.edit');
+Route::patch('/threads/{thread}', 'threadsController@update')->name('threads.update');
+Route::delete('/threads/{thread}', 'threadsController@destroy')->name('threads.destroy');
+
+php artisan make:model Channel -m
+
+dd()
+
+ 隐性路由模型绑定 {channel}路由片段默认对应的是id字段，而我们需要对应的是slug字段。所以我们需要重写getRouteKeyName()方法
+
+composer require barryvdh/laravel-debugbar:~2.4
+
+forum\app\Providers\AppServiceProvider.php
+public function register()
+{
+    if($this->app->isLocal()){
+        $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+    }
+}
+
+$thread->replies()跟$thread->replies的区别：$thread->replies()返回的是一个hasMany对象，而$thread->replies返回的是一个Collection集合。
+
+
+
+
+
+
+
+
+
