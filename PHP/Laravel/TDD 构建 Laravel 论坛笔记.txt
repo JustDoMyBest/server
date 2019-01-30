@@ -82,3 +82,10 @@ php artisan make:migration create_favorites_table --create=favorites
 
 php artisan make:model Favorite
 
+php artisan migrate
+
+php artisan vendor:publish
+
+php artisan make:policy ThreadPolicy --model=Thread
+
+php artisan make:model Activity -m

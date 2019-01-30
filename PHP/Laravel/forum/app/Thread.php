@@ -8,6 +8,7 @@ class Thread extends Model
 {
     //
     protected $guarded = []; // 意味所有属性均可更新，后期会修复此安全隐患
+    protected $with = ['creator','channel'];
 
     protected static function boot()
     {
@@ -16,6 +17,29 @@ class Thread extends Model
         static::addGlobalScope('replyCount',function ($builder){
            $builder->withCount('replies');
         });
+    
+        static::deleting(function ($thread) {
+            $thread->replies()->delete();
+        });
+
+        static::created(function ($thread){
+            $thread->recordActivity('created');
+         });
+    }
+
+    protected function recordActivity($event)
+    {
+        Activity::create([
+            'user_id' => auth()->id(),
+            'type' => $this->getActivityType($event),
+            'subject_id' => $this->id,
+            'subject_type' => get_class($this)
+        ]);
+    }
+
+    protected function getActivityType($event)
+    {
+        return $event . '_' . strtolower((new \ReflectionClass($this))->getShortName());
     }
 
     public function path()
