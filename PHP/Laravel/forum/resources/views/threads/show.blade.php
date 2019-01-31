@@ -11,7 +11,7 @@
                                 {{ $thread->title }}
                             </span>
 
-                            @can('update',$thread)
+                        @can('update',$thread)
                             <form action="{{ $thread->path() }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
@@ -27,7 +27,10 @@
                 </div>
 
                 @foreach($replies as $reply)
-    @include('threads.reply') @endforeach {{ $replies->links() }} @if (auth()->check())
+                    @include('threads.reply') 
+                @endforeach 
+                {{ $replies->links() }} 
+                @if (auth()->check())
                 <form method="post" action="{{ $thread->path() . '/replies' }}">
 
                     {{ csrf_field() }}
@@ -55,4 +58,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

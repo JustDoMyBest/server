@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Thread extends Model
 {
     //
+    use RecordsActivity; // 与之前相比，仅仅多了一行引用
+
     protected $guarded = []; // 意味所有属性均可更新，后期会修复此安全隐患
     protected $with = ['creator','channel'];
 
@@ -19,27 +21,8 @@ class Thread extends Model
         });
     
         static::deleting(function ($thread) {
-            $thread->replies()->delete();
+            $thread->replies->each->delete();
         });
-
-        static::created(function ($thread){
-            $thread->recordActivity('created');
-         });
-    }
-
-    protected function recordActivity($event)
-    {
-        Activity::create([
-            'user_id' => auth()->id(),
-            'type' => $this->getActivityType($event),
-            'subject_id' => $this->id,
-            'subject_type' => get_class($this)
-        ]);
-    }
-
-    protected function getActivityType($event)
-    {
-        return $event . '_' . strtolower((new \ReflectionClass($this))->getShortName());
     }
 
     public function path()
