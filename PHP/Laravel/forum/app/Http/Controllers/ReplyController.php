@@ -43,10 +43,14 @@ class ReplyController extends Controller
     {
         $this->validate(request(),['body' => 'required']);
     
-        $thread->addReply([
+        $reply = $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id(),
         ]);
+
+        if(request()->expectsJson()){
+            return $reply->load('owner');
+        }
     
         return back()->with('flash','Your reply has been left.');
     }
@@ -83,6 +87,9 @@ class ReplyController extends Controller
     public function update(Request $request, Reply $reply)
     {
         //
+        $this->authorize('update',$reply);
+
+        $reply->update(request(['body']));
     }
 
     /**
@@ -94,5 +101,17 @@ class ReplyController extends Controller
     public function destroy(Reply $reply)
     {
         //
+        // if($reply->user_id != auth()->id()){
+        //     return response([],403);
+        // }
+        $this->authorize('update',$reply);
+
+        $reply->delete();
+
+        if (request()->expectsJson()){
+            return response(['status' => 'Reply deleted']);
+        }
+
+        return back();
     }
 }

@@ -89,3 +89,7 @@ php artisan vendor:publish
 php artisan make:policy ThreadPolicy --model=Thread
 
 php artisan make:model Activity -m
+
+php artisan make:policy ReplyPolicy
+
+ĞòÁĞ»¯ ·ÃÎÊÆ÷.

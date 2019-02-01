@@ -111,8 +111,8 @@ class ThreadController extends Controller
         //return view('threads.show',compact('thread')); 
         return view('threads.show',[
             'thread' => $thread,
-            'replies' => $thread->replies()->paginate(2)
-            // 'replies' => $thread->replies()->get()
+            // 'replies' => $thread->replies()->paginate(2)
+            'replies' => $thread->replies()->get()
         ]);
     }
 
