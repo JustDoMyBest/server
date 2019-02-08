@@ -93,3 +93,49 @@ php artisan make:model Activity -m
 php artisan make:policy ReplyPolicy
 
 序列化 访问器.
+
+npm install moment --save
+
+回滚最近一次迁移
+$ php artisan migrate:rollback
+$ php artisan migrate
+
+我们将使用 Laravel 的消息通知系统 来进行消息通知。我们需要先创建notifications数据表，Laravel 自带了生成迁移表的命令，执行以下命令即可：
+php artisan notifications:table
+php artisan migrate
+
+生成通知类
+Laravel 中一条通知就是一个类（通常存在 app/Notifications 文件夹里）。我们运行以下命令创建ThreadWasUpdated通知类：
+php artisan make:notification ThreadWasUpdated
+
+php artisan make:test NotificationsTest
+
+php artisan make:controller UserNotificationsController
+
+为事件和监听器创建文件：
+php artisan event:generate
+
+back()->with()
+
+resolve(Spam::class)
+
+npm list --depth=0
+
+创建表单请求类：
+php artisan make:request CreatePostRequest
+
+npm install at.js --save
+
+npm install jquery.caret --save
+
+php artisan make:controller Api/UsersController
+php artisan make:controller "Api\UserAvatarController"
+
+php artisan storage:link
+
+
+
+
+
+
+

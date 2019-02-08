@@ -27,26 +27,20 @@ class ParticipateInForumTest extends TestCase
     function an_authenticated_user_may_participate_in_forum_threads()
     {
         // Given we have a authenticated user
-        // $this->be($user = factory('App\User')->create());
-        $this->signIn();  // 已登录用户
+        $this->signIn();
         // And an existing thread
-        // $thread = factory('App\Thread')->create();
         $thread = create('App\Thread');
-        $this->post('/threads',$thread->toArray());
-
-        // dd($thread->path()); // 打印出路径
-
-        $this->get($thread->path())
-        ->assertSee($thread->title)
-        ->assertSee($thread->body);
 
         // When the user adds a reply to the thread
-        $reply = factory('App\Reply')->make();
+        $reply = make('App\Reply');
         $this->post($thread->path() .'/replies',$reply->toArray());
 
         // Then their reply should be visible on the page
-        $this->get($thread->path())
-            ->assertSee($reply->body);
+//        $this->get($thread->path())
+//            ->assertSee($reply->body);
+
+        $this->assertDatabaseHas('replies',['body' => $reply->body]);
+        $this->assertEquals(1,$thread->fresh()->replies_count);
     }
 
     /** @test */
@@ -69,11 +63,12 @@ class ParticipateInForumTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+        $reply = create('App\Reply',['user_id' => auth()->id()]);
 
         $this->delete("/replies/{$reply->id}")->assertStatus(302);
 
-        $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+        $this->assertDatabaseMissing('replies',['id' => $reply->id]);
+        $this->assertEquals(0,$reply->thread->fresh()->replies_count);
     }
 
     /** @test */
@@ -102,5 +97,40 @@ class ParticipateInForumTest extends TestCase
         $this->patch("/replies/{$reply->id}", ['body' => $updatedReply]);
 
         $this->assertDatabaseHas('replies', ['id' => $reply->id, 'body' => $updatedReply]);
+    }
+
+    /** @test */
+    public function replies_that_contain_spam_may_not_be_created()
+    {
+        $this->withExceptionHandling();
+
+        $this->signIn();
+
+        $thread = create('App\Thread');
+        $reply = make('App\Reply',[
+           'body' => 'something forbidden'
+        ]);
+
+        $this->json('post',$thread->path() . '/replies',$reply->toArray())
+            ->assertStatus(422);
+    }
+
+    /** @test */
+    public function users_may_only_reply_a_maximum_of_once_per_minute()
+    {
+        \Illuminate\Support\Facades\Notification::fake();
+        $this->withExceptionHandling();
+        $this->signIn();
+
+        $thread = create('App\Thread');
+        $reply = make('App\Reply',[
+            'body' => 'My simple reply.'
+        ]);
+
+        $this->post($thread->path() . '/replies',$reply->toArray())
+            ->assertStatus(200);
+
+        $this->post($thread->path() . '/replies',$reply->toArray())
+            ->assertStatus(429);
     }
 }

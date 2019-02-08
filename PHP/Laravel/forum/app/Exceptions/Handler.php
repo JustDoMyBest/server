@@ -45,6 +45,15 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         // if(app()->environment() === 'testing') throw $exception;  // 此处加上一行
+        if($exception instanceof \Illuminate\Validation\ValidationException){
+            if ($request->expectsJson()){
+                return response('Validation failed.',422);
+            };
+        }
+
+        if($exception instanceof \App\Exceptions\ThrottleException){
+            return response('You are posting too frequently.',429);
+        }
 
         return parent::render($request, $exception);
     }

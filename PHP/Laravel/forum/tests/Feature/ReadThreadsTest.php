@@ -33,19 +33,6 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_replies_that_are_associated_with_a_thread()
-    {
-    // 如果有 Thread
-    // 并且该 Thread 有回复
-        $reply = factory('App\Reply')
-            ->create(['thread_id' => $this->thread->id]);
-    // 那么当我们看 Thread 时
-    // 我们也要看到回复
-        $this->get($this->thread->path())
-            ->assertSee($reply->body);
-    }
-
-    /** @test */
     public function a_user_can_filter_threads_according_to_a_channel()
     {
         $channel = create('App\Channel');
@@ -87,6 +74,31 @@ class ReadThreadsTest extends TestCase
         $response = $this->getJson('threads?popularity=1')->json();
 
     // Then they should be returned from most replies to least.
-        $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
+        // $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
+        $this->assertEquals([3, 2, 0], array_column($response['data'], 'replies_count'));
+    }
+
+    /** @test */
+    public function a_user_can_request_all_replies_for_a_given_thread()
+    {
+        $thread = create('App\Thread');
+        create('App\Reply',['thread_id' => $thread->id],40);
+
+        $response = $this->getJson($thread->path() . '/replies')->json();
+
+        $this->assertCount(2,$response['data']);
+        $this->assertEquals(40,$response['total']);
+    }
+
+    /** @test */
+    public function a_user_can_filter_threads_by_those_that_are_unanswered()
+    {
+        $thread = create('App\Thread');
+        create('App\Reply', ['thread_id' => $thread->id]);
+
+        $response = $this->getJson('threads?unanswered=1')->json();
+
+        // $this->assertCount(1, $response);
+        $this->assertCount(1, $response['data']);
     }
 }

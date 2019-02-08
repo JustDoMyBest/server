@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Reply;
 use App\Thread;
 use Illuminate\Http\Request;
+use App\Spam;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\CreatePostRequest;
 
 class ReplyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => 'index']);
     }
 
     /**
@@ -18,9 +21,10 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($channelId,Thread $thread)
     {
         //
+        return $thread->replies()->paginate(2);
     }
 
     /**
@@ -39,20 +43,38 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($channelId,Thread $thread)
+    public function store($channelId,Thread $thread,CreatePostRequest $request)
     {
-        $this->validate(request(),['body' => 'required']);
+        // if(Gate::denies('create',new Reply)) {
+        //     return response(
+        //         'You are posting too frequently.Please take a break.:)',422
+        //     );
+        // }
+
+        // try{
+        //     // $this->authorize('create',new Reply);
+        //     $this->validate(request(),['body' => 'required|spamfree']);
+
+            // $reply = $thread->addReply([
+            //     'body' => request('body'),
+            //     'user_id' => auth()->id(),
+            // ]);
+        // }catch (\Exception $e){
+            // return response(
+                // 'Sorry,your reply could not be saved at this time.',422
+            // );
+        // };
+
+        // if(request()->expectsJson()){
+            // return $reply->load('owner');
+        // }
     
-        $reply = $thread->addReply([
+        // return back()->with('flash','Your reply has been left.');
+        // return $reply->load('owner');
+        return $reply = $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id(),
-        ]);
-
-        if(request()->expectsJson()){
-            return $reply->load('owner');
-        }
-    
-        return back()->with('flash','Your reply has been left.');
+        ])->load('owner');
     }
 
     /**
@@ -84,10 +106,22 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reply $reply)
+    public function update(Reply $reply)
     {
-        //
         $this->authorize('update',$reply);
+
+        //
+        // try{
+        //     // $this->validateReply();
+        //     $this->validate(request(),['body' => 'required|spamfree']);
+
+        //     $reply->update(request(['body']));
+        // }catch (\Exception $e){
+        //     return response(
+        //         'Sorry,your reply could not be saved at this time.',422
+        //     );
+        // }
+        $this->validate(request(),['body' => 'required|spamfree']);
 
         $reply->update(request(['body']));
     }
@@ -114,4 +148,11 @@ class ReplyController extends Controller
 
         return back();
     }
+
+    // protected function validateReply()
+    // {
+    //     $this->validate(request(),['body' => 'required']);
+
+    //     resolve(Spam::class)->detect(request('body'));
+    // }
 }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Thread;
 use App\Channel;
+use App\Trending;
 use Illuminate\Http\Request;
 use App\Filters\ThreadsFilters;
+use Illuminate\Support\Facades\Redis;
 
 class ThreadController extends Controller
 {
@@ -19,7 +21,7 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Channel $channel, ThreadsFilters $filters)
+    public function index(Channel $channel,ThreadsFilters $filters,Trending $trending)
     {
         $threads = $this->getThreads($channel, $filters);
         //    dd($threads);
@@ -28,7 +30,14 @@ class ThreadController extends Controller
             return $threads;
         }
 
-        return view('threads.index', compact('threads'));
+        // $trending = array_map('json_decode',Redis::zrevrange('trending_threads',0,4));
+
+        // return view('threads.index', compact('threads','trending'));
+
+        return view('threads.index',[
+            'threads' => $threads,
+            'trending' => $trending->get()
+        ]);
     }
 
     // protected function getThreads(Channel $channel)
@@ -59,7 +68,10 @@ class ThreadController extends Controller
 
         // dd($threads->toSql());
 
-        $threads = $threads->get();
+        // $threads = $threads->get();
+        // $threads = $threads->paginate(20);
+        $threads = $threads->paginate(4);
+
         return $threads;
     }
 
@@ -83,10 +95,12 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-           'title' => 'required',
-            'body' => 'required',
+            'title' => 'required|spamfree',
+            'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id'
         ]);
+
+        // $spam->detect($request['body']);
     
         $thread = Thread::create([
             'user_id' => auth()->id(),
@@ -105,15 +119,27 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show($channelId,Thread $thread)
+    public function show($channelId,Thread $thread,Trending $trending)
     {
         //
         //return view('threads.show',compact('thread')); 
-        return view('threads.show',[
-            'thread' => $thread,
-            // 'replies' => $thread->replies()->paginate(2)
-            'replies' => $thread->replies()->get()
-        ]);
+        // return view('threads.show',[
+        //     'thread' => $thread,
+        //     // 'replies' => $thread->replies()->paginate(2)
+        //     'replies' => $thread->replies()->get()
+        // ]);
+        if(auth()->check()){
+            auth()->user()->read($thread);
+        }
+
+        // Redis::zincrby('trending_threads',1,json_encode([
+        //     'title' => $thread->title,
+        //     'path' => $thread->path()
+        // ]));
+
+        $trending->push($thread);
+
+        return view('threads.show',compact('thread'));
     }
 
     /**

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('header')
+    <link rel="stylesheet" href="/css/vendor/jquery.atwho.css">
+@endsection
+
 @section('content')
     <thread-view :initial-replies-count="{{ $thread->replies_count }}" inline-template>
         <div class="container">
@@ -8,8 +12,12 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="level">
+                                {{-- <img src="/storage/{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-1"> --}}
+                                {{-- <img src="/storage/{{ $thread->creator->avatar() }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-1"> --}}
+                                <img src="/storage/{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-1">
+
                             <span class="flex">
-                                <a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a>
+                                <a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a> posted:
                                 {{ $thread->title }}
                             </span>
 
@@ -29,9 +37,10 @@
                         </div>
                     </div>
 
-                    <replies :data="{{ $thread->replies }}"
-                        @added="repliesCount++"
-                        @removed="repliesCount--"></replies>
+                    {{-- <replies :data="{{ $thread->replies }}" --}}
+                        {{-- @added="repliesCount++" --}}
+                        {{-- @removed="repliesCount--"></replies> --}}
+                    <replies @added="repliesCount++" @removed="repliesCount--"></replies>
 
                     {{--@foreach ($replies as $reply)--}}
                         {{--@include('threads.reply')--}}
@@ -59,8 +68,13 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <p>
-                                <a href="#">{{ $thread->creator->name }}</a> 发布于 {{ $thread->created_at->diffForHumans() }},
-                                当前共有 <span v-text="repliesCount"></span> 个回复。
+                                This thread was published {{ $thread->created_at->diffForHumans() }} by
+                                <a href="#">{{ $thread->creator->name }}</a>,and currently
+                                has <span v-text="repliesCount"></span> {{ str_plural('comment',$thread->replies_count) }}
+                            </p>
+            
+                            <p>
+                                <subscribe-button :active="{{ json_encode($thread->isSubscribedTo)}}"></subscribe-button>
                             </p>
                         </div>
                     </div>
