@@ -15,6 +15,7 @@ class TagController extends Controller
     public function index()
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.tag_create');
     }
 
     /**

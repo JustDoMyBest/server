@@ -1,0 +1,1 @@
+@extends('awesome_sharing_courses_resources.backend.layouts.app')
