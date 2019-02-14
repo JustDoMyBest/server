@@ -25,11 +25,11 @@ data = [
     {"accessPath":"","checked":false,"delFlag":0,"parentID":20,"resourceGrade":3,"resourceID":42,"resourceName":"文件审核"},
     {"accessPath":"","checked":false,"delFlag":0,"parentID":20,"resourceGrade":3,"resourceID":42,"resourceName":"用户审核"}, --}}
 
-    {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":2,"resourceID":24,"resourceName":"用户管理"},
-    {"accessPath":"","checked":false,"delFlag":0,"parentID":24,"resourceGrade":3,"resourceID":42,"resourceName":"所有用户"},
-    {"accessPath":"","checked":false,"delFlag":0,"parentID":22,"resourceGrade":3,"resourceID":42,"resourceName":"添加用户"},
-
     {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":2,"resourceID":22,"resourceName":"用户组管理"},
     {"accessPath":"usergroup.html","checked":false,"delFlag":0,"parentID":22,"resourceGrade":3,"resourceID":42,"resourceName":"所有用户组"},
     {"accessPath":"usergroup_edit.html","checked":false,"delFlag":0,"parentID":22,"resourceGrade":3,"resourceID":42,"resourceName":"添加用户组"},
+
+    {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":2,"resourceID":24,"resourceName":"用户管理"},
+    {"accessPath":"/user","checked":false,"delFlag":0,"parentID":24,"resourceGrade":3,"resourceID":42,"resourceName":"所有用户"},
+    {"accessPath":"/user/create","checked":false,"delFlag":0,"parentID":24,"resourceGrade":3,"resourceID":42,"resourceName":"添加用户"},
 ];

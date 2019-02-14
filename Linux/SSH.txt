@@ -13,3 +13,5 @@ done
 ClientAliveInterval 30
 #ClientAliveCountMax 3
 ClientAliveCountMax 9999
+
+systemctl status systemd-logind

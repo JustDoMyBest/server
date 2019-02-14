@@ -22,6 +22,8 @@ Route::get('loupanchart', function () {
     return view('awesome_sharing_courses_resources.backend_BS_JQ.loupanchart');
 });
 Route::resource('tag', 'TagController');
+Route::resource('usergroup', 'UserGroupController');
+Route::resource('user', 'UserController');
 Route::resource('coursetype', 'CourseTypeController');
 Route::resource('course', 'CourseController');
 Route::resource('chapter', 'ChapterController');

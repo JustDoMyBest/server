@@ -11,6 +11,7 @@
 <script src="{{ asset('sise/backend/scripts/My97DatePicker/WdatePicker.js') }}" type="text/javascript" defer="defer"></script>
 <script type="text/javascript" src="{{ asset('sise/backend/scripts/artDialog/artDialog.js?skin=default') }}"></script>
 <script type="text/javascript">
+module_name = "user";
 	$(document).ready(function() {
 		/*
 		 * 提交
@@ -73,13 +74,11 @@
 	function checkFyFhSubmit(){
 		// 分别获取小区编号、栋号、层号、房号
 		var fyID = $('#fyID').val();
-		var fyXqCode = $("#fyXq").val();
-		var fyDh = $("#fyDh").val();
-		var fyCh = $("#fyCh").val();	
-		var fyFh = $("#fyFh").val();
-		var tag = $("#tag").val();
+		var name = $("#name").val();
+		var email = $("#email").val();
 		var enabled = $("#enabled").val();
-		if(fyXqCode!="" && fyDh!="" && fyCh!="" && fyFh!=""){
+		// if(fyXqCode!="" && fyDh!="" && fyCh!="" && fyFh!=""){
+		if(fyID!="" && name!="" && email!="" && enabled!=""){
 			// 给房屋坐落地址赋值
 			// $("#fyZldz").val($('#fyDh option:selected').text()  + fyCh + "-" + fyFh);
 			// 异步判断该房室是否存在，如果已存在，给用户已提示哦
@@ -89,17 +88,17 @@
 				type:"PUT",
 				// type:"PATCH",
 				// url:"checkFyFhIsExists.action",
-				url:"/tag/" + fyID,
+				url:"/" + module_name + "/" + fyID,
 				// data:{"fangyuanEntity.fyID":fyID,"fangyuanEntity.fyXqCode":fyXqCode, "fangyuanEntity.fyDhCode":fyDh, "fangyuanEntity.fyCh":fyCh, "fangyuanEntity.fyFh":fyFh},
-				data:{"_token":"{{ csrf_token() }}", "tag": tag, "enabled": enabled},
+				data:{"_token":"{{ csrf_token() }}", "name": name, "email": email, "enabled": enabled},
 				dataType : "text",
 				success:function(data){
 // 					alert(data);
 					// 如果返回数据不为空，更改“房源信息”
 					if(data=="1"){
-						//  art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'该房室在系统中已经存在哦，\n请维护其他房室数据', ok:true,});
-						//  $("#fyFh").css("background", "#EEE");
-						//  $("#fyFh").focus();
+						 art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'该房室在系统中已经存在哦，\n请维护其他房室数据', ok:true,});
+						 $("#fyFh").css("background", "#EEE");
+						 $("#fyFh").focus();
 						 return false;
 					}else{
 						// $("#submitForm").attr("action", "/xngzf/archives/saveOrUpdateFangyuan.action").submit();
@@ -115,34 +114,34 @@
 	
 	/** 表单验证  **/
 	function validateForm(){
-		// if($("#fyXqName").val()==""){
-		// 	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源小区', ok:true,});
-		// 	return false;
-		// }
-		// if($("#fyDh").val()==""){
-		// 	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源栋号', ok:true,});
-		// 	return false;
-		// }
-		// if($("#fyCh").val()==""){
-		// 	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源层号', ok:true,});
-		// 	return false;
-		// }
-		// if($("#fyFh").val()==""){
-		// 	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源房号', ok:true,});
-		// 	return false;
-		// }
-		// if($("#fyZongMj").val()==""){
-		// 	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源面积', ok:true,});
-		// 	return false;
-		// }
-		// if($("#fyJizuMj").val()==""){
-		// 	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写计租面积', ok:true,});
-		// 	return false;
-		// }
-		// if($("#fyZldz").val()==""){
-		// 	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源座落地址', ok:true,});
-		// 	return false;
-		// }
+		if($("#fyXqName").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源小区', ok:true,});
+			return false;
+		}
+		if($("#fyDh").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源栋号', ok:true,});
+			return false;
+		}
+		if($("#fyCh").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源层号', ok:true,});
+			return false;
+		}
+		if($("#fyFh").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源房号', ok:true,});
+			return false;
+		}
+		if($("#fyZongMj").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源面积', ok:true,});
+			return false;
+		}
+		if($("#fyJizuMj").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写计租面积', ok:true,});
+			return false;
+		}
+		if($("#fyZldz").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源座落地址', ok:true,});
+			return false;
+		}
 		return true;
 	}
 </script>
@@ -151,11 +150,11 @@
 <form id="submitForm" name="submitForm" action="/xngzf/archives/initFangyuan.action" method="post">
 	{{ csrf_field() }}
 	{{-- <input type="hidden" name="fyID" value="14458625716623" id="fyID"/> --}}
-	<input type="hidden" type="text" id="fyID" name="fyID" value="{{ $tag->id }}" />
+	<input type="hidden" type="text" id="fyID" name="fyID" value="{{ $user->id }}" />
 	<div id="container">
 		<div id="nav_links">
 			{{-- 当前位置：基础数据&nbsp;>&nbsp;<span style="color: #1A5CC6;">房源编辑</span> --}}
-			当前位置：标签管理&nbsp;>&nbsp;<span style="color: #1A5CC6;">标签编辑</span>
+			当前位置：用户管理&nbsp;>&nbsp;<span style="color: #1A5CC6;">用户编辑</span>
 			<div id="page_close">
 				<a href="javascript:parent.$.fancybox.close();">
 					<img src="{{ asset('sise/backend/images/common/page_close.png') }}" width="20" height="20" style="vertical-align: text-top;"/>
@@ -165,17 +164,15 @@
 		<div class="ui_content">
 			<table  cellspacing="0" cellpadding="0" width="100%" align="left" border="0">
 				<tr>
-					{{-- <td class="ui_text_rt" width="80">小区</td> --}}
-					<td class="ui_text_rt" width="80">标签名</td>
+					<td class="ui_text_rt" width="80">用户名</td>
 					<td class="ui_text_lt">
-						{{-- <input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" value="瑞景河畔16号楼1-112" class="ui_input_txt02"/> --}}
-						<input type="text" id="tag" name="fangyuanEntity.fyZldz" value="{{ $tag->tag }}" class="ui_input_txt02"/>
-						{{-- <select name="fangyuanEntity.fyXqCode" id="fyXq" class="ui_select01" onchange="getFyDhListByFyXqCode();">
-                            <option value="">--请选择--</option>
-                            <option value="6" selected="selected">瑞景河畔</option>
-                            <option value="77">蔚蓝小区</option>
-                            <option value="83">和盛园小区</option>
-                        </select> --}}
+						<input type="text" id="name" name="fangyuanEntity.fyZldz" value="{{ $user->name }}" class="ui_input_txt02"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="ui_text_rt" width="80">电子邮箱</td>
+					<td class="ui_text_lt">
+						<input type="text" id="email" name="fangyuanEntity.fyZldz" value="{{ $user->email }}" class="ui_input_txt02"/>
 					</td>
 				</tr>
 				<tr>
@@ -186,8 +183,8 @@
                             <option value="">--请选择--</option>
                             {{-- <option value="16" selected="selected">瑞景河畔16号楼</option>
                             <option value="75">瑞景河畔24号楼</option> --}}
-                            <option value="1" {{ $tag->enabled ? 'selected="selected"' : '' }} >1</option>
-                            <option value="00" {{ !$tag->enabled ? 'selected="selected"' : '' }} >0</option>
+                            <option value="1" {{ $user->enabled ? 'selected="selected"' : '' }} >1</option>
+                            <option value="00" {{ !$user->enabled ? 'selected="selected"' : '' }} >0</option>
                         </select>
 					</td>
 				</tr>

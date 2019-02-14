@@ -115,7 +115,20 @@ class TagController extends Controller
     public function update(Request $request, Tag $tag)
     {
         //
-        dd('updating');
+        // dd($tag->enabled());
+        // dd('updating');
+        if ($request['enabled'] === '1') {
+            $enabled = true;
+        }else {
+            $enabled = false;
+        }
+        // dd($request['enabled']);
+        // dd($request['tag']);
+        // dd($enabled);
+        $tag->update([
+            'tag' => $request['tag'],
+            'enabled' => $enabled,
+        ]);
     }
 
     /**

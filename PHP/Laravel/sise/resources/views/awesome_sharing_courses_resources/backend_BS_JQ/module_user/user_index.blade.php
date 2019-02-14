@@ -2,16 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="{{ asset('sise/backend/scripts/jquery/jquery-1.7.1.js') }}"></script>
-<link href="{{ asset('sise/backend/style/authority/basic_layout.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('sise/backend/style/authority/common_style.css') }}" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="{{ asset('sise/backend/scripts/authority/commonAll.js') }}"></script>
-<script type="text/javascript" src="{{ asset('sise/backend/scripts/fancybox/jquery.fancybox-1.3.4.js') }}"></script>
-<script type="text/javascript" src="{{ asset('sise/backend/scripts/fancybox/jquery.fancybox-1.3.4.pack.js') }}"></script>
-<link rel="stylesheet" type="text/css" href="{{ asset('sise/backend/style/authority/jquery.fancybox-1.3.4.css') }}" media="screen"></link>
-<script type="text/javascript" src="{{ asset('sise/backend/scripts/artDialog/artDialog.js?skin=default') }}"></script>
+@include('awesome_sharing_courses_resources.backend_BS_JQ.layouts.header')
+@include('awesome_sharing_courses_resources.backend_BS_JQ.layouts.script')
 <title>信息管理系统</title>
 <script type="text/javascript">
+
+var fancybox_onClosed_href = '/user';
+var module_name = 'user';
 
 	$(document).ready(function(){
 	    /**编辑   **/
@@ -23,7 +20,7 @@
 	        'showCloseButton' : false,
 	        'onClosed' : function() { 
 	        	// window.location.href = 'house_list.html';
-	        	window.location.href = '/tag';
+	        	window.location.href = fancybox_onClosed_href;
 	        }
 	    });
 	});
@@ -32,27 +29,11 @@
 
 	/** 模糊查询来电用户  **/
 	function search(){
-		// $("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
-		// $("#submitForm").attr("action", "tag?page=" + 1).submit();
 		getSearch();
-		// $("#submitForm").attr("action", "tag?page=" + 1 + "&by=" + by + "&tag=" + tag + "&enabled=" + enabled).submit();
 	}
 
 	function getSearch(){
-		// var by = $('#username').val();
-		// var tag = $('#tag').val();
-		// var enabled = $('#enabled').val();
-		// console.log(by);
-		// console.log(tag);
-		// console.log(enabled);
-		// alert(by);
-		// $("#submitForm").attr("action", "tag?page=" + 1 + "&by=" + by + "&tag=" + tag + "&enabled=" + enabled).submit();
-		$("#submitForm").attr("action", "tag").submit();
-	}
-
-	/** 新增   **/
-	function add(){
-		$("#submitForm").attr("action", "/xngzf/archives/luruFangyuan.action").submit();	
+		$("#submitForm").attr("action", "/" + module_name).submit();
 	}
 	
 	/** 删除 **/
@@ -60,10 +41,7 @@
 		// 非空判断
 		if(fyID == '') return;
 		if(confirm("您确定要删除吗？")){
-			// $("#submitForm").attr("action", "/xngzf/archives/delFangyuan.action?fyID=" + fyID).submit();			
-			// alert("tag/" + fyID);return
-			$("#deleteForm").attr("action", "tag/" + fyID).submit();			
-			// window.location.href='tag';
+			$("#deleteForm").attr("action", module_name + "/" + fyID).submit();			
 		}
 	}
 	
@@ -96,23 +74,14 @@
 			$("#allIDCheck").val(allIDCheck);
 			if(confirm("您确定要批量删除这些记录吗？")){
 				// 提交form
-				// $("#submitForm").attr("action", "/xngzf/archives/batchDelFangyuan.action").submit();
-					$("#deleteForm").attr("action","tag/" + allIDCheck).submit();
-				// for ( IDCheck of allIDCheck ) {
-					// $("#deleteForm").attr("action","tag/" + IDCheck).submit();
-					// console.log("tag/" + IDCheck);
-				// }
-				// $("#submitForm").attr("action", "tag").submit();
+				$("#deleteForm").attr("action", module_name + "/" + allIDCheck).submit();
 			}
 		}
 	}
 
 	/** 普通跳转 **/
 	function jumpNormalPage(page){
-		// $("#submitForm").attr("action", "house_list.html?page=" + page).submit();
-		// console.log({{ $tags->currentpage() + 1 }});
-		// $("#submitForm").attr("action", "tag?page=" + page).submit();
-		location.href = "tag?page=" + page;
+		location.href = "/" + module_name + "?page=" + page;
 	}
 	
 	/** 输入页跳转 **/
@@ -127,13 +96,13 @@
 			}
 			// $("#submitForm").attr("action", "house_list.html?page=" + pageNum).submit();
 			// $("#submitForm").attr("action", "tag?page=" + pageNum).submit();
-		location.href = "tag?page=" + pageNum;
+		location.href = "/" + module_name + "?page=" + pageNum;
 		}else{
 			// “跳转页数”为空
 			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'请输入合适的页数，\n自动为您跳到首页', ok:true,});
 			// $("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
 			// $("#submitForm").attr("action", "tag?page=" + 1).submit();
-		location.href = "tag?page=" + pageNum + 1;
+		location.href = "/" + module_name + "?page=" + pageNum + 1;
 		}
 	}
 </script>
@@ -160,9 +129,10 @@
 						<div id="box_center">
 
 							{{-- 发布者姓名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
-							发布者姓名&nbsp;&nbsp;<input value="{{ session('by') }}" type="text" id="username" name="by" class="ui_input_txt02" />
+							{{-- 创建者姓名&nbsp;&nbsp;<input value="{{ session('by') }}" type="text" name="by" class="ui_input_txt02" /> --}}
 							{{-- 标签名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
-							标签名&nbsp;&nbsp;<input value="{{ session('tag') }}" type="text" id="tag" name="tag" class="ui_input_txt02" />
+							用户名&nbsp;&nbsp;<input value="{{ session('name') }}" type="text" name="name" class="ui_input_txt02" />
+							电子邮箱&nbsp;&nbsp;<input value="{{ session('email') }}" type="text" name="email" class="ui_input_txt02" />
 
 							状态
 							{{-- <select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01"> --}}
@@ -186,10 +156,7 @@
 						</div>
 						<div id="box_bottom">
 							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
-							{{-- <input type="button" value="新增" class="ui_input_btn01" id="addBtn" />  --}}
-							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" /> 
-							{{-- <input type="button" value="导入" class="ui_input_btn01" id="importBtn" /> --}}
-							{{-- <input type="button" value="导出" class="ui_input_btn01" onclick="exportExcel();" /> --}}
+							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" />
 						</div>
 					</div>
 				</div>
@@ -201,24 +168,25 @@
 							<th width="30"><input type="checkbox" id="all" onclick="selectOrClearAllCheckbox(this);" />
 							</th>
 							<th>id</th>
-							<th>发布者姓名</th>
-							<th>标签名</th>
+							{{-- <th>创建者姓名</th> --}}
+							<th>用户名</th>
+							<th>电子邮箱</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
-						@foreach ($tags as $tag)
+						@foreach ($users as $user)
                             <tr>
 								{{-- <td><input type="checkbox" name="IDCheck" value="14458619251417" class="acb" /></td> --}}
-								<td><input type="checkbox" name="IDCheck" value="{{ $tag->id }}" class="acb" /></td>
-                                <td>{{ $tag->id }}</td>
-                                <td>{{ $tag->user->name }}</td>
-                                <td>{{ $tag->tag }}</td>
-								<td>{{ $tag->enabled }}</td>
+								<td><input type="checkbox" name="IDCheck" value="{{ $user->id }}" class="acb" /></td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email}}</td>
+								<td>{{ $user->enabled }}</td>
 								<td>
 									{{-- <a href="house_edit.html?fyID=14458619251417" class="edit">编辑</a>  --}}
-                                    <a href="{{ route('tag.edit', $tag->id) }}" class="edit">编辑</a> 
+                                    <a href="{{ route('user.edit', $user->id) }}" class="edit">编辑</a> 
 									{{-- <a href="javascript:del('14458619251417');">删除</a> --}}
-									<a href="javascript:del('{{ $tag->id }}');">删除</a>
+									<a href="javascript:del('{{ $user->id }}');">删除</a>
 								</td>
 							</tr>
                         @endforeach
@@ -229,13 +197,13 @@
 					<div class="ui_flt" style="height: 30px; line-height: 30px;">
 						共有
 						{{-- <span class="ui_txt_bold04">90</span> --}}
-                    <span class="ui_txt_bold04">{{ $tags->count() }}</span>
+                    <span class="ui_txt_bold04">{{ $users->count() }}</span>
 						条记录，当前第
 						{{-- <span class="ui_txt_bold04">1 --}}
-						<span class="ui_txt_bold04">{{ $tags->currentpage() }}
+						<span class="ui_txt_bold04">{{ $users->currentpage() }}
 						/
 						{{-- 9</span> --}}
-						{{ $tags->lastpage() }}</span>
+						{{ $users->lastpage() }}</span>
 						页
 					</div>
 					<div class="ui_frt">
@@ -244,11 +212,11 @@
 							<input type="button" value="首页" class="ui_input_btn01"
 								onclick="jumpNormalPage(1);" />
 							<input type="button" value="上一页" class="ui_input_btn01"
-								onclick="jumpNormalPage({{ $tags->currentpage() - 1 }});" />
+								onclick="jumpNormalPage({{ $users->currentpage() - 1 }});" />
 							<input type="button" value="下一页" class="ui_input_btn01"
-								onclick="jumpNormalPage({{ $tags->currentpage() + 1 }});" />
+								onclick="jumpNormalPage({{ $users->currentpage() + 1 }});" />
 							<input type="button" value="尾页" class="ui_input_btn01"
-								onclick="jumpNormalPage({{ $tags->lastpage() }});" />
+								onclick="jumpNormalPage({{ $users->lastpage() }});" />
 						
 						
 						
@@ -256,7 +224,7 @@
 						
 						转到第<input type="text" id="jumpNumTxt" class="ui_input_txt01" />页
 							 {{-- <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage(9);" /> --}}
-							 <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage({{ $tags->lastpage() }});" />
+							 <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage({{ $users->lastpage() }});" />
 					</div>
 				</div>
 			</div>

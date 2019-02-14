@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar_path',
+        'name', 'email', 'password', 'avatar_path', 'enabled',
     ];
 
     /**
@@ -27,10 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token', 'email',
     ];
 
-    public function getRouteKeyName()
-    {
-        return 'name';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'name';
+    // }
 
     public function threads()
     {
@@ -69,4 +69,10 @@ class User extends Authenticatable
     {
         return $key = sprintf("users.%s.visits.%s",$this->id,$thread->id);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        // dd($query,$filters);
+        return $filters->apply($query);
+    }    
 }
