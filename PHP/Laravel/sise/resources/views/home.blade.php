@@ -21,3 +21,7 @@
     </div>
 </div>
 @endsection
+<script>
+// console.log(!!window.location.pathname.match(new RegExp('tag','i')));
+console.log(window.location.pathname);
+</script>

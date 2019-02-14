@@ -5,7 +5,7 @@ Route::get('backend', function () {
     return view('awesome_sharing_courses_resources.backend_BS_JQ.index');
     // return view('awesome_sharing_courses_resources.backend_BS_JQ.introduce');
     // return view('awesome_sharing_courses_resources.backend.manage_cources');
-});
+})->middleware('auth');
 Route::get('introduce', function () {
     // return 'Hello';
     // return view('awesome_sharing_courses_resources.backend_BS_JQ.index');
@@ -21,7 +21,7 @@ Route::get('loupanchart', function () {
     // return view('awesome_sharing_courses_resources.backend_BS_JQ.index');
     return view('awesome_sharing_courses_resources.backend_BS_JQ.loupanchart');
 });
-Route::resource('tags', 'TagController');
+Route::resource('tag', 'TagController');
 Route::resource('coursetype', 'CourseTypeController');
 Route::resource('course', 'CourseController');
 Route::resource('chapter', 'ChapterController');

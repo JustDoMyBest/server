@@ -20,7 +20,7 @@ class CreateTagsTable extends Migration
             $table->boolean('enabled')->default(false);
             $table->timestamps();
 
-            $table->unique(['user_id']);
+            // $table->unique(['user_id']);
         });
     }
 

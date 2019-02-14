@@ -16,8 +16,8 @@ data = [
     {"accessPath":"","checked":false,"delFlag":0,"parentID":29,"resourceGrade":3,"resourceID":42,"resourceName":"文件上传"},
 
     {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":2,"resourceID":20,"resourceName":"标签管理"},
-    {"accessPath":"/tags","checked":false,"delFlag":0,"parentID":20,"resourceGrade":3,"resourceID":42,"resourceName":"所有标签"},
-    {"accessPath":"","checked":false,"delFlag":0,"parentID":20,"resourceGrade":3,"resourceID":42,"resourceName":"标签发布"},
+    {"accessPath":"/tag","checked":false,"delFlag":0,"parentID":20,"resourceGrade":3,"resourceID":42,"resourceName":"所有标签"},
+    {"accessPath":"/tag/create","checked":false,"delFlag":0,"parentID":20,"resourceGrade":3,"resourceID":42,"resourceName":"标签发布"},
 
     {{-- {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":2,"resourceID":20,"resourceName":"审核管理"},
     {"accessPath":"","checked":false,"delFlag":0,"parentID":20,"resourceGrade":3,"resourceID":42,"resourceName":"标签审核"},

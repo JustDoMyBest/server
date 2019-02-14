@@ -51,8 +51,10 @@
 </head>
 
 <body>
+{{-- <a href="{{ route('register') }}">点此注册</a> --}}
     <div id="app">
-    @include('layouts.nav') @yield('content')
+    @include('awesome_sharing_courses_resources.backend_BS_JQ.layouts.navtop')
+    @yield('content')
 
         <flash message="{{ session('flash') }}"></flash>
     </div>

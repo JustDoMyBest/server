@@ -1,6 +1,8 @@
 ﻿{{-- @extends('awesome_sharing_courses_resources.backend_BS_JQ.layouts.index') --}}
+{{-- @extends('awesome_sharing_courses_resources.backend_BS_JQ.layouts.app') --}}
 
 {{-- @section('iframe') --}}
+{{-- @section('content') --}}
 <!DOCTYPE html>
 <html>
 <head>

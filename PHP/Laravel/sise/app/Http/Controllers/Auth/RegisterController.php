@@ -62,10 +62,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // if($data['role'] == '^'){
+            // $this->redirectTo = '/user';
+            // $this->redirectTo = '/tag';
+            $this->redirectTo = '/backend';
+        // }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function redirectPath()
+    {
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
 }

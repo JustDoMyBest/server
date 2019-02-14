@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿{{-- @extends('awesome_sharing_courses_resources.backend_BS_JQ.layouts.app')
+
+@section('content') --}}
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -12,7 +15,8 @@
 		/**退出系统**/
 		function logout(){
 			if(confirm("您确定要退出本系统吗？")){
-				window.location.href = "/home";
+				// window.location.href = "/home";
+				window.location.href = "/frontend";
 			}
 		}
 		
@@ -30,18 +34,18 @@
 		}
 		
 		/**加入收藏夹**/
-		function addfavorite(){
-			var ua = navigator.userAgent.toLowerCase();
-			 if (ua.indexOf("360se") > -1){
-			  	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'由于360浏览器功能限制，加入收藏夹功能失效', ok:true,});
-			 }else if (ua.indexOf("msie 8") > -1){
-			  	window.external.AddToFavoritesBar('${dynamicURL}/authority/loginInit.action','西宁市公共租赁住房信息管理系统管理');//IE8
-			 }else if (document.all){
-			  	window.external.addFavorite('${dynamicURL}/authority/loginInit.action','西宁市公共租赁住房信息管理系统管理');
-			 }else{
-			  	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'添加失败，请用ctrl+D进行添加', ok:true,});
-			 }
-		} 
+		// function addfavorite(){
+		// 	var ua = navigator.userAgent.toLowerCase();
+		// 	 if (ua.indexOf("360se") > -1){
+		// 	  	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'由于360浏览器功能限制，加入收藏夹功能失效', ok:true,});
+		// 	 }else if (ua.indexOf("msie 8") > -1){
+		// 	  	window.external.AddToFavoritesBar('${dynamicURL}/authority/loginInit.action','西宁市公共租赁住房信息管理系统管理');//IE8
+		// 	 }else if (document.all){
+		// 	  	window.external.addFavorite('${dynamicURL}/authority/loginInit.action','西宁市公共租赁住房信息管理系统管理');
+		// 	 }else{
+		// 	  	art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'添加失败，请用ctrl+D进行添加', ok:true,});
+		// 	 }
+		// } 
 	</script>
 	<script type="text/javascript">
 		/* zTree插件加载目录的处理  */
@@ -251,7 +255,8 @@
 				<ul>
 					<li>
 						<img alt="当前用户" src="{{ asset('sise/backend/images/common/user.jpg') }}">：
-						<span>admin</span>
+						{{-- <span>admin</span> --}}
+						<span>@if(Auth::check()){{ Auth::user()->name }}@else{{ '未登录' }}@endif</span>
 					</li>
 					<li style='display:none'>
 						<img alt="事务月份" src="{{ asset('sise/backend/images/common/month.jpg') }}">：
@@ -340,7 +345,12 @@
       	{{-- @yield('iframe') --}}
     </div>
 {{-- <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div> --}}
+    {{-- <div id="app"> --}}
+        {{-- <flash message="{{ session('flash') }}"></flash> --}}
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 </body>
 </html>
    
  
+
+{{-- @endsection --}}

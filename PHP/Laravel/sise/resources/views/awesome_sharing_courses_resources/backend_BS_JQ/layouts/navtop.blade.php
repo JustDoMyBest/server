@@ -11,8 +11,7 @@
             </button>
 
             <!-- Branding Image -->
-            {{-- <a class="navbar-brand" href="{{ url('/') }}"> --}}
-            <a class="navbar-brand" href="javascript:;">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
         </div>
@@ -54,8 +53,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">登录</a></li>
-                    <li><a href="{{ route('register') }}">注册</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                     <user-notifications></user-notifications>
                     <li class="dropdown">
