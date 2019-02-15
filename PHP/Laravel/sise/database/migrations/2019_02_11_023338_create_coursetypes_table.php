@@ -13,7 +13,7 @@ class CreateCourseTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_types', function (Blueprint $table) {
+        Schema::create('coursetypes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('type');

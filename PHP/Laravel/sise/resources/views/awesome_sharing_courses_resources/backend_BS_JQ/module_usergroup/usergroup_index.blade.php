@@ -7,8 +7,8 @@
 <title>信息管理系统</title>
 <script type="text/javascript">
 
-var fancybox_onClosed_href = '/user';
-var module_name = 'user';
+var fancybox_onClosed_href = '/usergroup';
+var module_name = 'usergroup';
 
 	$(document).ready(function(){
 	    /**编辑   **/
@@ -131,8 +131,8 @@ var module_name = 'user';
 							{{-- 发布者姓名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
 							{{-- 创建者姓名&nbsp;&nbsp;<input value="{{ session('by') }}" type="text" name="by" class="ui_input_txt02" /> --}}
 							{{-- 标签名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
-							用户名&nbsp;&nbsp;<input value="{{ session('name') }}" type="text" name="name" class="ui_input_txt02" />
-							电子邮箱&nbsp;&nbsp;<input value="{{ session('email') }}" type="text" name="email" class="ui_input_txt02" />
+							用户组名&nbsp;&nbsp;<input value="{{ session('name') }}" type="text" name="name" class="ui_input_txt02" />
+							用户组描述&nbsp;&nbsp;<input value="{{ session('description') }}" type="text" name="description" class="ui_input_txt02" />
 
 							状态
 							{{-- <select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01"> --}}
@@ -169,26 +169,24 @@ var module_name = 'user';
 							</th>
 							<th>id</th>
 							{{-- <th>创建者姓名</th> --}}
-							<th>用户名</th>
-							<th>电子邮箱</th>
-							<th>用户组</th>
+							<th>用户组名</th>
+							<th>用户组描述</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
-						@foreach ($users as $user)
+						@foreach ($usergroups as $usergroup)
                             <tr>
 								{{-- <td><input type="checkbox" name="IDCheck" value="14458619251417" class="acb" /></td> --}}
-								<td><input type="checkbox" name="IDCheck" value="{{ $user->id }}" class="acb" /></td>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email}}</td>
-                                <td>{{ isset($user->usergroup)? $user->usergroup->name: '无' }}</td>
-								<td>{{ $user->enabled }}</td>
+								<td><input type="checkbox" name="IDCheck" value="{{ $usergroup->id }}" class="acb" /></td>
+                                <td>{{ $usergroup->id }}</td>
+                                <td>{{ $usergroup->name }}</td>
+                                <td>{{ $usergroup->description}}</td>
+								<td>{{ $usergroup->enabled }}</td>
 								<td>
 									{{-- <a href="house_edit.html?fyID=14458619251417" class="edit">编辑</a>  --}}
-                                    <a href="{{ route('user.edit', $user->id) }}" class="edit">编辑</a> 
+                                    <a href="{{ route('usergroup.edit', $usergroup->id) }}" class="edit">编辑</a> 
 									{{-- <a href="javascript:del('14458619251417');">删除</a> --}}
-									<a href="javascript:del('{{ $user->id }}');">删除</a>
+									<a href="javascript:del('{{ $usergroup->id }}');">删除</a>
 								</td>
 							</tr>
                         @endforeach
@@ -199,13 +197,13 @@ var module_name = 'user';
 					<div class="ui_flt" style="height: 30px; line-height: 30px;">
 						共有
 						{{-- <span class="ui_txt_bold04">90</span> --}}
-                    <span class="ui_txt_bold04">{{ $users->count() }}</span>
+                    <span class="ui_txt_bold04">{{ $usergroups->count() }}</span>
 						条记录，当前第
 						{{-- <span class="ui_txt_bold04">1 --}}
-						<span class="ui_txt_bold04">{{ $users->currentpage() }}
+						<span class="ui_txt_bold04">{{ $usergroups->currentpage() }}
 						/
 						{{-- 9</span> --}}
-						{{ $users->lastpage() }}</span>
+						{{ $usergroups->lastpage() }}</span>
 						页
 					</div>
 					<div class="ui_frt">
@@ -214,11 +212,11 @@ var module_name = 'user';
 							<input type="button" value="首页" class="ui_input_btn01"
 								onclick="jumpNormalPage(1);" />
 							<input type="button" value="上一页" class="ui_input_btn01"
-								onclick="jumpNormalPage({{ $users->currentpage() - 1 }});" />
+								onclick="jumpNormalPage({{ $usergroups->currentpage() - 1 }});" />
 							<input type="button" value="下一页" class="ui_input_btn01"
-								onclick="jumpNormalPage({{ $users->currentpage() + 1 }});" />
+								onclick="jumpNormalPage({{ $usergroups->currentpage() + 1 }});" />
 							<input type="button" value="尾页" class="ui_input_btn01"
-								onclick="jumpNormalPage({{ $users->lastpage() }});" />
+								onclick="jumpNormalPage({{ $usergroups->lastpage() }});" />
 						
 						
 						
@@ -226,7 +224,7 @@ var module_name = 'user';
 						
 						转到第<input type="text" id="jumpNumTxt" class="ui_input_txt01" />页
 							 {{-- <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage(9);" /> --}}
-							 <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage({{ $users->lastpage() }});" />
+							 <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage({{ $usergroups->lastpage() }});" />
 					</div>
 				</div>
 			</div>

@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Filters\UserFilters;
+use App\Usergroup;
 
 class UserController extends Controller
 {
     use \App\Traits\ConvertUtils;
+    public function __construct()
+    {
+        // $this->middleware('auth')->only('index');
+        $this->middleware('auth')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -91,7 +97,8 @@ class UserController extends Controller
     {
         //
         // dd('editting');
-        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_user.user_edit', compact('user'));
+        $usergroups = Usergroup::all();
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_user.user_edit', compact('user', 'usergroups'));
     }
 
     /**
@@ -106,11 +113,16 @@ class UserController extends Controller
     {
         //
         $enabled = $this->ConvertEnabledToBoolean($request['enabled']);
+        // $usergroup = Usergroup::find($request['usergroup']);
+        // $user->usergroup()->create($usergroup);
         // dd($enabled);
         // dd($user);
+        // dd($request['usergroup']);
+        // dd($usergroup);
         $user->update([
             'name' => $request['name'],
             'email' => $request['email'],
+            'usergroup_id' => $request['usergroup'],
             'enabled' => $enabled,
         ]);
     }

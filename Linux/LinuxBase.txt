@@ -68,6 +68,7 @@ find /usr/local/php* -name php-fpm.pid -exec cat {} \; \( -exec false \; -o -exe
 /usr/bin/find /usr/local/php* -name php-fpm.pid \( -exec cat {} \; -o -exec true \; \) -exec echo \; | xargs kill -USR1
 * * * * * flock -xn /tmp/mytest.lock -c 'php /home/fdipzone/php/test.php >> /home/fdipzone/php/test.log'
 lsof -i:3306
+hostname -I
 curl -o ./90562069.m3u8 -sSL -H "Referer: https://avgle.com/" 'https://ip99580758.cdn.qooqlevideo.com/key=ZXemZC+h59HIFEsCMJ5tUw,s=,end=1546296554,limit=2/data=1546296554/state=LSAh/referer=force,.avgle.com/reftag=56109644/media=hlsA/27/177/9/90562069.m3u8'
 
 ls -1f file_or_dir

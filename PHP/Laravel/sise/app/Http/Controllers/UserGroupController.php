@@ -2,19 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\UserGroup;
+use App\Usergroup;
 use Illuminate\Http\Request;
+use App\Filters\UsergroupFilters;
 
 class UserGroupController extends Controller
 {
+    use \App\Traits\ConvertUtils;
+    public function __construct()
+    {
+        // $this->middleware('auth')->only('index');
+        $this->middleware('auth')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, UsergroupFilters $filters)
     {
         //
+        $request->session()->flash('name', $request['name']);
+        $request->session()->flash('description', $request['description']);
+        $request->session()->flash('enabled', $request['enabled']);
+
+        // $usergroups = $this->getUsergroup($filters);
+        $usergroups = $this->getModel($filters);
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_usergroup.usergroup_index',[
+            // 'users' => $users,
+            'usergroups' => $usergroups,
+        ]);
+    }
+
+    // public function getUsergroup(UsergroupFilters $filters){
+    public function getModel(UsergroupFilters $filters){
+        // $usergroups = UserGroup::latest()->filter($filters);
+        $model = Usergroup::latest()->filter($filters);
+
+        $model = $model->paginate(5);
+
+        return $model;
     }
 
     /**
@@ -25,6 +52,7 @@ class UserGroupController extends Controller
     public function create()
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_usergroup.usergroup_create');
     }
 
     /**
@@ -36,6 +64,15 @@ class UserGroupController extends Controller
     public function store(Request $request)
     {
         //
+        // dd('storing');
+
+        UserGroup::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'enabled' => !!$request['enabled'],
+        ]);
+
+        return redirect('/usergroup');
     }
 
     /**
@@ -44,7 +81,7 @@ class UserGroupController extends Controller
      * @param  \App\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function show(UserGroup $userGroup)
+    public function show(Usergroup $usergroup)
     {
         //
     }
@@ -55,9 +92,10 @@ class UserGroupController extends Controller
      * @param  \App\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserGroup $userGroup)
+    public function edit(Usergroup $usergroup)
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_usergroup.usergroup_edit', compact('usergroup'));
     }
 
     /**
@@ -67,9 +105,15 @@ class UserGroupController extends Controller
      * @param  \App\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserGroup $userGroup)
+    public function update(Request $request, Usergroup $usergroup)
     {
         //
+        $enabled = $this->ConvertEnabledToBoolean($request['enabled']);
+        $usergroup->update([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'enabled' => $enabled,
+        ]);
     }
 
     /**
@@ -78,8 +122,12 @@ class UserGroupController extends Controller
      * @param  \App\UserGroup  $userGroup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserGroup $userGroup)
+    // public function destroy(Usergroup $usergroup)
+    public function destroy($ids)
     {
         //
+        $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
+        \DB::table('usergroups')->whereIn('id',$ids)->delete();
+        return redirect()->back();
     }
 }

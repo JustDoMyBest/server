@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar_path', 'enabled',
+        'name', 'email', 'password', 'avatar_path', 'enabled', 'usergroup_id',
     ];
 
     /**
@@ -45,6 +45,12 @@ class User extends Authenticatable
     public function activity()
     {
         return $this->hasMany(Activity::class);
+    }
+
+    public function usergroup()
+    {
+        // return $this->hasOne(Usergroup::class, ['id' => $this->id])->latest();
+        return $this->belongsTo(Usergroup::class);
     }
 
     public function read($thread)
