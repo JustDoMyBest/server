@@ -52,3 +52,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 require base_path('routes/sise/web.php');
+
+Route::get('/upload', 'UploadController@uploadForm');
+Route::post('/upload', 'UploadController@uploadSubmit');

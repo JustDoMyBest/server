@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
+    public function __construct()
+    {
+        // parent::__construct();
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +20,7 @@ class FileController extends Controller
     public function index()
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_index');
     }
 
     /**
@@ -25,6 +31,7 @@ class FileController extends Controller
     public function create()
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_create');
     }
 
     /**
@@ -36,6 +43,19 @@ class FileController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
+        // dd($request['files']);
+        // dd($request->all());
+        // foreach ($request['files'] as $file) {
+        //     $file->store('files', 'public');
+        // }
+        Files::create([
+            'user_id' => auth()->id,
+            'course_id' => null,
+            'filetype' => $request['filetype_id'],
+            'file_path' => $request['file']->store('files', 'sise', 'public'),
+            'enabled' => $request['enabled'],
+        ]);
     }
 
     /**

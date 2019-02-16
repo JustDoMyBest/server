@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCourseTypesTable extends Migration
+class CreateProductsPhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateCourseTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('coursetypes', function (Blueprint $table) {
+        Schema::create('products_photos', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->string('type');
-            $table->boolean('enabled')->default(false);
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->string('filename');
             $table->timestamps();
-
-            // $table->unique(['user_id']);
         });
     }
 
@@ -31,7 +29,6 @@ class CreateCourseTypesTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('course_types');
-        Schema::dropIfExists('coursetypes');
+        Schema::dropIfExists('products_photos');
     }
 }

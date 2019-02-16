@@ -16,10 +16,16 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('chapter_id');
-            $table->unsignedInteger('filetype_id');
-            $table->string('file_path')->nullable();
-            $table->boolean('enabled');
+            $table->unsignedInteger('course_id')->nullable();
+            // $table->unsignedInteger('chapter_id');
+            $table->unsignedInteger('filetype_id')->nullable();
+            $table->unsignedInteger('tag_id')->nullable();
+            $table->string('title');
+            $table->string('description');
+            $table->string('file_path');
+            $table->unsignedInteger('like')->default(0);
+            $table->unsignedInteger('dislike')->default(0);
+            $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
     }

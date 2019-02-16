@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
             $table->unsignedInteger('user_id');
             // $table->unsignedInteger('course_type_id');
             $table->unsignedInteger('coursetype_id');
+            // $table->unsignedInteger('chapter_id');
             $table->unsignedInteger('tag_id');
             $table->boolean('enabled')->default(false);
             $table->string('title');
@@ -31,7 +32,7 @@ class CreateCoursesTable extends Migration
             // $table->foreign('course_type_id')
             $table->foreign('coursetype_id')
             ->references('id')
-            ->on('course_types')
+            ->on('coursetypes')
             ->onDelete('cascade');
 
             // $table->foreign('tag_id')

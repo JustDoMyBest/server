@@ -13,14 +13,12 @@ class CreateFileTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('file_types', function (Blueprint $table) {
+        Schema::create('filetypes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('tag_id');
-            $table->boolean('enabled')->default(false);
             $table->string('type');
-            $table->integer('like');
-            $table->integer('dislike');
+            $table->string('description');
+            $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
     }
@@ -32,6 +30,7 @@ class CreateFileTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_types');
+        // Schema::dropIfExists('file_types');
+        Schema::dropIfExists('filetypes');
     }
 }

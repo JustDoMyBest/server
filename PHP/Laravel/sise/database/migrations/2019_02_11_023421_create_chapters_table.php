@@ -17,6 +17,7 @@ class CreateChaptersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('course_id');
+            $table->unsignedInteger('file_id');
             $table->string('title');
             $table->text('summary');
             $table->timestamps();
