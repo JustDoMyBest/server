@@ -22,10 +22,13 @@ Route::get('loupanchart', function () {
     return view('awesome_sharing_courses_resources.backend_BS_JQ.loupanchart');
 });
 Route::resource('tag', 'TagController');
-Route::resource('usergroup', 'UserGroupController');
+// Route::resource('usergroup', 'UserGroupController');
+Route::resource('usergroup', 'UsergroupController');
 Route::resource('user', 'UserController');
-Route::resource('coursetype', 'CourseTypeController');
+// Route::resource('coursetype', 'CourseTypeController');
+Route::resource('coursetype', 'CoursetypeController');
 Route::resource('course', 'CourseController');
 Route::resource('chapter', 'ChapterController');
-Route::resource('filetype', 'FileTypeController');
+// Route::resource('filetype', 'FileTypeController');
+Route::resource('filetype', 'FiletypeController');
 Route::resource('file', 'FileController');

@@ -19,12 +19,13 @@ class CreateCoursesTable extends Migration
             // $table->unsignedInteger('course_type_id');
             $table->unsignedInteger('coursetype_id');
             // $table->unsignedInteger('chapter_id');
-            $table->unsignedInteger('tag_id');
+            // $table->unsignedInteger('tag_id');
+            $table->string('tags')->nullable();
             $table->boolean('enabled')->default(false);
             $table->string('title');
             $table->text('description');
-            $table->integer('like');
-            $table->integer('dislike');
+            $table->integer('like')->default(0);
+            $table->integer('dislike')->default(0);
             $table->timestamps();
             // $table->unique(['user_id','course_type_id']);
             $table->unique(['user_id','coursetype_id']);

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\File;
+use App\Filetype;
+use App\Tag;
 use Illuminate\Http\Request;
+use App\Filters\FileFilters;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -17,10 +21,20 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, FileFilters $filters)
     {
         //
-        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_index');
+        $request->session()->flash('title', $request['title']);
+        $request->session()->flash('description', $request['description']);
+        $request->session()->flash('filetype', $request['filetype']);
+        $request->session()->flash('tag', $request['tag']);
+        $request->session()->flash('enabled', $request['enabled']);
+
+        // $files = $this->getModel($filters);
+        $files = $this->getModel(File::class, $filters);
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_index',[
+            'files' => $files,
+        ]);
     }
 
     /**
@@ -31,7 +45,12 @@ class FileController extends Controller
     public function create()
     {
         //
-        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_create');
+        $filetypes = Filetype::all();
+        $tags = Tag::all();
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_create',[
+            'filetypes' => $filetypes,
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -50,13 +69,18 @@ class FileController extends Controller
         //     $file->store('files', 'public');
         // }
         Files::create([
-            'user_id' => auth()->id,
+            'user_id' => auth()->id(),
             'course_id' => null,
-            'filetype' => $request['filetype_id'],
+            'filetype_id' => $request['filetype'],
+            'title' => $request['title'],
+            'tags' => $request['tag'],
+            'description' => $request['description'],
             'file_path' => $request['file']->store('files', 'sise', 'public'),
-            'enabled' => $request['enabled'],
+            'enabled' => !!$request['enabled'],
         ]);
-    }
+
+        return redirect('/file');
+   }
 
     /**
      * Display the specified resource.
@@ -87,9 +111,13 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, File $file)
+    public function update(Request $request, File $model)
     {
         //
+        dd('updating',$model->id);
+        $model->update([
+            '' => $request[''],
+        ]);
     }
 
     /**
@@ -98,8 +126,17 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function destroy(File $file)
+    // public function destroy(File $file)
+    public function destroy($ids)
     {
         //
+        // dd('destroying', $ids);
+        $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
+        \DB::table('files')->whereIn('id',$ids)->delete();
+        foreach($ids as $id) {
+            $file = File::find($id);
+            Storage::disk('public')->delete($file->file_path);
+        }
+        return redirect()->back();
     }
 }

@@ -6,9 +6,9 @@ use App\Usergroup;
 use Illuminate\Http\Request;
 use App\Filters\UsergroupFilters;
 
-class UserGroupController extends Controller
+class UsergroupController extends Controller
 {
-    use \App\Traits\ConvertUtils;
+    // use \App\Traits\ConvertUtils;
     public function __construct()
     {
         // $this->middleware('auth')->only('index');

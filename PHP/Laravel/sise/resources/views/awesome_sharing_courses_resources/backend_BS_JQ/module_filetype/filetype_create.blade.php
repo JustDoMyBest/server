@@ -6,50 +6,33 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">添加文件</div>
+                    <div class="panel-heading">新增文件类型</div>
     
                     <div class="panel-body">
-                        <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="{{ route('file.store') }}">
+                        <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="{{ route('filetype.store') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="title" class="col-md-4 control-label">文件标题：</label>
+                                <label for="type" class="col-md-4 control-label">文件类型：</label>
     
                                 <div class="col-md-6">
-                                    <input placeholder="输入你想添加的文件标题" id="title" type="string" class="form-control" name="title"
-                                        value="{{ old('title') }}"
+                                    <input placeholder="输入你想添加的文件类型" id="title" type="string" class="form-control" name="type"
+                                        value="{{ old('type') }}"
                                         required autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="description" class="col-md-4 control-label">用户组描述：</label>
+                                <label for="description" class="col-md-4 control-label">文件类型描述：</label>
     
                                 <div class="col-md-6">
-                                    <input placeholder="输入你想添加的用户组描述" id="description" type="string" class="form-control" name="description"
+                                    <input placeholder="输入你想添加的文件类型描述" id="description" type="string" class="form-control" name="description"
                                         value="{{ old('description') }}" required>
                                 </div>
                             </div>
-    
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="filetype" class="col-md-4 control-label">文件类型：</label>
-    
-                                <div class="col-md-6">
-                                    {{-- <input placeholder="输入你想添加的文件类型" id="filetype" type="string" class="form-control" name="filetype" value="{{ old('filetype') }}" required autofocus> --}}
-                                    <select id="filetype" type="string" class="form-control" name="filetype">
-                                        <option value="">--请选择--</option>
-                                        @foreach ($filetypes as $filetype)
-                                            <option value="{{ $filetype->id }}">{{ $filetype->type }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="tag" class="col-md-4 control-label">文件标签：</label>
-    
+                            {{-- <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}"> <label for="tag" class="col-md-4 control-label">文件标签：</label>
                                 <div class="col-md-6">
-                                    {{-- <input placeholder="输入你想添加的文件类型" id="filetype" type="string" class="form-control" name="filetype" value="{{ old('filetype') }}" required autofocus> --}}
                                     <select id="tag" type="string" class="form-control" name="tag" multiple size="2">
                                         <option value="">--请选择--</option>
                                         @foreach ($tags as $tag)
@@ -57,16 +40,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="files" class="col-md-4 control-label">文件（可多选）：</label>
-    
-                                <div class="col-md-6">
-                                    {{-- <input id="files" type="file" class="form-control-file" name="files[]" value="{{ old('description') }}" required multiple> --}}
-                                    <input id="files" type="file" class="form-control-file" name="files[]" required multiple>
-                                </div>
-                            </div>
+                            </div> --}}
     
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 {{-- <label for="password" class="col-md-4 control-label">Password</label> --}}
@@ -88,16 +62,6 @@
                                 </div>
                             </div>
     
-                            {{-- <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> --}}
-    
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -107,6 +71,7 @@
                                     {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                         Forgot Your Password?
                                     </a> --}}
+
                                 </div>
                             </div>
                         </form>

@@ -19,8 +19,9 @@ class CreateFilesTable extends Migration
             $table->unsignedInteger('course_id')->nullable();
             // $table->unsignedInteger('chapter_id');
             $table->unsignedInteger('filetype_id')->nullable();
-            $table->unsignedInteger('tag_id')->nullable();
+            // $table->unsignedInteger('tag_id')->nullable();
             $table->string('title');
+            $table->string('tags')->nullable();
             $table->string('description');
             $table->string('file_path');
             $table->unsignedInteger('like')->default(0);

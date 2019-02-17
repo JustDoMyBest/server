@@ -12,4 +12,10 @@ class File extends Model
     public function filetype() {
         return $this->belongsTo(Filetype::class);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        // dd($query,$filters);
+        return $filters->apply($query);
+    }
 }

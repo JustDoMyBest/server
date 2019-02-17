@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\FileType;
 use Illuminate\Http\Request;
+use App\Filters\FiletypeFilters;
 
-class FileTypeController extends Controller
+class FiletypeController extends Controller
 {
     public function __construct()
     {
@@ -17,9 +18,20 @@ class FileTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, FiletypeFilters $filters)
     {
         //
+        $request->session()->flash('title', $request['title']);
+        $request->session()->flash('description', $request['description']);
+        $request->session()->flash('filetype', $request['filetype']);
+        $request->session()->flash('enabled', $request['enabled']);
+
+        // $filetypes = $this->getModel($filters);
+        $filetypes = $this->getModel(Filetype::class, $filters);
+        // dd($filetypes);
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_filetype.filetype_index',[
+            'filetypes' => $filetypes,
+        ]);
     }
 
     /**
@@ -30,6 +42,7 @@ class FileTypeController extends Controller
     public function create()
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_filetype.filetype_create');
     }
 
     /**
@@ -41,6 +54,16 @@ class FileTypeController extends Controller
     public function store(Request $request)
     {
         //
+        // dd(auth());
+        // dd(auth()->id());
+        Filetype::create([
+            'user_id' => auth()->id(),
+            'type' => $request['type'],
+            'description' => $request['description'],
+            'enabled' => !!$request['enabled'],
+        ]);
+
+        return redirect('/filetype');
     }
 
     /**
@@ -60,9 +83,10 @@ class FileTypeController extends Controller
      * @param  \App\FileType  $fileType
      * @return \Illuminate\Http\Response
      */
-    public function edit(FileType $fileType)
+    public function edit(Filetype $filetype)
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_filetype.filetype_edit', compact('filetype'));
     }
 
     /**
@@ -72,9 +96,14 @@ class FileTypeController extends Controller
      * @param  \App\FileType  $fileType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FileType $fileType)
+    // public function update(Request $request, FileType $fileType)
+    public function update(Request $request, Filetype $model)
     {
         //
+        dd('updating',$model->id);
+        $model->update([
+            '' => $request[''],
+        ]);
     }
 
     /**
@@ -83,8 +112,10 @@ class FileTypeController extends Controller
      * @param  \App\FileType  $fileType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FileType $fileType)
+    // public function destroy(FileType $fileType)
+    public function destroy($ids)
     {
         //
+        dd('destroying', $ids);
     }
 }

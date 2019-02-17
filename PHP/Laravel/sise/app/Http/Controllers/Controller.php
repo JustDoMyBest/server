@@ -10,4 +10,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    use \App\Traits\ConvertUtils;
+
+    public function getModel($class, $filters){
+        // $usergroups = UserGroup::latest()->filter($filters);
+        // $model = File::latest()->filter($filters);
+        $model = resolve($class)::latest()->filter($filters);
+
+        $model = $model->paginate(5);
+
+        return $model;
+    }
 }

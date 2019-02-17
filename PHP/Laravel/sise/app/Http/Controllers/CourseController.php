@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use Illuminate\Http\Request;
+use App\Filters\CourseFilters;
 
 class CourseController extends Controller
 {
@@ -17,9 +18,20 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, CourseFilters $filters)
     {
         //
+        $request->session()->flash('title', $request['title']);
+        $request->session()->flash('description', $request['description']);
+        $request->session()->flash('filetype', $request['filetype']);
+        $request->session()->flash('tag', $request['tag']);
+        $request->session()->flash('enabled', $request['enabled']);
+
+        // $files = $this->getModel($filters);
+        $courses = $this->getModel(Course::class, $filters);
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_course.course_index',[
+            'courses' => $courses,
+        ]);
     }
 
     /**
@@ -30,6 +42,12 @@ class CourseController extends Controller
     public function create()
     {
         //
+        $coursetypes = Coursetype::all();
+        $tags = Tag::all();
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_create',[
+            'coursetypes' => $coursetypes,
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -41,6 +59,11 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         //
+        Course::create([
+
+        ]);
+
+        return redirect('/course');
     }
 
     /**
@@ -72,9 +95,13 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Course $model)
     {
         //
+        dd('updating',$model->id);
+        $model->update([
+            '' => $request[''],
+        ]);
     }
 
     /**

@@ -42,7 +42,25 @@ var module_name = 'file';
 							文件描述&nbsp;&nbsp;<input value="{{ session('description') }}" type="text" name="description" class="ui_input_txt02" />
 							文件标签&nbsp;&nbsp;<input value="{{ session('tag') }}" type="text" name="description" class="ui_input_txt02" />
 
-							@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_search_enabled')
+							状态
+							{{-- <select name="fangyuanEntity.fyStatus" id="fyStatus" class="ui_select01"> --}}
+							<select name="enabled" id="enabled" class="ui_select01">
+								<option value="all">--请选择--</option>
+								<option value="0"
+								@if (session('enabled')==='0')
+									selected
+								@endif>所有</option>
+								<option value="00" 
+								@if (session('enabled')==='00')
+									selected
+								@endif>0</option>
+								<option value="1"
+								@if (session('enabled')==='1')
+									selected
+								@endif>1</option>
+								{{-- <option value="2">{{ $old['status'] }}</option> --}}
+
+                            </select>
 						</div>
 						<div id="box_bottom">
 							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
@@ -92,7 +110,40 @@ var module_name = 'file';
 						
 					</table>
 				</div>
-				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_paginate', ['models' => $files])
+				<div class="ui_tb_h30">
+					<div class="ui_flt" style="height: 30px; line-height: 30px;">
+						共有
+						{{-- <span class="ui_txt_bold04">90</span> --}}
+                    <span class="ui_txt_bold04">{{ $files->count() }}</span>
+						条记录，当前第
+						{{-- <span class="ui_txt_bold04">1 --}}
+						<span class="ui_txt_bold04">{{ $files->currentpage() }}
+						/
+						{{-- 9</span> --}}
+						{{ $files->lastpage() }}</span>
+						页
+					</div>
+					<div class="ui_frt">
+						<!--    如果是第一页，则只显示下一页、尾页 -->
+						
+							<input type="button" value="首页" class="ui_input_btn01"
+								onclick="jumpNormalPage(1);" />
+							<input type="button" value="上一页" class="ui_input_btn01"
+								onclick="jumpNormalPage({{ $files->currentpage() - 1 }});" />
+							<input type="button" value="下一页" class="ui_input_btn01"
+								onclick="jumpNormalPage({{ $files->currentpage() + 1 }});" />
+							<input type="button" value="尾页" class="ui_input_btn01"
+								onclick="jumpNormalPage({{ $files->lastpage() }});" />
+						
+						
+						
+						<!--     如果是最后一页，则只显示首页、上一页 -->
+						
+						转到第<input type="text" id="jumpNumTxt" class="ui_input_txt01" />页
+							 {{-- <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage(9);" /> --}}
+							 <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage({{ $files->lastpage() }});" />
+					</div>
+				</div>
 			</div>
 		</div>
 	</form>

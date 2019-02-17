@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\CourseType;
 use Illuminate\Http\Request;
+use App\Filters\CoursetypeFilters;
 
-class CourseTypeController extends Controller
+class CoursetypeController extends Controller
 {
     public function __construct()
     {
@@ -17,7 +18,7 @@ class CourseTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, CoursetypeFilters $filters)
     {
         //
     }
@@ -30,6 +31,7 @@ class CourseTypeController extends Controller
     public function create()
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_coursetype.coursetype_create');
     }
 
     /**
@@ -41,6 +43,11 @@ class CourseTypeController extends Controller
     public function store(Request $request)
     {
         //
+        Coursetype::create([
+
+        ]);
+
+        return redirect('/coursetype');
     }
 
     /**
@@ -60,9 +67,10 @@ class CourseTypeController extends Controller
      * @param  \App\CourseType  $courseType
      * @return \Illuminate\Http\Response
      */
-    public function edit(CourseType $courseType)
+    public function edit(Coursetype $coursetype)
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_filetype.filetype_edit', compact('coursetype'));
     }
 
     /**
@@ -72,9 +80,14 @@ class CourseTypeController extends Controller
      * @param  \App\CourseType  $courseType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CourseType $courseType)
+    // public function update(Request $request, CourseType $courseType)
+    public function update(Request $request, Coursetype $model)
     {
         //
+        dd('updating',$model->id);
+        $model->update([
+            '' => $request[''],
+        ]);
     }
 
     /**
@@ -83,8 +96,10 @@ class CourseTypeController extends Controller
      * @param  \App\CourseType  $courseType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CourseType $courseType)
+    // public function destroy(CourseType $courseType)
+    public function destroy($ids)
     {
         //
+        dd('destroying', $ids);
     }
 }
