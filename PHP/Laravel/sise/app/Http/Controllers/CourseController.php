@@ -86,6 +86,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         //
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_course.course_edit', compact('course'));
     }
 
     /**
@@ -95,11 +96,12 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $model)
+    public function update(Request $request, Course $course)
     {
         //
-        dd('updating',$model->id);
-        $model->update([
+        // dd('updating',$model->id);
+        // $model->update([
+        $course->update([
             '' => $request[''],
         ]);
     }

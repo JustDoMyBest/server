@@ -151,11 +151,11 @@ module_name = "file";
 <form id="submitForm" name="submitForm" action="/xngzf/archives/initFangyuan.action" method="post">
 	{{ csrf_field() }}
 	{{-- <input type="hidden" name="fyID" value="14458625716623" id="fyID"/> --}}
-	<input type="hidden" type="text" id="fyID" name="fyID" value="{{ $usergroup->id }}" />
+	<input type="hidden" type="text" id="fyID" name="fyID" value="{{ $file->id }}" />
 	<div id="container">
 		<div id="nav_links">
 			{{-- 当前位置：基础数据&nbsp;>&nbsp;<span style="color: #1A5CC6;">房源编辑</span> --}}
-			当前位置：用户管理&nbsp;>&nbsp;<span style="color: #1A5CC6;">用户编辑</span>
+			当前位置：文件管理&nbsp;>&nbsp;<span style="color: #1A5CC6;">文件编辑</span>
 			<div id="page_close">
 				<a href="javascript:parent.$.fancybox.close();">
 					<img src="{{ asset('sise/backend/images/common/page_close.png') }}" width="20" height="20" style="vertical-align: text-top;"/>
@@ -165,15 +165,60 @@ module_name = "file";
 		<div class="ui_content">
 			<table  cellspacing="0" cellpadding="0" width="100%" align="left" border="0">
 				<tr>
-					<td class="ui_text_rt" width="80">用户组名</td>
+					{{-- <td class="ui_text_rt" width="80">文件所属课程</td> --}}
+					<td class="ui_text_rt" width="80"><a href="{{ $file->file_path }}">文件标题</a></td>
 					<td class="ui_text_lt">
-						<input type="text" id="name" value="{{ $usergroup->name }}" class="ui_input_txt02"/>
+						{{-- <input type="text" id="name" value="{{ $file->course ? $file->course->title: '无' }}" class="ui_input_txt02"/> --}}
+						<input type="text" id="name" value="{{ $file->title }}" class="ui_input_txt02"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="ui_text_rt" width="80">用户组描述</td>
+					{{-- <td class="ui_text_rt" width="80">文件类型</td> --}}
+					<td class="ui_text_rt" width="80">文件标签</td>
 					<td class="ui_text_lt">
-						<input type="text" id="description" value="{{ $usergroup->description }}" class="ui_input_txt02"/>
+						{{-- <input type="text" id="description" value="{{ $file->filetype? $file->filetype->type: '无' }}" class="ui_input_txt02"/> --}}
+						<input type="text" id="description" value="{{ $file->filetype? $file->filetype->type: '无' }}" class="ui_input_txt02"/>
+					</td>
+				</tr>
+				<tr>
+					{{-- <td class="ui_text_rt" width="80">文件类型</td> --}}
+					<td class="ui_text_rt" width="80">文件描述</td>
+					<td class="ui_text_lt">
+						{{-- <input type="text" id="description" value="{{ $file->filetype? $file->filetype->type: '无' }}" class="ui_input_txt02"/> --}}
+						<input type="text" id="description" value="{{ $file->filetype? $file->filetype->type: '无' }}" class="ui_input_txt02"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="ui_text_rt">文件类型</td>
+					<td class="ui_text_lt">
+						<select id="filetype" type="string" class="form-control" name="filetype">
+							<option value="">--请选择--</option>
+							@foreach ($filetypes as $filetype)
+								<option value="{{ $filetype->id }}">{{ $filetype->type }}</option>
+							@endforeach
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="ui_text_rt">文件标签</td>
+					<td class="ui_text_lt">
+						<select id="tags" type="string" class="ui_select01" name="tags" multiple size="2">
+							<option value="">--请选择--</option>
+							@foreach ($tags as $tag)
+								<option value="{{ $tag->id }}">{{ $tag->tag }}</option>
+							@endforeach
+						</select>
+					</td>
+				</tr>
+
+				<tr>
+					{{-- <td class="ui_text_rt">文件（不可多选）</td> --}}
+					<td class="ui_text_rt">文件</td>
+					<td class="ui_text_lt">
+						{{-- <input id="files" type="file" class="form-control-file" name="files[]" value="{{ old('description') }}" required multiple> --}}
+						{{-- <input id="file" type="file" class="form-control-file" name="file" required multiple> --}}
+						<input id="file" type="file" name="file" required>
 					</td>
 				</tr>
 				<tr>
@@ -184,8 +229,8 @@ module_name = "file";
                             <option value="">--请选择--</option>
                             {{-- <option value="16" selected="selected">瑞景河畔16号楼</option>
                             <option value="75">瑞景河畔24号楼</option> --}}
-                            <option value="1" {{ $usergroup->enabled ? 'selected="selected"' : '' }} >1</option>
-                            <option value="00" {{ !$usergroup->enabled ? 'selected="selected"' : '' }} >0</option>
+                            <option value="1" {{ $file->enabled ? 'selected="selected"' : '' }} >1</option>
+                            <option value="00" {{ !$file->enabled ? 'selected="selected"' : '' }} >0</option>
                         </select>
 					</td>
 				</tr>

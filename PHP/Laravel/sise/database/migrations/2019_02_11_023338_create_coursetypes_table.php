@@ -17,6 +17,7 @@ class CreateCourseTypesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('type');
+            $table->string('description');
             $table->boolean('enabled')->default(false);
             $table->timestamps();
 

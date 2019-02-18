@@ -11,10 +11,19 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
+    // protected static function boot()
+    // {
+    //     if (auth()->guest()) return;
+    //     $filetypes = Filetype::all();
+    //     $tags = Tag::all();
+    // }
+
     public function __construct()
     {
         // parent::__construct();
         $this->middleware('auth');
+        $this->filetypes = Filetype::all();
+        $this->tags = Tag::all();
     }
     /**
      * Display a listing of the resource.
@@ -45,8 +54,6 @@ class FileController extends Controller
     public function create()
     {
         //
-        $filetypes = Filetype::all();
-        $tags = Tag::all();
         return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_create',[
             'filetypes' => $filetypes,
             'tags' => $tags,
@@ -68,14 +75,14 @@ class FileController extends Controller
         // foreach ($request['files'] as $file) {
         //     $file->store('files', 'public');
         // }
-        Files::create([
+        File::create([
             'user_id' => auth()->id(),
             'course_id' => null,
             'filetype_id' => $request['filetype'],
             'title' => $request['title'],
             'tags' => $request['tag'],
             'description' => $request['description'],
-            'file_path' => $request['file']->store('files', 'sise', 'public'),
+            'file_path' => $request['file']->store('sise/files', 'public'),
             'enabled' => !!$request['enabled'],
         ]);
 
@@ -102,6 +109,12 @@ class FileController extends Controller
     public function edit(File $file)
     {
         //
+        // return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_edit', compact('file'));
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_edit', [
+            'file' => $file,
+            'filetypes' => $this->filetypes,
+            'tags' => $this->tags,
+            ]);
     }
 
     /**
@@ -132,11 +145,11 @@ class FileController extends Controller
         //
         // dd('destroying', $ids);
         $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
-        \DB::table('files')->whereIn('id',$ids)->delete();
         foreach($ids as $id) {
             $file = File::find($id);
             Storage::disk('public')->delete($file->file_path);
         }
+        \DB::table('files')->whereIn('id',$ids)->delete();
         return redirect()->back();
     }
 }

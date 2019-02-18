@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="description" class="col-md-4 control-label">用户组描述：</label>
+                                <label for="description" class="col-md-4 control-label">文件描述：</label>
     
                                 <div class="col-md-6">
                                     <input placeholder="输入你想添加的用户组描述" id="description" type="string" class="form-control" name="description"
@@ -50,7 +50,7 @@
     
                                 <div class="col-md-6">
                                     {{-- <input placeholder="输入你想添加的文件类型" id="filetype" type="string" class="form-control" name="filetype" value="{{ old('filetype') }}" required autofocus> --}}
-                                    <select id="tag" type="string" class="form-control" name="tag" multiple size="2">
+                                    <select id="tags" type="string" class="form-control" name="tags" multiple size="2">
                                         <option value="">--请选择--</option>
                                         @foreach ($tags as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
@@ -60,11 +60,12 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="files" class="col-md-4 control-label">文件（可多选）：</label>
+                                <label for="file" class="col-md-4 control-label">文件（不可多选）：</label>
     
                                 <div class="col-md-6">
                                     {{-- <input id="files" type="file" class="form-control-file" name="files[]" value="{{ old('description') }}" required multiple> --}}
-                                    <input id="files" type="file" class="form-control-file" name="files[]" required multiple>
+                                    {{-- <input id="file" type="file" class="form-control-file" name="file" required multiple> --}}
+                                    <input id="file" type="file" class="form-control-file" name="file" required>
                                 </div>
                             </div>
     

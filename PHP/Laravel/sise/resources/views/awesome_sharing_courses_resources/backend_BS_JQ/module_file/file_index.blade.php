@@ -67,25 +67,25 @@ var module_name = 'file';
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
-						@foreach ($files as $files)
+						@foreach ($files as $file)
                             <tr>
 								{{-- <td><input type="checkbox" name="IDCheck" value="14458619251417" class="acb" /></td> --}}
-								<td><input type="checkbox" name="IDCheck" value="{{ $files->id }}" class="acb" /></td>
-                                <td>{{ $files->id }}</td>
-								<td>{{ $files->title }}</td>
-								@if(isset($files->filetype))
-									<td>{{ $files->filetype->type }}</td>
+								<td><input type="checkbox" name="IDCheck" value="{{ $file->id }}" class="acb" /></td>
+                                <td>{{ $file->id }}</td>
+								<td><a href="/storage/{{ $file->file_path }}">{{ $file->title }}</a></td>
+								@if(isset($file->filetype))
+									<td>{{ $file->filetype->type }}</td>
 								@else
 									<td>无</td>
 								@endif
-                                <td>{{ $files->description}}</td>
-                                <td>{{ $files->tags }}</td>
-								<td>{{ $files->enabled }}</td>
+                                <td>{{ $file->description}}</td>
+                                <td>{{ $file->tags }}</td>
+								<td>{{ $file->enabled }}</td>
 								<td>
 									{{-- <a href="house_edit.html?fyID=14458619251417" class="edit">编辑</a>  --}}
-                                    <a href="{{ route('files.edit', $files->id) }}" class="edit">编辑</a> 
+                                    <a href="{{ route('file.edit', $file->id) }}" class="edit">编辑</a> 
 									{{-- <a href="javascript:del('14458619251417');">删除</a> --}}
-									<a href="javascript:del('{{ $files->id }}');">删除</a>
+									<a href="javascript:del('{{ $file->id }}');">删除</a>
 								</td>
 							</tr>
                         @endforeach

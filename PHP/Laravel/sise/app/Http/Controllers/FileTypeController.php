@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\FileType;
 use Illuminate\Http\Request;
 use App\Filters\FiletypeFilters;
+use Illuminate\Http\Response;
 
 class FiletypeController extends Controller
 {
@@ -21,9 +22,9 @@ class FiletypeController extends Controller
     public function index(Request $request, FiletypeFilters $filters)
     {
         //
-        $request->session()->flash('title', $request['title']);
+        // $request->session()->flash('title', $request['title']);
+        $request->session()->flash('type', $request['type']);
         $request->session()->flash('description', $request['description']);
-        $request->session()->flash('filetype', $request['filetype']);
         $request->session()->flash('enabled', $request['enabled']);
 
         // $filetypes = $this->getModel($filters);
@@ -97,13 +98,22 @@ class FiletypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function update(Request $request, FileType $fileType)
-    public function update(Request $request, Filetype $model)
+    // public function update(Request $request, Filetype $model)
+    public function update(Request $request, Filetype $filetype)
     {
         //
-        dd('updating',$model->id);
-        $model->update([
-            '' => $request[''],
+        // dd('updating',$model->id);
+        // $model->update([
+        $filetype->update([
+            'user_id' => auth()->id(),
+            'type' => $request['type'],
+            'description' => $request['description'],
+            'enabled' => !!$request['enabled'],
         ]);
+
+        if ($request->wantsJson()) {
+            return Response([], 204);
+        }
     }
 
     /**
@@ -116,6 +126,9 @@ class FiletypeController extends Controller
     public function destroy($ids)
     {
         //
-        dd('destroying', $ids);
+        // dd('destroying', $ids);
+        $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
+        \DB::table('filetypes')->whereIn('id',$ids)->delete();
+        return redirect()->back();
     }
 }

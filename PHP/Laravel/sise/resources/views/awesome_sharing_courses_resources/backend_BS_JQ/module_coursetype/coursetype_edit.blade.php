@@ -11,7 +11,7 @@
 <script src="{{ asset('sise/backend/scripts/My97DatePicker/WdatePicker.js') }}" type="text/javascript" defer="defer"></script>
 <script type="text/javascript" src="{{ asset('sise/backend/scripts/artDialog/artDialog.js?skin=default') }}"></script>
 <script type="text/javascript">
-module_name = "filetype";
+module_name = "coursetype";
 	$(document).ready(function() {
 		/*
 		 * 提交

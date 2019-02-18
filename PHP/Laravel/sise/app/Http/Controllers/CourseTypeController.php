@@ -21,6 +21,17 @@ class CoursetypeController extends Controller
     public function index(Request $request, CoursetypeFilters $filters)
     {
         //
+        // $request->session()->flash('title', $request['title']);
+        $request->session()->flash('type', $request['type']);
+        $request->session()->flash('description', $request['description']);
+        $request->session()->flash('enabled', $request['enabled']);
+
+        // $filetypes = $this->getModel($filters);
+        $coursetypes = $this->getModel(Coursetype::class, $filters);
+        // dd($filetypes);
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_coursetype.coursetype_index',[
+            'coursetypes' => $coursetypes,
+        ]);
     }
 
     /**
@@ -44,7 +55,10 @@ class CoursetypeController extends Controller
     {
         //
         Coursetype::create([
-
+            'user_id' => auth()->id(),
+            'type' => $request['type'],
+            'description' => $request['description'],
+            'enabled' => !!$request['enabled'],
         ]);
 
         return redirect('/coursetype');
@@ -70,7 +84,7 @@ class CoursetypeController extends Controller
     public function edit(Coursetype $coursetype)
     {
         //
-        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_filetype.filetype_edit', compact('coursetype'));
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_coursetype.coursetype_edit', compact('coursetype'));
     }
 
     /**
@@ -81,13 +95,22 @@ class CoursetypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function update(Request $request, CourseType $courseType)
-    public function update(Request $request, Coursetype $model)
+    public function update(Request $request, Coursetype $coursetype)
     {
         //
-        dd('updating',$model->id);
-        $model->update([
-            '' => $request[''],
+        // dd('updating',$model->id);
+        // $model->update([
+        $coursetype->update([
+            'user_id' => auth()->id(),
+            'type' => $request['type'],
+            'description' => $request['description'],
+            'enabled' => !!$request['enabled'],
         ]);
+
+        if ($request->wantsJson()) {
+            return Response([], 204);
+        }
+
     }
 
     /**
@@ -100,6 +123,9 @@ class CoursetypeController extends Controller
     public function destroy($ids)
     {
         //
-        dd('destroying', $ids);
+        // dd('destroying', $ids);
+        $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
+        \DB::table('coursetypes')->whereIn('id',$ids)->delete();
+        return redirect()->back();
     }
 }

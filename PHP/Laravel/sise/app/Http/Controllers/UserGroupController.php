@@ -27,7 +27,7 @@ class UsergroupController extends Controller
         $request->session()->flash('enabled', $request['enabled']);
 
         // $usergroups = $this->getUsergroup($filters);
-        $usergroups = $this->getModel($filters);
+        $usergroups = $this->getModel(UserGroup::class, $filters);
         return view('awesome_sharing_courses_resources.backend_BS_JQ.module_usergroup.usergroup_index',[
             // 'users' => $users,
             'usergroups' => $usergroups,
@@ -35,14 +35,14 @@ class UsergroupController extends Controller
     }
 
     // public function getUsergroup(UsergroupFilters $filters){
-    public function getModel(UsergroupFilters $filters){
-        // $usergroups = UserGroup::latest()->filter($filters);
-        $model = Usergroup::latest()->filter($filters);
+    // public function getModel(UsergroupFilters $filters){
+    //     // $usergroups = UserGroup::latest()->filter($filters);
+    //     $model = Usergroup::latest()->filter($filters);
 
-        $model = $model->paginate(5);
+    //     $model = $model->paginate(5);
 
-        return $model;
-    }
+    //     return $model;
+    // }
 
     /**
      * Show the form for creating a new resource.

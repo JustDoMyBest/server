@@ -7,8 +7,8 @@
 <title>信息管理系统</title>
 <script type="text/javascript">
 
-var fancybox_onClosed_href = '/filetype';
-var module_name = 'filetype';
+var fancybox_onClosed_href = '/coursetype';
+var module_name = 'coursetype';
 
 @include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_js')
 </script>
@@ -38,8 +38,8 @@ var module_name = 'filetype';
 							{{-- 创建者姓名&nbsp;&nbsp;<input value="{{ session('by') }}" type="text" name="by" class="ui_input_txt02" /> --}}
 							{{-- 标签名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
 							{{-- 文件标题&nbsp;&nbsp;<input value="{{ session('name') }}" type="text" name="name" class="ui_input_txt02" /> --}}
-							文件类型&nbsp;&nbsp;<input value="{{ session('type') }}" type="text" name="type" class="ui_input_txt02" />
-							文件描述&nbsp;&nbsp;<input value="{{ session('description') }}" type="text" name="description" class="ui_input_txt02" />
+							课程类型&nbsp;&nbsp;<input value="{{ session('type') }}" type="text" name="type" class="ui_input_txt02" />
+							课程类型描述&nbsp;&nbsp;<input value="{{ session('description') }}" type="text" name="description" class="ui_input_txt02" />
 
 							@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_search_enabled')
 						</div>
@@ -57,28 +57,28 @@ var module_name = 'filetype';
 							<th width="30"><input type="checkbox" id="all" onclick="selectOrClearAllCheckbox(this);" />
 							</th>
 							<th>id</th>
-							<th>文件类型</th>
-							<th>文件类型描述</th>
+							<th>课程类型</th>
+							<th>课程类型描述</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
-						@foreach ($filetypes as $filetype)
+						@foreach ($coursetypes as $coursetype)
                             <tr>
-								<td><input type="checkbox" name="IDCheck" value="{{ $filetype->id }}" class="acb" /></td>
-                                <td>{{ $filetype->id }}</td>
-								<td>{{ $filetype->type }}</td>
-                                <td>{{ $filetype->description}}</td>
-								<td>{{ $filetype->enabled }}</td>
+								<td><input type="checkbox" name="IDCheck" value="{{ $coursetype->id }}" class="acb" /></td>
+                                <td>{{ $coursetype->id }}</td>
+								<td>{{ $coursetype->type }}</td>
+                                <td>{{ $coursetype->description}}</td>
+								<td>{{ $coursetype->enabled }}</td>
 								<td>
-                                    <a href="{{ route('filetype.edit', $filetype->id) }}" class="edit">编辑</a> 
-									<a href="javascript:del('{{ $filetype->id }}');">删除</a>
+                                    <a href="{{ route('coursetype.edit', $coursetype->id) }}" class="edit">编辑</a> 
+									<a href="javascript:del('{{ $coursetype->id }}');">删除</a>
 								</td>
 							</tr>
                         @endforeach
 						
 					</table>
 				</div>
-				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_paginate', ['models' => $filetypes])
+				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_paginate', ['models' => $coursetypes])
 			</div>
 		</div>
 	</form>
