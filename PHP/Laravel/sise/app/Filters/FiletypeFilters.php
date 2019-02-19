@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class FiletypeFilters extends Filters
 {
-    protected $filters = ['by', 'name', 'description', 'enabled'];
+    protected $filters = ['by', 'title', 'description', 'enabled'];
 
     public function by($username){
         if($username == '') return $this->builder;
@@ -17,9 +17,9 @@ class FiletypeFilters extends Filters
         return $this->builder;
     }
 
-    public function name($name){
-        if($name == '') return $this->builder;
-        return $this->builder->where('name','like', "%$name%");
+    public function title($title){
+        if($title == '') return $this->builder;
+        return $this->builder->where('title','like', "%$title%");
     }
 
     public function description($description){

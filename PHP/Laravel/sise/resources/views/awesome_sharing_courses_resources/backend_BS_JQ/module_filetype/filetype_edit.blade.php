@@ -140,7 +140,7 @@ module_name = "filetype";
 						<input type="text" id="description" value="{{ $filetype->description }}" class="ui_input_txt02"/>
 					</td>
 				</tr>
-				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_edit_enabled')
+				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_edit_enabled', ['model' => $filetype])
 				<tr>
 					<td>&nbsp;</td>
 					<td class="ui_text_lt">

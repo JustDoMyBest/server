@@ -36,13 +36,14 @@ class FileController extends Controller
         $request->session()->flash('title', $request['title']);
         $request->session()->flash('description', $request['description']);
         $request->session()->flash('filetype', $request['filetype']);
-        $request->session()->flash('tag', $request['tag']);
+        $request->session()->flash('tags', $request['tags']);
         $request->session()->flash('enabled', $request['enabled']);
 
         // $files = $this->getModel($filters);
         $files = $this->getModel(File::class, $filters);
         return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_index',[
             'files' => $files,
+            // 'filetypes' => $this->filetypes,
         ]);
     }
 
@@ -54,9 +55,11 @@ class FileController extends Controller
     public function create()
     {
         //
+        // dd($this->filetypes);
+        // dd($this->tags);
         return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_create',[
-            'filetypes' => $filetypes,
-            'tags' => $tags,
+            'filetypes' => $this->filetypes,
+            'tags' => $this->tags,
         ]);
     }
 
@@ -75,15 +78,31 @@ class FileController extends Controller
         // foreach ($request['files'] as $file) {
         //     $file->store('files', 'public');
         // }
+        // dd($request['tags']);
+        // foreach ($request['tags'] as $tag) {
+        //     // echo empty($tag);
+        //     // echo $tag;
+        //     if (!empty($tag)) {
+        //         $tags .= $tag . ',';
+        //     }
+        // }
+        // $tags = substr($tags, 0, strlen($tags)-1);
+
+        // $tags = $this->convertTagsArrayToString($request['tags']);
+        // print_r($tags);
+        // $tags = $this->convertTagsStringToArray($tags);
+        // dd($tags);
         File::create([
             'user_id' => auth()->id(),
             'course_id' => null,
             'filetype_id' => $request['filetype'],
             'title' => $request['title'],
-            'tags' => $request['tag'],
+            // 'tags' => $request['tags'],
+            'tags' => $this->convertTagsArrayToString($request['tags']),
             'description' => $request['description'],
             'file_path' => $request['file']->store('sise/files', 'public'),
-            'enabled' => !!$request['enabled'],
+            // 'enabled' => !!$request['enabled'],
+            'enabled' => $this->convertEnabledToBoolean($request['enabled']),
         ]);
 
         return redirect('/file');
@@ -124,13 +143,49 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, File $model)
+    public function update(Request $request, File $file)
     {
         //
-        dd('updating',$model->id);
-        $model->update([
-            '' => $request[''],
-        ]);
+        // dd('updating', $file->id);
+        // dd($request['title']);
+        // dd($request->headers);
+        // dd($request->all());
+
+        // $file->update([
+        //     'user_id' => auth()->id(),
+        //     'course_id' => null,
+        //     'filetype_id' => $request['filetype'],
+        //     'title' => $request['title'],
+        //     // 'tags' => $request['tags'],
+        //     'tags' => $this->convertTagsArrayToString($request['tags']),
+        //     'description' => $request['description'],
+        //     'file_path' => $request['file']->store('sise/files', 'public'),
+        //     // 'enabled' => !!$request['enabled'],
+        //     'enabled' => $this->convertEnabledToBoolean($request['enabled']),
+        // ]);
+
+        // dd($file->title);
+        if($this->store($request)){
+            $this->destroy($file->id);
+        }
+        // File::create([
+        //     'user_id' => auth()->id(),
+        //     'course_id' => null,
+        //     'filetype_id' => $request['filetype'],
+        //     'title' => $request['title'],
+        //     // 'tags' => $request['tags'],
+        //     'tags' => $this->convertTagsArrayToString($request['tags']),
+        //     'description' => $request['description'],
+        //     'file_path' => $request['file']->store('sise/files', 'public'),
+        //     // 'enabled' => !!$request['enabled'],
+        //     'enabled' => $this->convertEnabledToBoolean($request['enabled']),
+        // ]);
+
+        return '<h2 align="center">更新成功</h2>';
+        // $this->create($file);
+        // $model->update([
+        //     '' => $request[''],
+        // ]);
     }
 
     /**

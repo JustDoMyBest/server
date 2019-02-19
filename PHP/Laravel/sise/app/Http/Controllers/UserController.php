@@ -112,7 +112,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
-        $enabled = $this->ConvertEnabledToBoolean($request['enabled']);
+        $enabled = $this->convertEnabledToBoolean($request['enabled']);
         // $usergroup = Usergroup::find($request['usergroup']);
         // $user->usergroup()->create($usergroup);
         // dd($enabled);

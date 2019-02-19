@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 trait ConvertUtils {
-    public function ConvertEnabledToBoolean($str){
+    public function convertEnabledToBoolean($str) {
         // if ($request['enabled'] === '1') {
         if ($str === '1') {
             // $enabled = true;
@@ -12,5 +12,22 @@ trait ConvertUtils {
             // $enabled = false;
             return false;
         } 
+    }
+
+    public function convertTagsArrayToString($tags) {
+        $str = '';
+        foreach ($tags as $tag) {
+            if (!empty($tag)) {
+                $str .= $tag . ',';
+            }
+        }
+        $str = substr($str, 0, strlen($str)-1);
+        return $str;
+    }
+
+    public function convertTagsStringToArray($tags) {
+        // $arr = array();
+        // $arr = explode(',', $tags);
+        return explode(',', $tags);
     }
 }

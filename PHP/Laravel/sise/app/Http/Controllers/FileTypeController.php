@@ -104,11 +104,12 @@ class FiletypeController extends Controller
         //
         // dd('updating',$model->id);
         // $model->update([
+        // dd($this->convertEnabledToBoolean($request['enabled']));
         $filetype->update([
             'user_id' => auth()->id(),
             'type' => $request['type'],
             'description' => $request['description'],
-            'enabled' => !!$request['enabled'],
+            'enabled' => $this->convertEnabledToBoolean($request['enabled']),
         ]);
 
         if ($request->wantsJson()) {
