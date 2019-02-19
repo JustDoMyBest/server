@@ -7,7 +7,7 @@ data = [
 
     {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":2,"resourceID":16,"resourceName":"课程管理"},
     {"accessPath":"/course","checked":false,"delFlag":0,"parentID":16,"resourceGrade":3,"resourceID":58,"resourceName":"所有课程"},
-    {"accessPath":"/coursetype","checked":false,"delFlag":0,"parentID":16,"resourceGrade":3,"resourceID":58,"resourceName":"课程发布"},
+    {"accessPath":"/course/create","checked":false,"delFlag":0,"parentID":16,"resourceGrade":3,"resourceID":58,"resourceName":"课程发布"},
 
     {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":3,"resourceID":9,"resourceName":"课程类型管理"},
     {"accessPath":"/coursetype","checked":false,"delFlag":0,"parentID":9,"resourceGrade":3,"resourceID":58,"resourceName":"所有课程类型"},

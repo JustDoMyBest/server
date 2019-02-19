@@ -7,8 +7,8 @@
 <title>信息管理系统</title>
 <script type="text/javascript">
 
-var fancybox_onClosed_href = '/file';
-var module_name = 'file';
+var fancybox_onClosed_href = '/course';
+var module_name = 'course';
 
 @include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_js')
 </script>
@@ -37,10 +37,10 @@ var module_name = 'file';
 							{{-- 发布者姓名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
 							{{-- 创建者姓名&nbsp;&nbsp;<input value="{{ session('by') }}" type="text" name="by" class="ui_input_txt02" /> --}}
 							{{-- 标签名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
-							文件标题&nbsp;&nbsp;<input value="{{ session('title') }}" type="text" name="title" class="ui_input_txt02" />
-							文件类型&nbsp;&nbsp;<input value="{{ session('filetype') }}" type="text" name="filetype" class="ui_input_txt02" />
-							文件描述&nbsp;&nbsp;<input value="{{ session('description') }}" type="text" name="description" class="ui_input_txt02" />
-							文件标签&nbsp;&nbsp;<input value="{{ session('tags') }}" type="text" name="tags" class="ui_input_txt02" />
+							课程标题&nbsp;&nbsp;<input value="{{ session('title') }}" type="text" name="title" class="ui_input_txt02" />
+							课程类型&nbsp;&nbsp;<input value="{{ session('filetype') }}" type="text" name="filetype" class="ui_input_txt02" />
+							课程描述&nbsp;&nbsp;<input value="{{ session('description') }}" type="text" name="description" class="ui_input_txt02" />
+							课程标签&nbsp;&nbsp;<input value="{{ session('tags') }}" type="text" name="tags" class="ui_input_txt02" />
 
 							@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_search_enabled')
 						</div>
@@ -60,39 +60,48 @@ var module_name = 'file';
 							<th>id</th>
 							{{-- <th>创建者姓名</th> --}}
 							{{-- <th>文件名</th> --}}
-							<th>文件标题</th>
-							<th>文件类型</th>
-							<th>文件描述</th>
-							<th>文件标签</th>
+							<th>课程标题</th>
+							<th>课程类型</th>
+							<th>课程描述</th>
+							<th>课程标签</th>
+							<th>课程文件</th>
 							<th>状态</th>
 							<th>操作</th>
 						</tr>
-						@foreach ($files as $file)
+						@foreach ($courses as $course)
                             <tr>
 								{{-- <td><input type="checkbox" name="IDCheck" value="14458619251417" class="acb" /></td> --}}
-								<td><input type="checkbox" name="IDCheck" value="{{ $file->id }}" class="acb" /></td>
-                                <td>{{ $file->id }}</td>
-								<td><a href="/storage/{{ $file->file_path }}">{{ $file->title }}</a></td>
-								@if(isset($file->filetype))
-									<td>{{ $file->filetype->type }}</td>
+								<td><input type="checkbox" name="IDCheck" value="{{ $course->id }}" class="acb" /></td>
+                                <td>{{ $course->id }}</td>
+								<td><a href="/storage/{{ $course->course_path }}">{{ $course->title }}</a></td>
+								@if(isset($course->coursetype))
+									<td>{{ $course->coursetype->type }}</td>
 								@else
 									<td>无</td>
 								@endif
-                                <td>{{ $file->description}}</td>
-                                <td>{{ $file->tags }}</td>
-								<td>{{ $file->enabled }}</td>
+                                <td>{{ $course->description}}</td>
+                                <td>{{ $course->tags }}</td>
+                                {{-- <td>{{ $course->files?implode(',', $course->files) }}</td> --}}
+                                <td>
+									{{-- {{ $course->files?implode(',', $course->files): }} --}}
+									@foreach ($course->files as $file)
+										<a href="{{ $file->file_path() }}">{{ $file->title }}</a>
+										<br>
+									@endforeach
+								</td>
+								<td>{{ $course->enabled }}</td>
 								<td>
 									{{-- <a href="house_edit.html?fyID=14458619251417" class="edit">编辑</a>  --}}
-                                    <a href="{{ route('file.edit', $file->id) }}" class="edit">编辑</a> 
+                                    <a href="{{ route('course.edit', $course->id) }}" class="edit">编辑</a> 
 									{{-- <a href="javascript:del('14458619251417');">删除</a> --}}
-									<a href="javascript:del('{{ $file->id }}');">删除</a>
+									<a href="javascript:del('{{ $course->id }}');">删除</a>
 								</td>
 							</tr>
                         @endforeach
 						
 					</table>
 				</div>
-				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_paginate', ['models' => $files])
+				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_paginate', ['models' => $courses])
 			</div>
 		</div>
 	</form>

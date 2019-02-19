@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Coursetype;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Filters\CourseFilters;
 
@@ -12,6 +14,8 @@ class CourseController extends Controller
     {
         // parent::__construct();
         $this->middleware('auth');
+        $this->coursetypes = Coursetype::all();
+        $this->tags = Tag::all();
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +27,7 @@ class CourseController extends Controller
         //
         $request->session()->flash('title', $request['title']);
         $request->session()->flash('description', $request['description']);
-        $request->session()->flash('filetype', $request['filetype']);
+        $request->session()->flash('coursetype', $request['coursetype']);
         $request->session()->flash('tag', $request['tag']);
         $request->session()->flash('enabled', $request['enabled']);
 
@@ -44,7 +48,7 @@ class CourseController extends Controller
         //
         $coursetypes = Coursetype::all();
         $tags = Tag::all();
-        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_file.file_create',[
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_course.course_create',[
             'coursetypes' => $coursetypes,
             'tags' => $tags,
         ]);
@@ -59,6 +63,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request->all());
         Course::create([
 
         ]);
@@ -86,7 +91,12 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         //
-        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_course.course_edit', compact('course'));
+        // return view('awesome_sharing_courses_resources.backend_BS_JQ.module_course.course_edit', compact('course'));
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_course.course_edit', [
+            'course' => $course,
+            'coursetypes' => $this->coursetypes,
+            'tags' => $this->tags,
+        ]);
     }
 
     /**
@@ -101,9 +111,13 @@ class CourseController extends Controller
         //
         // dd('updating',$model->id);
         // $model->update([
-        $course->update([
-            '' => $request[''],
-        ]);
+        // $course->update([
+        //     '' => $request[''],
+        // ]);
+        if($this->store($request)){
+            $this->destroy($course->id);
+        }
+        return '<h2 align="center">更新成功</h2>';
     }
 
     /**
@@ -112,8 +126,19 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    // public function destroy(Course $course)
+    public function destroy($ids)
     {
         //
+        $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
+        foreach($ids as $id) {
+            $course = Course::find($id);
+            foreach($course->files as $file){
+                Storage::disk('public')->delete($file->file_path);
+                \DB::table('files')->where('id',$file->id)->delete();
+            }
+        }
+        \DB::table('courses')->whereIn('id',$ids)->delete();
+        return redirect()->back();
     }
 }

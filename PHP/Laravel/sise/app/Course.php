@@ -13,6 +13,10 @@ class Course extends Model
         return $this->belongsTo(Coursetype::class);
     }
 
+    public function files() {
+        return $this->hasMany(File::class);
+    }
+
     public function scopeFilter($query, $filters)
     {
         // dd($query,$filters);

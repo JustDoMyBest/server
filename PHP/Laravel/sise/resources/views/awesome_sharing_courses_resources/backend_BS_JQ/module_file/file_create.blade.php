@@ -26,7 +26,7 @@
                                 <label for="description" class="col-md-4 control-label">文件描述：</label>
     
                                 <div class="col-md-6">
-                                    <input placeholder="输入你想添加的用户组描述" id="description" type="string" class="form-control" name="description"
+                                    <input placeholder="输入你想添加的文件描述" id="description" type="string" class="form-control" name="description"
                                         value="{{ old('description') }}" required>
                                 </div>
                             </div>

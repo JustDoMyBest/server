@@ -38,39 +38,6 @@ module_name = "file";
 		}
 	});
 	
-	/** 检测房源房号是否存在  **/
-// 	function checkFyFh(){
-// 		// 分别获取小区编号、栋号、层号、房号
-// 		var fyID = $('#fyID').val();
-// 		var fyXqCode = $("#fyXq").val();
-// 		var fyDh = $("#fyDh").val();
-// 		var fyCh = $("#fyCh").val();	
-// 		var fyFh = $("#fyFh").val();
-// 		var tag = $("#tag").val();
-// 		if(fyXqCode!="" && fyDh!="" && fyCh!="" && fyFh!=""){
-// 			// 给房屋坐落地址赋值
-// 			$("#fyZldz").val($('#fyDh option:selected').text() + fyCh + "-" + fyFh);
-// 			// 异步判断该房室是否存在，如果已存在，给用户已提示哦
-// 			$.ajax({
-// 				type:"POST",
-// 				url:"checkFyFhIsExists.action",
-// 				// data:{"_token": "{{ csrf_token() }}", "fangyuanEntity.fyID":fyID, "tag": tag,"fangyuanEntity.fyXqCode":fyXqCode, "fangyuanEntity.fyDhCode":fyDh, "fangyuanEntity.fyCh":fyCh, "fangyuanEntity.fyFh":fyFh},
-// 				data:{"_token": "{{ csrf_token() }}", "fyID":fyID, "tag": tag,"fangyuanEntity.fyXqCode":fyXqCode, "fangyuanEntity.fyDhCode":fyDh, "fangyuanEntity.fyCh":fyCh, "fangyuanEntity.fyFh":fyFh},
-// 				dataType : "text",
-// 				success:function(data){
-// // 					alert(data);
-// 					// 如果返回数据不为空，更改“房源信息”
-// 					if(data=="1"){
-// 						//  art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'该房室在系统中已经存在哦，\n请维护其他房室数据', ok:true,});
-// 						 $("#fyFh").css("background", "#EEE");
-// 						 $("#fyFh").focus();
-// 						 return false;
-// 					}
-// 				}
-// 			});
-// 		}
-// 	}
-	
 // 			$.ajaxSetup({
 //         headers: {
 //             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
