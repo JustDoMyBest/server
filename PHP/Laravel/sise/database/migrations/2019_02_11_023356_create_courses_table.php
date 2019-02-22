@@ -28,7 +28,7 @@ class CreateCoursesTable extends Migration
             $table->integer('dislike')->default(0);
             $table->timestamps();
             // $table->unique(['user_id','course_type_id']);
-            $table->unique(['user_id','coursetype_id']);
+            // $table->unique(['user_id','coursetype_id']);
 
             // $table->foreign('course_type_id')
             $table->foreign('coursetype_id')

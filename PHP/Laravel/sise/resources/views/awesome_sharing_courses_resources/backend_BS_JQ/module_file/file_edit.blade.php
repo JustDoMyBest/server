@@ -263,7 +263,7 @@ module_name = "file";
 					<td class="ui_text_lt">
 						{{-- <input id="files" type="file" class="form-control-file" name="files[]" value="{{ old('description') }}" required multiple> --}}
 						{{-- <input id="file" type="file" class="form-control-file" name="file" required multiple> --}}
-						<input id="file" name="file" type="file" name="file" required>
+						<input id="file" name="file" type="file" required>
 					</td>
 				</tr>
 				<tr>

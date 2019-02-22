@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Coursetype;
 use App\Tag;
+use App\File;
 use Illuminate\Http\Request;
 use App\Filters\CourseFilters;
 
@@ -28,7 +29,7 @@ class CourseController extends Controller
         $request->session()->flash('title', $request['title']);
         $request->session()->flash('description', $request['description']);
         $request->session()->flash('coursetype', $request['coursetype']);
-        $request->session()->flash('tag', $request['tag']);
+        $request->session()->flash('tags', $request['tags']);
         $request->session()->flash('enabled', $request['enabled']);
 
         // $files = $this->getModel($filters);
@@ -63,10 +64,25 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request->all());
-        Course::create([
-
+        // dd($request->all());
+        $course = Course::create([
+            'user_id' => auth()->id(),
+            'coursetype_id' => $request['coursetype'],
+            'title' => $request['title'],
+            'tags' => $this->convertTagsArrayToString($request['tags']),
+            'description' => $request['description'],
+            'enabled' => $this->convertEnabledToBoolean($request['enabled']),
         ]);
+        foreach ($request['files'] as $file) {
+            if ($file->isValid()) {
+                File::create([
+                    'user_id' => auth()->id(),
+                    'title' => $file->getClientOriginalName(),
+                    'course_id' => $course->id,
+                    'file_path' => $file->store('sise/courses/files', 'public'),
+                ]);
+            }
+        }
 
         return redirect('/course');
     }
@@ -133,12 +149,13 @@ class CourseController extends Controller
         $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
         foreach($ids as $id) {
             $course = Course::find($id);
-            foreach($course->files as $file){
-                Storage::disk('public')->delete($file->file_path);
-                \DB::table('files')->where('id',$file->id)->delete();
-            }
+            // foreach($course->files as $file){
+            //     Storage::disk('public')->delete($file->file_path);
+            //     \DB::table('files')->where('id',$file->id)->delete();
+            // }
+            $course->delete();
         }
-        \DB::table('courses')->whereIn('id',$ids)->delete();
+        // \DB::table('courses')->whereIn('id',$ids)->delete();
         return redirect()->back();
     }
 }

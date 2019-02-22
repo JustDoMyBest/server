@@ -32,3 +32,4 @@ Route::resource('chapter', 'ChapterController');
 // Route::resource('filetype', 'FileTypeController');
 Route::resource('filetype', 'FiletypeController');
 Route::resource('file', 'FileController');
+Route::resource('contact_us', 'ContactUsController');

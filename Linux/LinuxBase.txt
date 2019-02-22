@@ -24,7 +24,8 @@ echo $passwd
 df -lhT
 du -lh --max-depth=1 /
 du -sh *
-time -f  "start:`date` \truntime:\%E  file:file_name  "
+time -f  "start:`date` \truntime:\%E  file:file_name  " /usr/bin/bash $script_name &> ${log_dir}${log_name}
+time -f  "start:`date` \truntime:\%E  file:file_name  " /usr/bin/bash $script_name >> ${log_dir}${log_name} 2>1
 rpm -ivh your-package.rpm
 rpm -Uvh your-package.rpm
 rpm -qa | grep sql
@@ -70,6 +71,17 @@ find /usr/local/php* -name php-fpm.pid -exec cat {} \; \( -exec false \; -o -exe
 lsof -i:3306
 hostname -I
 curl -o ./90562069.m3u8 -sSL -H "Referer: https://avgle.com/" 'https://ip99580758.cdn.qooqlevideo.com/key=ZXemZC+h59HIFEsCMJ5tUw,s=,end=1546296554,limit=2/data=1546296554/state=LSAh/referer=force,.avgle.com/reftag=56109644/media=hlsA/27/177/9/90562069.m3u8'
+wget -q
+
+dd if=/dev/zero of=test bs=1M count=1000
+dd if=/dev/zero of=test bs=1M count=0 seek=100000
+
+watch -n 0.1 '/usr/bin/openssl rand -base64 ^C md5sum| cut -c 1-8'
+
+echo 123 | rev
+
+date -d "2010-10-18 00:00:00" +%s
+date -d @1287331200  "+%Y-%m-%d"
 
 ls -1f file_or_dir
 

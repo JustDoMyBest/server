@@ -4,17 +4,32 @@ namespace App\Http\Controllers;
 
 use App\ContactUs;
 use Illuminate\Http\Request;
+use App\Filters\ContactUsFilters;
 
 class ContactUsController extends Controller
 {
+    public function __construct()
+    {
+        // parent::__construct();
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request,ContactUsFilters $filters)
     {
         //
+        $request->session()->flash('contact_information', $request['contact_information']);
+        $request->session()->flash('text', $request['text']);
+        $request->session()->flash('enabled', $request['enabled']);
+
+        // $contact_uss = $this->getModel($filters);
+        $contact_uses = $this->getModel(ContactUs::class, $filters);
+        return view('awesome_sharing_courses_resources.backend_BS_JQ.module_contact_us.contact_us_index',[
+            'contact_uses' => $contact_uses,
+        ]);
     }
 
     /**

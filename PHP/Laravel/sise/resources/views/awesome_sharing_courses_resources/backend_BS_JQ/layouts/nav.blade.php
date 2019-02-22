@@ -42,5 +42,6 @@ data = [
     {"accessPath":"/user/create","checked":false,"delFlag":0,"parentID":24,"resourceGrade":3,"resourceID":42,"resourceName":"添加用户"},
 
     {"accessPath":"","checked":false,"delFlag":0,"parentID":1,"resourceGrade":3,"resourceID":12,"resourceName":"留言管理"},
-    {"accessPath":"/messageboard","checked":false,"delFlag":0,"parentID":12,"resourceGrade":3,"resourceID":42,"resourceName":"所有留言"},
+    {{-- {"accessPath":"/messageboard","checked":false,"delFlag":0,"parentID":12,"resourceGrade":3,"resourceID":42,"resourceName":"所有留言"}, --}}
+    {"accessPath":"/contact_us","checked":false,"delFlag":0,"parentID":12,"resourceGrade":3,"resourceID":42,"resourceName":"所有留言"},
 ];

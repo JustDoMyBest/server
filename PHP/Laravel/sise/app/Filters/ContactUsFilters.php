@@ -5,9 +5,9 @@ namespace App\Filters;
 use App\User;
 use Illuminate\Http\Request;
 
-class CourseFilters extends Filters
+class ContactUsFilters extends Filters
 {
-    protected $filters = ['by', 'title', 'tags', 'description', 'enabled'];
+    protected $filters = ['by','contact_information','text','tag','enabled'];
 
     public function by($username){
         if($username == '') return $this->builder;
@@ -17,19 +17,21 @@ class CourseFilters extends Filters
         return $this->builder;
     }
 
-    public function tags($tags){
-        if($tags == '') return $this->builder;
-        return $this->builder->where('tags','like', "%$tags%");
+
+    public function contact_information($contact_information){
+        if($contact_information == '') return $this->builder;
+        return $this->builder->where('contact_information','like', "%$contact_information%");
     }
 
-    public function title($title){
-        if($title == '') return $this->builder;
-        return $this->builder->where('title','like', "%$title%");
+
+    public function text($text){
+        if($text == '') return $this->builder;
+        return $this->builder->where('text','like', "%$text%");
     }
 
-    public function description($description){
-        if($description == '') return $this->builder;
-        return $this->builder->where('description','like', "%$description%");
+    public function tag($tag){
+        if($tag == '') return $this->builder;
+        return $this->builder->where('tag','like', "%$tag%");
     }
     
     public function enabled($enabled){

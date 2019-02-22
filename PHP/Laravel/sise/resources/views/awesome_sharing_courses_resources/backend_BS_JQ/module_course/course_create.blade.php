@@ -32,11 +32,11 @@
                             </div>
     
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="filetype" class="col-md-4 control-label">课程类型：</label>
+                                <label for="coursetype" class="col-md-4 control-label">课程类型：</label>
     
                                 <div class="col-md-6">
                                     {{-- <input placeholder="输入你想添加的文件类型" id="filetype" type="string" class="form-control" name="filetype" value="{{ old('filetype') }}" required autofocus> --}}
-                                    <select id="filetype" type="string" class="form-control" name="filetype">
+                                    <select id="coursetype" type="string" class="form-control" name="coursetype">
                                         <option value="">--请选择--</option>
                                         @foreach ($coursetypes as $coursetype)
                                             <option value="{{ $coursetype->id }}">{{ $coursetype->type }}</option>

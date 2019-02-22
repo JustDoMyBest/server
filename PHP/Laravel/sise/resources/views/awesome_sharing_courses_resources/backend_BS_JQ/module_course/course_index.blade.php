@@ -38,7 +38,7 @@ var module_name = 'course';
 							{{-- 创建者姓名&nbsp;&nbsp;<input value="{{ session('by') }}" type="text" name="by" class="ui_input_txt02" /> --}}
 							{{-- 标签名&nbsp;&nbsp;<input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" class="ui_input_txt02" /> --}}
 							课程标题&nbsp;&nbsp;<input value="{{ session('title') }}" type="text" name="title" class="ui_input_txt02" />
-							课程类型&nbsp;&nbsp;<input value="{{ session('filetype') }}" type="text" name="filetype" class="ui_input_txt02" />
+							课程类型&nbsp;&nbsp;<input value="{{ session('coursetype') }}" type="text" name="coursetype" class="ui_input_txt02" />
 							课程描述&nbsp;&nbsp;<input value="{{ session('description') }}" type="text" name="description" class="ui_input_txt02" />
 							课程标签&nbsp;&nbsp;<input value="{{ session('tags') }}" type="text" name="tags" class="ui_input_txt02" />
 
@@ -73,7 +73,8 @@ var module_name = 'course';
 								{{-- <td><input type="checkbox" name="IDCheck" value="14458619251417" class="acb" /></td> --}}
 								<td><input type="checkbox" name="IDCheck" value="{{ $course->id }}" class="acb" /></td>
                                 <td>{{ $course->id }}</td>
-								<td><a href="/storage/{{ $course->course_path }}">{{ $course->title }}</a></td>
+								{{-- <td><a href="/storage/{{ $course->course_path }}">{{ $course->title }}</a></td> --}}
+								<td>{{ $course->title }}</td>
 								@if(isset($course->coursetype))
 									<td>{{ $course->coursetype->type }}</td>
 								@else
@@ -85,7 +86,12 @@ var module_name = 'course';
                                 <td>
 									{{-- {{ $course->files?implode(',', $course->files): }} --}}
 									@foreach ($course->files as $file)
-										<a href="{{ $file->file_path() }}">{{ $file->title }}</a>
+										{{-- <a href="{{ $file->file_path }}">{{ $course->title }}</a> --}}
+										<a href="{{ $file->realFilePath }}">{{ $file->title }}</a>
+										{{-- {{ dd($file->file_path) }} --}}
+										{{-- {{ dd($file->realFilePath) }} --}}
+										{{-- <a href="{{ $file->filePath }}">{{ $file->title }}</a> --}}
+										{{-- <a href="{{ $file->file_path }}">22</a> --}}
 										<br>
 									@endforeach
 								</td>
