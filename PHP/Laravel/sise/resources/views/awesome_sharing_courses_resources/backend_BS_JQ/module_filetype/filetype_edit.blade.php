@@ -135,7 +135,7 @@ module_name = "filetype";
 					</td>
 				</tr>
 				<tr>
-					<td class="ui_text_rt" width="80">文件类型描述</td>
+					<td class="ui_text_rt" width="80">类型描述</td>
 					<td class="ui_text_lt">
 						<input type="text" id="description" value="{{ $filetype->description }}" class="ui_input_txt02"/>
 					</td>

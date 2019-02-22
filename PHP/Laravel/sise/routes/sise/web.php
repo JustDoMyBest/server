@@ -33,3 +33,11 @@ Route::resource('chapter', 'ChapterController');
 Route::resource('filetype', 'FiletypeController');
 Route::resource('file', 'FileController');
 Route::resource('contact_us', 'ContactUsController');
+
+// Route::get('frontend', function () {
+//     return view('awesome_sharing_courses_resources.frontend_BS_JQ.index');
+// });
+Route::get('frontend', 'FrontendController@index');
+Route::get('frontend/courses', 'FrontendController@courses');
+Route::get('frontend/files', 'FrontendController@files');
+Route::get('frontend/contact_uses', 'FrontendController@contact_uses');

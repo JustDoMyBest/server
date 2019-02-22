@@ -115,11 +115,11 @@ module_name = "coursetype";
 <form id="submitForm" name="submitForm" action="/xngzf/archives/initFangyuan.action" method="post">
 	{{ csrf_field() }}
 	{{-- <input type="hidden" name="fyID" value="14458625716623" id="fyID"/> --}}
-	<input type="hidden" type="text" id="fyID" name="fyID" value="{{ $filetype->id }}" />
+	<input type="hidden" type="text" id="fyID" name="fyID" value="{{ $coursetype->id }}" />
 	<div id="container">
 		<div id="nav_links">
 			{{-- 当前位置：基础数据&nbsp;>&nbsp;<span style="color: #1A5CC6;">房源编辑</span> --}}
-			当前位置：文件类型管理&nbsp;>&nbsp;<span style="color: #1A5CC6;">文件类型编辑</span>
+			当前位置：课程类型管理&nbsp;>&nbsp;<span style="color: #1A5CC6;">课程类型编辑</span>
 			<div id="page_close">
 				<a href="javascript:parent.$.fancybox.close();">
 					<img src="{{ asset('sise/backend/images/common/page_close.png') }}" width="20" height="20" style="vertical-align: text-top;"/>
@@ -129,18 +129,18 @@ module_name = "coursetype";
 		<div class="ui_content">
 			<table  cellspacing="0" cellpadding="0" width="100%" align="left" border="0">
 				<tr>
-					<td class="ui_text_rt" width="80">文件类型</td>
+					<td class="ui_text_rt" width="80">课程类型</td>
 					<td class="ui_text_lt">
-						<input type="text" id="type" value="{{ $filetype->type }}" class="ui_input_txt02"/>
+						<input type="text" id="type" value="{{ $coursetype->type }}" class="ui_input_txt02"/>
 					</td>
 				</tr>
 				<tr>
-					<td class="ui_text_rt" width="80">文件类型描述</td>
+					<td class="ui_text_rt" width="80">类型描述</td>
 					<td class="ui_text_lt">
-						<input type="text" id="description" value="{{ $filetype->description }}" class="ui_input_txt02"/>
+						<input type="text" id="description" value="{{ $coursetype->description }}" class="ui_input_txt02"/>
 					</td>
 				</tr>
-				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_edit_enabled')
+				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_edit_enabled', [ 'model' => $coursetype ])
 				<tr>
 					<td>&nbsp;</td>
 					<td class="ui_text_lt">

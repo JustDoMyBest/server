@@ -5,92 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-
-    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
-    <!-- Theme Style -->
-    <link rel="stylesheet" href="css/style.css">
+    @include('awesome_sharing_courses_resources.frontend_BS_JQ.layouts.common_css')
   </head>
   <body>
     
     <header role="banner">
      
-      <nav class="navbar navbar-expand-md navbar-dark bg-light">
-        <div class="container">
-          <a class="navbar-brand absolute" href="index.html">Skwela</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Online Courses</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="courses.html">HTML</a>
-                  <a class="dropdown-item" href="courses.html">WordPress</a>
-                  <a class="dropdown-item" href="courses.html">Web Development</a>
-                  <a class="dropdown-item" href="courses.html">Javascript</a>
-                  <a class="dropdown-item" href="courses.html">Photoshop</a>
-                </div>
-
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown05">
-                  <a class="dropdown-item" href="#">HTML</a>
-                  <a class="dropdown-item" href="#">WordPress</a>
-                  <a class="dropdown-item" href="#">Web Development</a>
-                  <a class="dropdown-item" href="#">Javascript</a>
-                  <a class="dropdown-item" href="#">Photoshop</a>
-                </div>
-
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="blog.html">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-            </ul>
-            <ul class="navbar-nav absolute-right">
-              <li class="nav-item">
-                <a href="login.html" class="nav-link">Login</a>
-              </li>
-              <li class="nav-item">
-                <a href="register.html" class="nav-link">Register</a>
-              </li>
-            </ul>
-            
-          </div>
-        </div>
-      </nav>
+      @include('awesome_sharing_courses_resources.frontend_BS_JQ.layouts.nav', [ 'coursetypes' => $coursetypes, 'filetypes' => $filetypes])
     </header>
     <!-- END header -->
 
-    <section class="site-hero overlay" data-stellar-background-ratio="0.5" style="background-image: url(images/big_image_1.jpg);">
+    <section class="site-hero overlay" data-stellar-background-ratio="0.5" style="background-image: url({{ asset('sise/frontend/images/big_image_1.jpg')  }});">
       <div class="container">
         <div class="row align-items-center site-hero-inner justify-content-center">
           <div class="col-md-8 text-center">
 
             <div class="mb-5 element-animate">
-              <h1>Learn From Doing</h1>
-              <p class="lead">Learn something new every day with skwela lorem ipsum dolor sit amet.</p>
-              <p><a href="#" class="btn btn-primary">Sign up and get a 7-day free trial</a></p>
+              {{-- <h1>Learn From Doing</h1> --}}
+              <h1>开始您的圆梦之旅吧！</h1>
+              {{-- <p class="lead">Learn something new every day with skwela lorem ipsum dolor sit amet.</p> --}}
+              <p class="lead">打盹会做梦，学习会圆梦。赶紧加入“精品课程资源共享网站”，开启圆梦之旅吧。</p>
+              {{-- <p><a href="#" class="btn btn-primary">Sign up and get a 7-day free trial</a></p> --}}
+              {{-- <p><a href="#" class="btn btn-primary">注册后免费使用哦</a></p> --}}
+              <p><a href="#" class="btn btn-primary">注册后更多惊喜等着您!</a></p>
             </div>
 
             
@@ -100,7 +37,7 @@
     </section>
     <!-- END section -->
 
-    <section class="school-features d-flex" style="background-image: url(images/big_image_3.jpg);">
+    {{-- <section class="school-features d-flex" style="background-image: url({{ asset('sise/frontend/images/big_image_3.jpg')  }});">
 
       <div class="inner">
         <div class="media d-block feature">
@@ -222,7 +159,7 @@
     </section>
     <!-- END section -->
 
-    <section class="section-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/big_image_3.jpg);">
+    <section class="section-cover" data-stellar-background-ratio="0.5" style="background-image: url({{ asset('sise/frontend/images/big_image_3.jpg')  }});">
       <div class="container">
         <div class="row justify-content-center align-items-center intro">
           <div class="col-md-7 text-center element-animate">
@@ -247,42 +184,42 @@
         <div class="row top-course">
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="#" class="course">
-              <img src="images/webdesign.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/webdesign.jpg')  }}" alt="Image placeholder">
               <h2>Web Design 101</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="#" class="course">
-              <img src="images/wordpress.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/wordpress.jpg')  }}" alt="Image placeholder">
               <h2>Learn How To Develop WordPress Plugin</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="#" class="course">
-              <img src="images/javascript.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/javascript.jpg')  }}" alt="Image placeholder">
               <h2>JavaScript 101</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="#" class="course">
-              <img src="images/photoshop.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/photoshop.jpg')  }}" alt="Image placeholder">
               <h2>Photoshop Design 101</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="#" class="course">
-              <img src="images/reactjs.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/reactjs.jpg')  }}" alt="Image placeholder">
               <h2>Learn Native ReactJS</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="#" class="course">
-              <img src="images/angularjs.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/angularjs.jpg')  }}" alt="Image placeholder">
               <h2>Learn AngularJS 2</h2>
               <p>Enroll Now</p>
             </a>
@@ -298,7 +235,7 @@
           
           
           <div class="col-lg-7 order-lg-3 order-1 mb-lg-0 mb-5">
-            <img src="images/person_testimonial_1.jpg" alt="Image placeholder" class="img-md-fluid">
+            <img src="{{ asset('sise/frontend/images/person_testimonial_1.jpg')  }}" alt="Image placeholder" class="img-md-fluid">
           </div>
           <div class="col-lg-1 order-lg-2"></div>
           <div class="col-lg-4 order-lg-1 order-2 mb-lg-0 mb-5">
@@ -310,9 +247,9 @@
         </div>
       </div>
     </section>
-    <!-- END section -->
+    <!-- END section --> --}}
   
-    <footer class="site-footer" style="background-image: url(images/big_image_3.jpg);">
+    {{-- <footer class="site-footer" style="background-image: url({{ asset('sise/frontend/images/big_image_3.jpg') }});">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-4">
@@ -360,20 +297,11 @@ Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="
         </div>
       </div>
     </footer>
-    <!-- END footer -->
+    <!-- END footer --> --}}
     
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-
-    
-    <script src="js/main.js"></script>
+    @include('awesome_sharing_courses_resources.frontend_BS_JQ.layouts.common_js')
   </body>
 </html>

@@ -21,7 +21,11 @@ class AppServiceProvider extends ServiceProvider
             $channels = \Cache::rememberForever('channels',function (){
                 return \App\Channel::all(); 
              });
+            $coursetypes = \DB::table('coursetypes')->get();
+            $filetypes = \DB::table('filetypes')->get();
             $view->with('channels',$channels); 
+            $view->with('coursetypes',$coursetypes); 
+            $view->with('filetypes',$filetypes); 
          });
 
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
