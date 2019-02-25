@@ -16,8 +16,13 @@
                 {{-- <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Online Courses</a> --}}
                 <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">在想课程</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                    @forelse ($coursetypes as $coursetype)
-                       <a class="dropdown-item" href="/frontend/courses">{{ $coursetype->type }}</a>
+                    {{-- @forelse ($coursetypes as $coursetype) --}}
+                    @forelse ($all_coursetypes as $coursetype)
+                       {{-- <a class="dropdown-item" href="/frontend/courses/{{ $coursetype->id }}">{{ $coursetype->type }}</a> --}}
+                       {{-- <a class="dropdown-item" href="/frontend/courses?coursetype={{ $coursetype->id }}">{{ $coursetype->type }}</a> --}}
+                       @if ($coursetype->enabled === 1)
+                         <a class="dropdown-item" href="/frontend/courses/{{ $coursetype->id }}">{{ $coursetype->type }}</a>
+                       @endif
                     @empty
                        <a class="dropdown-item" href="javascript:;">没有课程</a> 
                     @endforelse
@@ -34,8 +39,12 @@
                 {{-- <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a> --}}
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">文件共享</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    @forelse ($filetypes as $filetype)
-                       <a class="dropdown-item" href="/frontend/courses">{{ $filetype->type }}</a>
+                    {{-- @forelse ($filetypes as $filetype) --}}
+                    @forelse ($all_filetypes as $filetype)
+                       {{-- <a class="dropdown-item" href="/frontend/files?filetype={{ $filetype->id }}">{{ $filetype->type }}</a> --}}
+                       @if ($filetype->enabled === 1)
+                        <a class="dropdown-item" href="/frontend/files/{{ $filetype->id }}">{{ $filetype->type }}</a>
+                       @endif
                     @empty
                        <a class="dropdown-item" href="javascript:;">没有文件</a> 
                     @endforelse

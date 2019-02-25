@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use App\Filters\FiletypeFilters;
 use Illuminate\Http\Response;
+use App\Coursetype;
+use App\Course;
+use App\Filetype;
 
 class FrontendController extends Controller
 {
@@ -39,14 +42,38 @@ class FrontendController extends Controller
      * @param  \App\FileType  $fileType
      * @return \Illuminate\Http\Response
      */
-    public function courses(Request $request)
+    public function courses(Request $request, Coursetype $coursetype)
     {
         //
-        return view('awesome_sharing_courses_resources.frontend_BS_JQ.courses',[]);
+        // dd($request->all());
+        // dd($coursetype->courses);
+        // dd($coursetype);
+        // $courses = $coursetype->courses->where('enabled', 1)->paginate(5);
+        $courses = \DB::table('courses')->where('coursetype_id', $coursetype->id)->where('enabled', 1)->paginate(2);
+        // dd($courses);
+        return view('awesome_sharing_courses_resources.frontend_BS_JQ.courses',[
+            'coursetype' => $coursetype,
+            // 'courses' => $coursetype->courses,
+            'courses' => $courses,
+        ]);
     }
-    public function files(Request $request)
+    public function course_single(Request $request, Coursetype $coursetype, Course $course)
     {
         //
+        // dd($request->all());
+        // dd($coursetype->courses);
+        // dd($coursetype->courses);
+        // dd($course);
+        return view('awesome_sharing_courses_resources.frontend_BS_JQ.course-single',[
+            'courses' => $coursetype->courses,
+            'course' => $course,
+        ]);
+    }
+    public function files(Request $request, Filetype $filetype)
+    {
+        //
+        // dd($request->all());
+        dd($filetype->files);
         return view('awesome_sharing_courses_resources.frontend_BS_JQ.files',[]);
     }
     public function contact_uses(Request $request)

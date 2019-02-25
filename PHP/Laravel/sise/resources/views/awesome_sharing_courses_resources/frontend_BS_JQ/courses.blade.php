@@ -11,75 +11,22 @@
     
     <header role="banner">
      
-      <nav class="navbar navbar-expand-md navbar-dark bg-light">
-        <div class="container">
-          <a class="navbar-brand absolute" href="index.html">Skwela</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Online Courses</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                  <a class="dropdown-item" href="courses.html">HTML</a>
-                  <a class="dropdown-item" href="courses.html">WordPress</a>
-                  <a class="dropdown-item" href="courses.html">Web Development</a>
-                  <a class="dropdown-item" href="courses.html">Javascript</a>
-                  <a class="dropdown-item" href="courses.html">Photoshop</a>
-                </div>
-
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown05">
-                  <a class="dropdown-item" href="#">HTML</a>
-                  <a class="dropdown-item" href="#">WordPress</a>
-                  <a class="dropdown-item" href="#">Web Development</a>
-                  <a class="dropdown-item" href="#">Javascript</a>
-                  <a class="dropdown-item" href="#">Photoshop</a>
-                </div>
-
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="blog.html">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-            </ul>
-            <ul class="navbar-nav absolute-right">
-              <li class="nav-item">
-                <a href="login.html" class="nav-link">Login</a>
-              </li>
-              <li class="nav-item">
-                <a href="register.html" class="nav-link">Register</a>
-              </li>
-            </ul>
-            
-          </div>
-        </div>
-      </nav>
+      @include('awesome_sharing_courses_resources.frontend_BS_JQ.layouts.nav')
     </header>
     <!-- END header -->
 
-    <section class="site-hero overlay" data-stellar-background-ratio="0.5" style="background-image: url(images/big_image_1.jpg);">
+    <section class="site-hero overlay" data-stellar-background-ratio="0.5" style="background-image: url({{ asset('sise/frontend/images/big_image_1.jpg') }});">
       <div class="container">
         <div class="row align-items-center site-hero-inner justify-content-center">
           <div class="col-md-8 text-center">
 
             <div class="mb-5 element-animate">
-              <h1>Level Up Your Skills</h1>
-              <p class="lead">See our courses Below. Learn something new every day with skwela lorem ipsum dolor sit amet.</p>
-              <p><a href="#" class="btn btn-primary">Sign up and get a 7-day free trial</a></p>
+              {{-- <h1>Level Up Your Skills</h1> --}}
+              <h1>提升您的技能</h1>
+              {{-- <p class="lead">See our courses Below. Learn something new every day with skwela lorem ipsum dolor sit amet.</p> --}}
+              <p class="lead">向下滚动查看您的课程，每天学习新知识。</p>
+              {{-- <p><a href="#" class="btn btn-primary">Sign up and get a 7-day free trial</a></p> --}}
+              {{-- <p><a href="#" class="btn btn-primary">注册后更多惊喜等着您!</a></p> --}}
             </div>
 
             
@@ -94,114 +41,116 @@
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center">
-            <h2>Our Courses</h2>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum magnam illum maiores adipisci pariatur, eveniet.</p>
+            {{-- <h2>Our Courses</h2>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum magnam illum maiores adipisci pariatur, eveniet.</p> --}}
+            <h2>我们的课程</h2>
+            <p class="lead">静心学习我们的所有课程，你就有可能月薪几十万咯!!</p>
           </div>
         </div>
         <div class="row top-course">
-          <div class="col-md-4 col-sm-6 col-12">
-            <a href="course-single.html" class="course">
-              <img src="images/webdesign.jpg" alt="Image placeholder">
-              <h2>Web Design 101</h2>
-              <p>Enroll Now</p>
+          {{-- @forelse ($coursetype->courses as $course) --}}
+          @forelse ($courses as $course)
+          {{-- @if ($course->enable === 1) --}}
+          <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+            {{-- <a href="course-single.html" class="course"> --}}
+            <a href="/frontend/courses/{{ $coursetype->id }}/{{ $course->id }}" class="course">
+              {{-- <img src="{{ asset('sise/frontend/images/webdesign.jpg') }}" alt="Image placeholder"> --}}
+              <h2>{{ $course->title }}</h2>
+              <p>{{ $course->description }}</p>
             </a>
           </div>
-          <div class="col-md-4 col-sm-6 col-12">
-            <a href="course-single.html" class="course">
-              <img src="images/wordpress.jpg" alt="Image placeholder">
-              <h2>Learn How To Develop WordPress Plugin</h2>
-              <p>Enroll Now</p>
+          {{-- @endif --}}
+          @empty
+          {{-- <div class="col-md-4 col-sm-6 col-12"> --}}
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <a href="javascript:;" class="course">
+              {{-- <img src="{{ asset('sise/frontend/images/webdesign.jpg') }}" alt="Image placeholder"> --}}
+              <h1 align='center'>当前类型没有课程</h1>
+              {{-- <p>Enroll Now</p> --}}
             </a>
           </div>
-
-          <div class="col-md-4 col-sm-6 col-12">
-            <a href="course-single.html" class="course">
-              <img src="images/javascript.jpg" alt="Image placeholder">
-              <h2>JavaScript 101</h2>
-              <p>Enroll Now</p>
-            </a>
-          </div>
-
+          @endforelse
+          {{-- {{ $courses->render() }} --}}
         </div>
-
+          {{ $courses->links() }}
         <!-- END row -->
 
-        <div class="row top-course">
+        {{-- <div class="row top-course">
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/webdesign.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/webdesign.jpg') }}" alt="Image placeholder">
               <h2>Web Design 101</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/wordpress.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/wordpress.jpg') }}" alt="Image placeholder">
               <h2>Learn How To Develop WordPress Plugin</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/javascript.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/javascript.jpg') }}" alt="Image placeholder">
               <h2>JavaScript 101</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/photoshop.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/photoshop.jpg') }}" alt="Image placeholder">
               <h2>Photoshop Design 101</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/reactjs.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/reactjs.jpg') }}" alt="Image placeholder">
               <h2>Learn Native ReactJS</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/angularjs.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/angularjs.jpg') }}" alt="Image placeholder">
               <h2>Learn AngularJS 2</h2>
               <p>Enroll Now</p>
             </a>
           </div>
-        </div>
+        </div> --}}
         <!-- END row -->
 
         
-        <div class="row top-course">
+        {{-- <div class="row top-course">
           <div class="col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/photoshop.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/photoshop.jpg') }}" alt="Image placeholder">
               <h2>Photoshop Design 101</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/reactjs.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/reactjs.jpg') }}" alt="Image placeholder">
               <h2>Learn Native ReactJS</h2>
               <p>Enroll Now</p>
             </a>
           </div>
           <div class="col-md-4 col-sm-6 col-12">
             <a href="course-single.html" class="course">
-              <img src="images/angularjs.jpg" alt="Image placeholder">
+              <img src="{{ asset('sise/frontend/images/angularjs.jpg') }}" alt="Image placeholder">
               <h2>Learn AngularJS 2</h2>
               <p>Enroll Now</p>
             </a>
           </div>
-        </div>
+        </div> --}}
         <!-- END row -->
       </div>
     </section>
     <!-- END section -->
 
-    <section class="site-section">
+    {{-- <section class="site-section">
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center">
@@ -213,7 +162,7 @@
 
           <div class="inner">
             <div class="media d-block feature text-center">
-              <img src="images/person_1.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_1.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Rhea Smith</h3>
                 <p class="instructor-meta">WordPress Expert</p>
@@ -222,7 +171,7 @@
             </div>
 
             <div class="media d-block feature text-center">
-              <img src="images/person_2.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_2.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Gregg White</h3>
                 <p class="instructor-meta">HTML4, CSS3 Expert</p>
@@ -231,7 +180,7 @@
             </div>
 
             <div class="media d-block feature text-center">
-              <img src="images/person_3.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_3.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Rob Gold</h3>
                 <p class="instructor-meta">JS Expert</p>
@@ -241,7 +190,7 @@
 
 
             <div class="media d-block feature text-center">
-              <img src="images/person_4.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_4.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Wennie Poe</h3>
                 <p class="instructor-meta">Angular JS Expert</p>
@@ -255,7 +204,7 @@
 
           <div class="inner">
             <div class="media d-block feature text-center">
-              <img src="images/person_1.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_1.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Rhea Smith</h3>
                 <p class="instructor-meta">WordPress Expert</p>
@@ -264,7 +213,7 @@
             </div>
 
             <div class="media d-block feature text-center">
-              <img src="images/person_2.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_2.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Gregg White</h3>
                 <p class="instructor-meta">Photoshop Expert</p>
@@ -273,7 +222,7 @@
             </div>
 
             <div class="media d-block feature text-center">
-              <img src="images/person_3.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_3.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Rob Gold</h3>
                 <p class="instructor-meta">Web Design Expert</p>
@@ -283,7 +232,7 @@
 
 
             <div class="media d-block feature text-center">
-              <img src="images/person_4.jpg" alt="Image placeholder" class="mb-3">
+              <img src="{{ asset('sise/frontend/images/person_4.jpg') }}" alt="Image placeholder" class="mb-3">
               <div class="media-body">
                 <h3 class="mt-0">Wennie Poe</h3>
                 <p class="instructor-meta">React JS Expert</p>
@@ -295,10 +244,10 @@
 
 
       </div>
-    </section>
+    </section> --}}
     <!-- END section -->
 
-    <section class="section-cover bg-dark">
+    {{-- <section class="section-cover bg-dark">
       <div class="container">
         <div class="row justify-content-center align-items-center intro">
           <div class="col-md-7 text-center element-animate">
@@ -309,60 +258,12 @@
         </div>
       </div>
     </section>
-    <!-- END section -->
+    <!-- END section --> --}}
 
 
     
   
-    <footer class="site-footer" style="background-image: url(images/big_image_3.jpg);">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-4">
-            <h3>About</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, accusantium optio unde perferendis eum illum voluptatibus dolore tempora, consequatur minus asperiores temporibus reprehenderit.</p>
-          </div>
-          <div class="col-md-6 ml-auto">
-            <div class="row">
-              <div class="col-md-4">
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Company</a></li>
-                  <li><a href="#">Teachers</a></li>
-                  <li><a href="#">Courses</a></li>
-                  <li><a href="#">Categories</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Company</a></li>
-                  <li><a href="#">Teachers</a></li>
-                  <li><a href="#">Courses</a></li>
-                  <li><a href="#">Categories</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Company</a></li>
-                  <li><a href="#">Teachers</a></li>
-                  <li><a href="#">Courses</a></li>
-                  <li><a href="#">Categories</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <p>
-Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- END footer -->
+    {{-- @include('awesome_sharing_courses_resources.frontend_BS_JQ.layouts.common_footer') --}}
     
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>

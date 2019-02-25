@@ -9,6 +9,10 @@ class Filetype extends Model
     //
     protected $guarded = [];
 
+    public function files () {
+        return $this->hasMany(File::class);
+    }
+
     public function scopeFilter($query, $filters)
     {
         // dd($query,$filters);

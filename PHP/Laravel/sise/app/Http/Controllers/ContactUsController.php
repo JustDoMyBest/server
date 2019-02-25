@@ -11,7 +11,7 @@ class ContactUsController extends Controller
     public function __construct()
     {
         // parent::__construct();
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -51,6 +51,13 @@ class ContactUsController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
+        ContactUs::create([
+            'contact_information' => $request['contact_information'],
+            'text' => $request['text'],
+        ]);
+
+        return redirect()->back();
     }
 
     /**

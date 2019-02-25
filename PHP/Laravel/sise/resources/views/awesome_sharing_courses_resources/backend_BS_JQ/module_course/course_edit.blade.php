@@ -203,10 +203,12 @@ module_name = "file";
 				<tr>
 					<td class="ui_text_rt">课程类型</td>
 					<td class="ui_text_lt">
-						<select id="coursetype" name="coursetype" type="string" class="form-control" name="filetype">
-							<option value="">--请选择--</option>
+						<select id="coursetype" name="coursetype" type="string" class="form-control" required>
+							{{-- <option value="">--请选择--</option> --}}
 							@foreach ($coursetypes as $coursetype)
+                                @if ($coursetype->enabled === 1)
 								<option value="{{ $coursetype->id }}" {{ $course->coursetype_id === $coursetype->id ? 'selected' : '' }}>{{ $coursetype->type }}</option>
+								@endif
 							@endforeach
 						</select>
 					</td>
@@ -218,8 +220,10 @@ module_name = "file";
 						<select id="tags" type="string" class="ui_select01" name="tags[]" multiple size="2">
 							<option value="">--请选择--</option>
 							@foreach ($tags as $tag)
+                                @if ($tag->enabled === 1)
 								{{-- <option value="{{ $tag->tag }}" {{ $file->tag === $tag->tag ? 'selected' : '' }}>{{ $tag->tag }}</option> --}}
 								<option value="{{ $tag->tag }}" {{ in_array($tag->tag, explode(',', $course->tags)) ? 'selected' : '' }}>{{ $tag->tag }}</option>
+								@endif
 							@endforeach
 						</select>
 					</td>

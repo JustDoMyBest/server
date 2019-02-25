@@ -8,7 +8,7 @@
 <script type="text/javascript">
 
 var fancybox_onClosed_href = '/contact_us';
-var module_name = 'contact_us
+var module_name = 'contact_us';
 
 @include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_js')
 </script>
@@ -41,7 +41,7 @@ var module_name = 'contact_us
 							留言者联系方式&nbsp;&nbsp;<input value="{{ session('contact_information') }}" type="text" name="contact_information" class="ui_input_txt02" />
 							留言者留言&nbsp;&nbsp;<input value="{{ session('text') }}" type="text" name="text" class="ui_input_txt02" />
 
-							@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_search_enabled')
+							{{-- @include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_search_enabled') --}}
 						</div>
 						<div id="box_bottom">
 							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
@@ -59,7 +59,7 @@ var module_name = 'contact_us
 							<th>id</th>
 							<th>留言者联系方式</th>
 							<th>留言者留言</th>
-							<th>状态</th>
+							{{-- <th>状态</th> --}}
 							<th>操作</th>
 						</tr>
 						@foreach ($contact_uses as $contact_us)
@@ -68,7 +68,7 @@ var module_name = 'contact_us
                                 <td>{{ $contact_us->id }}</td>
 								<td>{{ $contact_us->contact_information }}</td>
                                 <td>{{ $contact_us->text }}</td>
-								<td>{{ $contact_us->enabled }}</td>
+								{{-- <td>{{ $contact_us->enabled }}</td> --}}
 								<td>
                                     {{-- <a href="{{ route('contact_us.edit', $contact_us->id) }}" class="edit">编辑</a>  --}}
 									<a href="javascript:del('{{ $contact_us->id }}');">删除</a>

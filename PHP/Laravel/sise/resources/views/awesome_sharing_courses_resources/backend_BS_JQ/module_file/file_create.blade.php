@@ -36,10 +36,12 @@
     
                                 <div class="col-md-6">
                                     {{-- <input placeholder="输入你想添加的文件类型" id="filetype" type="string" class="form-control" name="filetype" value="{{ old('filetype') }}" required autofocus> --}}
-                                    <select id="filetype" type="string" class="form-control" name="filetype">
-                                        <option value="">--请选择--</option>
+                                    <select id="filetype" type="string" class="form-control" name="filetype" required>
+                                        {{-- <option value="">--请选择--</option> --}}
                                         @foreach ($filetypes as $filetype)
+                                        @if ($filetype->enabled === 1)
                                             <option value="{{ $filetype->id }}">{{ $filetype->type }}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -53,7 +55,9 @@
                                     <select id="tags" type="string" class="form-control" name="tags[]" multiple size="2">
                                         <option value="">--请选择--</option>
                                         @foreach ($tags as $tag)
+                                        @if ($tag->enabled === 1)
                                             <option value="{{ $tag->tag }}">{{ $tag->tag }}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>

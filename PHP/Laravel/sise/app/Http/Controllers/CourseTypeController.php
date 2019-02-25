@@ -29,6 +29,7 @@ class CoursetypeController extends Controller
         // $filetypes = $this->getModel($filters);
         $coursetypes = $this->getModel(Coursetype::class, $filters);
         // dd($filetypes);
+        // dd($coursetypes);
         return view('awesome_sharing_courses_resources.backend_BS_JQ.module_coursetype.coursetype_index',[
             'coursetypes' => $coursetypes,
         ]);
@@ -104,7 +105,7 @@ class CoursetypeController extends Controller
             'user_id' => auth()->id(),
             'type' => $request['type'],
             'description' => $request['description'],
-            'enabled' => !!$request['enabled'],
+            'enabled' => $this->convertEnabledToBoolean($request['enabled']),
         ]);
 
         if ($request->wantsJson()) {

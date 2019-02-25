@@ -16,7 +16,8 @@
 		function logout(){
 			if(confirm("您确定要退出本系统吗？")){
 				// window.location.href = "/home";
-				window.location.href = "/frontend";
+				document.getElementById('logout-form').submit();
+				// window.location.href = "/frontend";
 			}
 		}
 		
@@ -245,6 +246,9 @@
 	</script>
 </head>
 <body onload="getDate01()">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
     <div id="top">
 		<div id="top_logo">
 			<img style='display:none' alt="logo" src="{{ asset('sise/backend/images/common/logo.jpg') }}" width="274" height="49" style="vertical-align:middle;">

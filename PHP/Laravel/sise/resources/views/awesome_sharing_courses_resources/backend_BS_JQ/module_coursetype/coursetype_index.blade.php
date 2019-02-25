@@ -78,6 +78,7 @@ var module_name = 'coursetype';
 						
 					</table>
 				</div>
+				{{-- {{dd($coursetypes)}} --}}
 				@include('awesome_sharing_courses_resources.backend_BS_JQ.module_common.module_index_paginate', ['models' => $coursetypes])
 			</div>
 		</div>

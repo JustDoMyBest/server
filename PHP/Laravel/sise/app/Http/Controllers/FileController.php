@@ -202,6 +202,9 @@ class FileController extends Controller
         $ids=is_array($ids)? $ids: (is_string($ids)? explode(',', $ids):func_get_args());
         foreach($ids as $id) {
             $file = File::find($id);
+            if ($file->filetype_id === null) {
+                return redirect()->back();
+            }
             Storage::disk('public')->delete($file->file_path);
         }
         \DB::table('files')->whereIn('id',$ids)->delete();

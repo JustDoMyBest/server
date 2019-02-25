@@ -44,7 +44,8 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect()->back();
+        // return redirect()->back();
+        return redirect('/frontend');
     }
 
     public function login(Request $request)

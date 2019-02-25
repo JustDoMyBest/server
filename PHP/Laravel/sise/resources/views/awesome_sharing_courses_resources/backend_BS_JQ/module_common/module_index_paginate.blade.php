@@ -6,6 +6,7 @@
                     <span class="ui_txt_bold04">{{ $models->count() }}</span>
 						条记录，当前第
 						{{-- <span class="ui_txt_bold04">1 --}}
+							{{-- {{dd($models)}} --}}
 						<span class="ui_txt_bold04">{{ $models->currentpage() }}
 						/
 						{{-- 9</span> --}}

@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
             $coursetypes = \DB::table('coursetypes')->get();
             $filetypes = \DB::table('filetypes')->get();
             $view->with('channels',$channels); 
-            $view->with('coursetypes',$coursetypes); 
-            $view->with('filetypes',$filetypes); 
+            $view->with('all_coursetypes',$coursetypes); 
+            $view->with('all_filetypes',$filetypes); 
          });
 
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
