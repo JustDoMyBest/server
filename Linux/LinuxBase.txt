@@ -94,6 +94,7 @@ tar -c test/ |pigz |ssh -c arcfour128 目标IP "cat >/data/test.tar.gz" # 不解压
 rsync -avzpogu --progress --delete /source/ /destination/
 rsync -avzu --progress --delete /source/ /destination/
 rsync -rvz -e 'ssh -p 2345' --progress --remove-sent-files ./localpath root@remotehost:/remotepath
+rsync -rvz -e 'ssh -p 2345' --progress --remove-source-files ./localpath root@remotehost:/remotepath
 watch -n 5 --differences ls -l
 netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 cat /home/wwwlogs/oms.ejbuy.com.log |awk '{print $1}' |sort |uniq -c|sort -n    # sort -rnk 1

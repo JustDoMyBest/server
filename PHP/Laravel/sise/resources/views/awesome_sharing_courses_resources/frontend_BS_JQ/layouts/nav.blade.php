@@ -1,7 +1,8 @@
       <nav class="navbar navbar-expand-md navbar-dark bg-light">
         <div class="container">
           {{-- <a class="navbar-brand absolute" href="index.html">Skwela</a> --}}
-          <a class="navbar-brand absolute" href="index.html">精品课程资源共享网站</a>
+          {{-- <a class="navbar-brand absolute" href="index.html">精品课程资源共享网站</a> --}}
+          <a class="navbar-brand absolute" href="/frontend">精品课程资源共享网站</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

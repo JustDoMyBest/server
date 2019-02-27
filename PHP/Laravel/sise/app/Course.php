@@ -22,6 +22,10 @@ class Course extends Model
         });
     }
 
+    public function user () {
+        return $this->belongsTo(User::class);
+    }
+
     public function coursetype() {
         return $this->belongsTo(Coursetype::class);
     }

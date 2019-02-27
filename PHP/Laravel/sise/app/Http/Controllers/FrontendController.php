@@ -48,8 +48,8 @@ class FrontendController extends Controller
         // dd($request->all());
         // dd($coursetype->courses);
         // dd($coursetype);
-        // $courses = $coursetype->courses->where('enabled', 1)->paginate(5);
-        $courses = \DB::table('courses')->where('coursetype_id', $coursetype->id)->where('enabled', 1)->paginate(2);
+        // $courses = $coursetype->courses->where('enabled', 1);
+        $courses = \DB::table('courses')->where('coursetype_id', $coursetype->id)->where('enabled', 1)->paginate(60);
         // dd($courses);
         return view('awesome_sharing_courses_resources.frontend_BS_JQ.courses',[
             'coursetype' => $coursetype,
@@ -73,12 +73,45 @@ class FrontendController extends Controller
     {
         //
         // dd($request->all());
-        dd($filetype->files);
-        return view('awesome_sharing_courses_resources.frontend_BS_JQ.files',[]);
+        // dd($filetype->files);
+        $files = \DB::table('files')->where('filetype_id', $filetype->id)->where('enabled', 1)->paginate(60);
+        return view('awesome_sharing_courses_resources.frontend_BS_JQ.files',[
+            'filetype' => $filetype,
+            // 'files' => $filetype->files,
+            'files' => $files,
+        ]);
     }
+    // public function file_single(Request $request, Filetype $filetype, File $file)
+    // {
+    //     //
+    //     // dd($request->all());
+    //     // dd($coursetype->courses);
+    //     // dd($coursetype->courses);
+    //     // dd($course);
+    //     return view('awesome_sharing_courses_resources.frontend_BS_JQ.course-single',[
+    //         // 'courses' => $coursetype->courses,
+    //         'file' => $file,
+    //     ]);
+    // }
     public function contact_uses(Request $request)
     {
         //
         return view('awesome_sharing_courses_resources.frontend_BS_JQ.contact',[]);
+    }
+    public function search(Request $request)
+    {
+        //
+        // dd($request->all());
+        $request->session()->flash('text', $request['text']);
+        // $courses = \DB::table('courses')->where('title', 'like', '%'.$request['text'].'%')->get();
+        $courses = \DB::table('courses')->where('title', 'like', '%'.$request['text'].'%')->take(12)->get();
+        // $courses = \DB::table('courses')->where('title', 'like', "%$request['text']%")->get();
+        // $coursetypes = \DB::table('coursetypes')->get();
+        $files = \DB::table('files')->where('title', 'like', '%'.$request['text'].'%')->whereNull('course_id')->take(12)->get();
+        return view('awesome_sharing_courses_resources.frontend_BS_JQ.search',[
+            'courses' => $courses,
+            // 'coursetype' => $coursetype,
+            'files' => $files,
+        ]);
     }
 }

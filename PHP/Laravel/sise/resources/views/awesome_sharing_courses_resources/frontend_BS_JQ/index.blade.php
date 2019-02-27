@@ -28,7 +28,20 @@
               <p class="lead">打盹会做梦，学习会圆梦。赶紧加入“精品课程资源共享网站”，开启圆梦之旅吧。</p>
               {{-- <p><a href="#" class="btn btn-primary">Sign up and get a 7-day free trial</a></p> --}}
               {{-- <p><a href="#" class="btn btn-primary">注册后免费使用哦</a></p> --}}
-              <p><a href="#" class="btn btn-primary">注册后更多惊喜等着您!</a></p>
+              {{-- <p><a href="#" class="btn btn-primary">注册后更多惊喜等着您!</a></p> --}}
+              {{-- <p><a href="/frontend/search" class="btn btn-primary">点击搜索整站资源!</a></p> --}}
+              <form action="/frontend/search">
+                {{-- <div class="form-inline col-md-12" style="border:4px solid"> --}}
+                <input name="text" class="col-md-4" style="border:4px;border-top-right-radius: 5px; 
+                border-top-left-radius: 5px; 
+                border-bottom-right-radius:5px;
+                border-bottom-left-radius:5px;" type="text"></input>
+                <input class="btn btn-primary col-md-6" style="border:4px;border-top-right-radius: 5px; 
+                border-top-left-radius: 5px; 
+                border-bottom-right-radius:5px;
+                border-bottom-left-radius:5px;" type="submit" value="输入内容，点击搜索整站资源!" ></input>
+                {{-- </div> --}}
+              </form>
             </div>
 
             
