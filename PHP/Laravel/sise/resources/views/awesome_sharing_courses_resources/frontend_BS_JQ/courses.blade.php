@@ -43,7 +43,7 @@
           <div class="col-md-7 text-center">
             {{-- <h2>Our Courses</h2>
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum magnam illum maiores adipisci pariatur, eveniet.</p> --}}
-            <h2>我们的课程</h2>
+            <h2>我们的{{ $coursetype->type }}</h2>
             <p class="lead">静心学习我们的所有课程，你就有可能月薪几十万咯!!</p>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <a href="javascript:;" class="course">
               {{-- <img src="{{ asset('sise/frontend/images/webdesign.jpg') }}" alt="Image placeholder"> --}}
-              <h1 align='center'>当前类型没有课程</h1>
+              <h1 align='center'>暂时没有{{ $coursetype->type }}</h1>
               {{-- <p>Enroll Now</p> --}}
             </a>
           </div>

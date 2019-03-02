@@ -27,7 +27,7 @@
                   {{-- <h1 class="mb-0">Web Design 101</h1> --}}
                   <h1 class="mb-0">{{ $course->title }}</h1>
                   {{-- <p>By Gregg White</p> --}}
-                  <p>{{ $course->user->name }}</p>
+                  <p>精品视频课程主讲老师：{{ $course->user->name }}</p>
                   {{-- <p class="lead mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, fuga.</p> --}}
                   <p class="lead mb-5">{{ $course->description }}</p>
                   

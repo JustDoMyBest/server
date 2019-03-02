@@ -15,7 +15,7 @@
               </li>
               <li class="nav-item dropdown">
                 {{-- <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Online Courses</a> --}}
-                <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">在想课程</a>
+                <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">精品课程</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                     {{-- @forelse ($coursetypes as $coursetype) --}}
                     @forelse ($all_coursetypes as $coursetype)
@@ -25,20 +25,15 @@
                          <a class="dropdown-item" href="/frontend/courses/{{ $coursetype->id }}">{{ $coursetype->type }}</a>
                        @endif
                     @empty
-                       <a class="dropdown-item" href="javascript:;">没有课程</a> 
+                       <a class="dropdown-item" href="javascript:;">没有精品课程</a> 
                     @endforelse
-                  {{-- <a class="dropdown-item" href="courses.html">HTML</a>
-                  <a class="dropdown-item" href="courses.html">WordPress</a>
-                  <a class="dropdown-item" href="courses.html">Web Development</a>
-                  <a class="dropdown-item" href="courses.html">Javascript</a>
-                  <a class="dropdown-item" href="courses.html">Photoshop</a> --}}
                 </div>
 
               </li>
 
               <li class="nav-item dropdown">
                 {{-- <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a> --}}
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">文件共享</a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">精品课程文件</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown05">
                     {{-- @forelse ($filetypes as $filetype) --}}
                     @forelse ($all_filetypes as $filetype)
@@ -47,7 +42,7 @@
                         <a class="dropdown-item" href="/frontend/files/{{ $filetype->id }}">{{ $filetype->type }}</a>
                        @endif
                     @empty
-                       <a class="dropdown-item" href="javascript:;">没有文件</a> 
+                       <a class="dropdown-item" href="javascript:;">没有精品课程文件</a> 
                     @endforelse
                   {{-- <a class="dropdown-item" href="#">HTML</a>
                   <a class="dropdown-item" href="#">WordPress</a>

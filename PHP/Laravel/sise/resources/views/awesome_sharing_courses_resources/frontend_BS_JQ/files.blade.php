@@ -43,8 +43,9 @@
           <div class="col-md-7 text-center">
             {{-- <h2>Our Courses</h2>
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum magnam illum maiores adipisci pariatur, eveniet.</p> --}}
-            <h2>我们的文件</h2>
-            <p class="lead">我们共享的所有文件，点击就能在线浏览或者下载咯，右键另存为还能直接下载图片、视频等文件哦!!</p>
+            <h2>我们的{{ $filetype->type }}</h2>
+            {{-- <p class="lead">我们共享的所有文件，点击就能在线浏览或者下载咯，右键另存为还能直接下载图片、视频等文件哦!!</p> --}}
+            <p class="lead">我们共享的所有{{ $filetype->type }}，点击就能在线浏览或者下载咯。</p>
           </div>
         </div>
         <div class="row top-course">
@@ -66,7 +67,8 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <a href="javascript:;" class="course">
               {{-- <img src="{{ asset('sise/frontend/images/webdesign.jpg') }}" alt="Image placeholder"> --}}
-              <h1 align='center'>当前类型没有文件</h1>
+              {{-- <h1 align='center'>当前类型没有文件</h1> --}}
+              <h1 align='center'>暂时没有{{ $filetype->type }}</h1>
               {{-- <p>Enroll Now</p> --}}
             </a>
           </div>
