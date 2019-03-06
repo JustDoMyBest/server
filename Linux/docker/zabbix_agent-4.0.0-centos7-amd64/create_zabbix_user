@@ -4,8 +4,8 @@ user=zabbix
 group=zabbix
 
 #Create user if not exist
-grep $user /etc/passwd
+grep $user /etc/passwd &> /dev/null
 if test $? -ne 0
 then
-	useradd -M zabbix
+	useradd -M zabbix &> /dev/null
 fi

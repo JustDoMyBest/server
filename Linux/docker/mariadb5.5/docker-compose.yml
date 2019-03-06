@@ -1,0 +1,21 @@
+version: '3'
+services:
+    mysql:
+        build: "mysql"
+        environment:
+            - TZ=Asia/Shanghai
+            - MYSQL_ROOT_PASSWORD=admin!123
+        ports:
+            - "3309:3306"
+        volumes:
+            # - "./mysql/var/lib/mysql:/var/lib/mysql"
+            # - "./mysql/etc:/etc/mysql/conf.d"
+            # - "./mysql/var/log/mysql:/var/log/mysql"
+            # - "./mysql/var/run/mysqld:/var/run/mysqld"
+            # - "./mysql/backup:/backup"
+            
+            - "./var/lib/mysql:/var/lib/mysql"
+            - "./etc/my.cnf:/etc/mysql/conf.d/mariadb.cnf"
+            - "./var/log/mysql/mariadb-slow.log:/var/log/mysql/mariadb-slow.log"
+            - "./var/run/mysqld:/var/run/mysqld"
+            - "./backup:/backup"

@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+bash /home/s/zabbix_agent-4.0.0-centos7-amd64/create_zabbix_user
+
+bash /home/s/zabbix_agent-4.0.0-centos7-amd64/ln_exec_file
+
+firewall-cmd --permanent --add-port=10050/tcp &> /dev/null
+firewall-cmd --reload &> /dev/null
+
+/home/s/zabbix_agent-4.0.0-centos7-amd64/sbin/zabbix_agentd -c /home/s/zabbix_agent-4.0.0-centos7-amd64/conf/zabbix_agentd.conf 

@@ -182,3 +182,37 @@ Version: '5.7.24'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2019-03-02T08:05:47.137539Z 0 [Note] Event Scheduler: Loaded 0 events
 2019-03-02T08:05:47.178541Z 0 [Note] E:\laragon\bin\mysql\mysql-5.7.24-winx64\bin\mysqld: ready for connections.
 Version: '5.7.24'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2019-03-02T13:08:53.113717Z 92 [Note] Aborted connection 92 to db: 'forum' user: 'root' host: 'localhost' (Got an error reading communication packets)
+2019-03-02T20:32:22.456284Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-02T20:32:22.457284Z 0 [Note] E:\laragon\bin\mysql\mysql-5.7.24-winx64\bin\mysqld (mysqld 5.7.24) starting as process 1736 ...
+2019-03-02T20:32:22.526288Z 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2019-03-02T20:32:22.528288Z 0 [Note] InnoDB: Uses event mutexes
+2019-03-02T20:32:22.529288Z 0 [Note] InnoDB: _mm_lfence() and _mm_sfence() are used for memory barrier
+2019-03-02T20:32:22.530289Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-03-02T20:32:22.531289Z 0 [Note] InnoDB: Number of pools: 1
+2019-03-02T20:32:22.533289Z 0 [Note] InnoDB: Not using CPU crc32 instructions
+2019-03-02T20:32:22.539289Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2019-03-02T20:32:22.560290Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-03-02T20:32:22.640295Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2019-03-02T20:32:22.645295Z 0 [Note] InnoDB: Log scan progressed past the checkpoint lsn 8198594
+2019-03-02T20:32:22.646295Z 0 [Note] InnoDB: Doing recovery: scanned up to log sequence number 8198603
+2019-03-02T20:32:22.647295Z 0 [Note] InnoDB: Database was not shutdown normally!
+2019-03-02T20:32:22.647295Z 0 [Note] InnoDB: Starting crash recovery.
+2019-03-02T20:32:23.183326Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2019-03-02T20:32:23.184326Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-03-02T20:32:23.186326Z 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-03-02T20:32:23.420339Z 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2019-03-02T20:32:23.426340Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2019-03-02T20:32:23.427340Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2019-03-02T20:32:23.429340Z 0 [Note] InnoDB: 5.7.24 started; log sequence number 8198603
+2019-03-02T20:32:23.431340Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2019-03-02T20:32:23.432340Z 0 [Note] InnoDB: Loading buffer pool(s) from J:\git\PHP\Laravel\data\mysql\ib_buffer_pool
+2019-03-02T20:32:23.491343Z 0 [Warning] Failed to set up SSL because of the following SSL library error: SSL context is not usable without certificate and private key
+2019-03-02T20:32:23.492344Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2019-03-02T20:32:23.494344Z 0 [Note] IPv6 is available.
+2019-03-02T20:32:23.494344Z 0 [Note]   - '::' resolves to '::';
+2019-03-02T20:32:23.495344Z 0 [Note] Server socket created on IP: '::'.
+2019-03-02T20:32:23.509345Z 0 [Note] InnoDB: Buffer pool(s) load completed at 190303  4:32:23
+2019-03-02T20:32:23.735357Z 0 [Note] Event Scheduler: Loaded 0 events
+2019-03-02T20:32:23.736358Z 0 [Note] E:\laragon\bin\mysql\mysql-5.7.24-winx64\bin\mysqld: ready for connections.
+Version: '5.7.24'  socket: ''  port: 3306  MySQL Community Server (GPL)

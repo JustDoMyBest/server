@@ -1,0 +1,35 @@
+1、安装sendmail
+
+# yum install -y sendmail
+
+# yum install -y sendmail-cf
+
+
+2、配置发送邮件的邮箱认证信息
+
+＃ vim /etc/mail.rc 
+
+在后面添加一下内容：
+
+set from=xxxxx@xxx.com   #发送者的邮箱
+
+set smtp=smtp.exmail.qq.com ＃邮箱的SMTP
+
+set smtp-auth-user=xxxxx@xxx.com   #发送者的邮箱
+
+set smtp-auth-password=＊＊＊＊＊ ＃邮箱密码
+
+set smtp-auth=login                           ＃自动登录
+
+set from=13711760361@163.com
+set smtp=smtp.163.com
+set smtp-auth-user=13711760361@163.com
+set smtp-auth-password=1234qwer
+set smtp-auth=login
+
+
+3、测试发送邮件
+
+echo '邮件内容' | mail -s "邮件标题" -r xxxxx@xxx.com hhh@163.com aaa@163.com
+
+说明：xxxxx@xxx.com为发送者邮箱，要和第二步设置邮箱一致，hhh@163.com aaa@163.com是收件人，多个收件人用空格隔开。

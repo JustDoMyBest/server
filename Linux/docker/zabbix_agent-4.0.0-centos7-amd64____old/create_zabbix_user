@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+user=zabbix
+group=zabbix
+
+#Create user if not exist
+grep $user /etc/passwd
+if test $? -ne 0
+then
+	useradd -M zabbix
+fi

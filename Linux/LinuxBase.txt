@@ -85,6 +85,9 @@ HP和RedHat上可以使用uuidgen来生成,solaris上命令:makeuuid
 date -d "2010-10-18 00:00:00" +%s
 date -d @1287331200  "+%Y-%m-%d"
 
+pidof apache2
+pgrep apache2
+
 ls -1f file_or_dir
 
 tar cvf - zencart | pigz > zencart.20170301_164100.tar.gz

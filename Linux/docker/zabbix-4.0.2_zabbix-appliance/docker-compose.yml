@@ -10,7 +10,8 @@ networks:
 
 services:
     zabbix-appliance:
-        image: "zabbix/zabbix-appliance:centos-4.0.2"
+        #image: "zabbix/zabbix-appliance:centos-4.0.2"
+        build: "zabbix-appliance"
         environment:
             - TZ=Asia/Shanghai
             - PHP_TZ="Asia/Shanghai"
@@ -21,6 +22,8 @@ services:
         volumes:
             - "./var/log/mariadb:/var/log/mariadb"
             - "./var/lib/mysql:/var/lib/mysql"
+            - "./alertscripts:/usr/lib/zabbix/alertscripts"
+            - "./ansible:/etc/ansible"
         networks:
             zabbix_appliance:
                 ipv4_address: 10.2.9.2

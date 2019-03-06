@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+#kill -15 `pidof zabbix_agentd`
+bash stop_zabbix_agentd
+bash start_zabbix_agentd
