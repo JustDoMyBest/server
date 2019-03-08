@@ -19,28 +19,32 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            {{-- <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-hidden="true"
-                       aria-expanded="false">Browse <span class="caret"></span> </a>
+                       {{-- aria-expanded="false">Browse <span class="caret"></span> </a> --}}
+                       aria-expanded="false">浏览 <span class="caret"></span> </a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="/threads">ALL Threads</a> </li>
+                        {{-- <li><a href="/threads">ALL Threads</a> </li> --}}
+                        <li><a href="/threads">所有的在线互动学习问答</a> </li>
 
                         @if(auth()->check())
-                            <li><a href="/threads?by={{ auth()->user()->name }}">My Threads</a> </li>
+                            <li><a href="/threads?by={{ auth()->user()->name }}">我的在线互动学习问答</a> </li>
                         @endif
 
-                        <li><a href="/threads?popularity=1">Popular Threads</a> </li>
-                        <li><a href="/threads?unanswered=1">Unanswered Threads</a> </li>
+                        <li><a href="/threads?popularity=1">讨论热度排序的在线互动学习问答</a> </li>
+                        <li><a href="/threads?unanswered=1">暂未有回复的在线互动学习问答</a> </li>
                     </ul>
                 </li>
 
-                <li><a href="/threads/create">New Thread</a></li>
+                {{-- <li><a href="/threads/create">New Thread</a></li> --}}
+                <li><a href="/threads/create">新建在线互动学习问答</a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-hidden="true"
-                       aria-expanded="false">Channels <span class="caret"></span> </a>
+                       {{-- aria-expanded="false">Channels <span class="caret"></span> </a> --}}
+                       aria-expanded="false">在线互动学习问答类型 <span class="caret"></span> </a>
 
                     <ul class="dropdown-menu">
                         @foreach($channels as $channel)
@@ -48,7 +52,7 @@
                         @endforeach
                     </ul>
                 </li>
-            </ul> --}}
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">

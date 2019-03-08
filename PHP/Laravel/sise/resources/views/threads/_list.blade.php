@@ -16,7 +16,8 @@
                     </h4>
 
                     <h5>
-                        Posted By:<a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a>
+                        {{-- Posted By:<a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a> --}}
+                        发布者:<a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a>
                     </h5>
                 </div>
 
@@ -31,5 +32,6 @@
         </div>
     </div>
 @empty
-    <p>There are no relevant results at this time.</p>
+    {{-- <p>There are no relevant results at this time.</p> --}}
+    <p>暂时没有相关精品课程在线互动学习问答发布</p>
 @endforelse

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Middleware\CheckSuperuser;
+
 Route::get('backend', function () {
     // return 'Hello';
     return view('awesome_sharing_courses_resources.backend_BS_JQ.index');
     // return view('awesome_sharing_courses_resources.backend_BS_JQ.introduce');
     // return view('awesome_sharing_courses_resources.backend.manage_cources');
-})->middleware('auth');
+})->middleware('auth')->middleware(CheckSuperuser::class);
 Route::get('introduce', function () {
     // return 'Hello';
     // return view('awesome_sharing_courses_resources.backend_BS_JQ.index');

@@ -7,7 +7,8 @@
                     <a :href="'/profiles/'+data.owner.name"
                         v-text="data.owner.name">
                     <!-- </a> said {{ data.created_at }}...t }} -->
-                    </a> said <span v-text="ago"></span>
+                    <!-- </a> said <span v-text="ago"></span> -->
+                    </a> 回复于 <span v-text="ago"></span>
                 </h5>
 
                 <!--@if(Auth::check())-->
@@ -29,8 +30,10 @@
                         <textarea class="form-control" v-model="body" required></textarea>
                     </div>
 
-                    <button class="btn btn-xs btn-primary" >Update</button>
-                    <button class="btn btn-xs btn-link" @click="cancelReply" type="button">Cancel</button>
+                    <!-- <button class="btn btn-xs btn-primary" >Update</button>
+                    <button class="btn btn-xs btn-link" @click="cancelReply" type="button">Cancel</button> -->
+                    <button class="btn btn-xs btn-primary" >更新</button>
+                    <button class="btn btn-xs btn-link" @click="cancelReply" type="button">取消</button>
                 </form>
             </div>
 
@@ -43,8 +46,10 @@
             <!-- <div class="panel-footer level" v-if="canUpdate"> -->
             <div class="panel-footer level">
                 <div v-if="authorize('updateReply',reply)">
-                    <button class="btn btn-xs mr-1" @click="editReply">Edit</button>
-                    <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
+                    <!-- <button class="btn btn-xs mr-1" @click="editReply">Edit</button>
+                    <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button> -->
+                    <button class="btn btn-xs mr-1" @click="editReply">编辑</button>
+                    <button class="btn btn-xs btn-danger mr-1" @click="destroy">删除</button>
 
                     <!-- <button class="btn btn-xs btn-default ml-a" @click="markBestReply" v-show="! isBest">Best Reply</button> -->
                 </div>
@@ -100,7 +105,8 @@
                         if(response.status === 200){
                            this.editing = false;
  
-                           flash('Updated!');
+                        //    flash('Updated!');
+                           flash('更新成功！');
                         }
                     });
 

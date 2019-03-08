@@ -110,7 +110,8 @@ class ThreadController extends Controller
         ]);
     
         return redirect($thread->path())
-            ->with('flash','Your thread has been published!');
+            // ->with('flash','Your thread has been published!');
+            ->with('flash','你已成功发布在线互动学习问答！');
     }
 
     /**

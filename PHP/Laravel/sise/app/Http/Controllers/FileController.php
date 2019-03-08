@@ -20,7 +20,7 @@ class FileController extends Controller
 
     public function __construct()
     {
-        // parent::__construct();
+        //parent::__construct();
         $this->middleware('auth');
         $this->filetypes = Filetype::all();
         $this->tags = Tag::all();

@@ -1,5 +1,6 @@
 <template>
-    <button :class="classes" @click="subscribe">Subscribe</button>
+    <!-- <button :class="classes" @click="subscribe">Subscribe</button> -->
+    <button :class="classes" @click="subscribe">点我订阅</button>
 </template>
 
 <script>

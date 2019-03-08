@@ -216,3 +216,5 @@ Version: '5.7.24'  socket: ''  port: 3306  MySQL Community Server (GPL)
 2019-03-02T20:32:23.735357Z 0 [Note] Event Scheduler: Loaded 0 events
 2019-03-02T20:32:23.736358Z 0 [Note] E:\laragon\bin\mysql\mysql-5.7.24-winx64\bin\mysqld: ready for connections.
 Version: '5.7.24'  socket: ''  port: 3306  MySQL Community Server (GPL)
+2019-03-08T02:10:28.334560Z 0 [Warning] Insecure configuration for --secure-file-priv: Current value does not restrict location of generated files. Consider setting it to a valid, non-empty path.
+2019-03-08T02:10:28.336304Z 0 [Note] D:\laragon\bin\mysql\mysql-5.7.24-winx64\bin\mysqld (mysqld 5.7.24) starting as process 26312 ...

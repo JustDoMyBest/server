@@ -17,7 +17,8 @@
                                 <img src="/storage/{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}" width="25" height="25" class="mr-1">
 
                             <span class="flex">
-                                <a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a> posted:
+                                {{-- <a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a> posted: --}}
+                                <a href="{{ route('profile',$thread->creator) }}">{{ $thread->creator->name }}</a> 发布：
                                 {{ $thread->title }}
                             </span>
 
@@ -26,7 +27,9 @@
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
-                                        <button type="submit" class="btn btn-link">Delete Thread</button>
+                                        {{-- <button type="submit" class="btn btn-link">Delete Thread</button> --}}
+                                        {{-- <button type="submit" class="btn btn-link">删除在线互动学习问答</button> --}}
+                                        <button type="submit" class="btn btn-link">删除</button>
                                     </form>
                                 @endcan
                             </div>
@@ -68,9 +71,11 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <p>
-                                This thread was published {{ $thread->created_at->diffForHumans() }} by
+                                {{-- This thread was published {{ $thread->created_at->diffForHumans() }} by
                                 <a href="#">{{ $thread->creator->name }}</a>,and currently
-                                has <span v-text="repliesCount"></span> {{ str_plural('comment',$thread->replies_count) }}
+                                has <span v-text="repliesCount"></span> {{ str_plural('comment',$thread->replies_count) }} --}}
+                                这个在线互动学习问答被 {{ $thread->creator->name }} 发布于 {{ $thread->created_at->diffForHumans() }}，
+                                目前有 {{ $thread->replies_count }} 条回复。
                             </p>
             
                             <p>

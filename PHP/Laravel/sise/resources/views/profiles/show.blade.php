@@ -35,7 +35,8 @@
                     @endif
                 @endforeach
                 @empty
-                    <p>There is no activity for this user yet.</p>
+                    {{-- <p>There is no activity for this user yet.</p> --}}
+                    <p>你还没有活动记录。</p>
                 @endforelse
 
             </div>

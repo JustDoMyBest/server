@@ -43,7 +43,8 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Trending Threads
+                        {{-- Trending Threads --}}
+                        热度趋势排行
                     </div>
 
                     <div class="panel-body">

@@ -25,7 +25,7 @@
                          <a class="dropdown-item" href="/frontend/courses/{{ $coursetype->id }}">{{ $coursetype->type }}</a>
                        @endif
                     @empty
-                       <a class="dropdown-item" href="javascript:;">没有精品课程</a> 
+                       <a class="dropdown-item" href="javascript:;">暂时没有精品课程</a> 
                     @endforelse
                 </div>
 
@@ -42,7 +42,7 @@
                         <a class="dropdown-item" href="/frontend/files/{{ $filetype->id }}">{{ $filetype->type }}</a>
                        @endif
                     @empty
-                       <a class="dropdown-item" href="javascript:;">没有精品课程文件</a> 
+                       <a class="dropdown-item" href="javascript:;">暂时没有精品课程文件</a>
                     @endforelse
                   {{-- <a class="dropdown-item" href="#">HTML</a>
                   <a class="dropdown-item" href="#">WordPress</a>
@@ -58,6 +58,9 @@
               {{-- <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
               </li> --}}
+              <li class="nav-item">
+                <a class="nav-link" href="/threads" target="_Blank">精品课程在线互动学习问答社区</a>
+              </li>
               <li class="nav-item">
                 {{-- <a class="nav-link" href="contact.html">Contact</a> --}}
                 {{-- <a class="nav-link" href="contact.html">联系我们</a> --}}

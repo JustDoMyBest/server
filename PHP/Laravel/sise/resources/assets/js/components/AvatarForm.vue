@@ -45,7 +45,8 @@
                 data.append('avatar',avatar);
 
                 axios.post(`/api/users/${this.user.name}/avatar`,data)
-                    .then(() => flash('Avatar uploaded!'));
+                    // .then(() => flash('Avatar uploaded!'));
+                    .then(() => flash('头像更新成功！'));
             }
         }
     }

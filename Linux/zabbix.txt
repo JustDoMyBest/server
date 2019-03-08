@@ -1,2 +1,6 @@
 grant select,super,process on *.* to zabbix@localhost identified by 'zabbix';
 grant process on *.* to zabbix@localhost identified by 'zbcgoj352';
+
+{ALERT.SENDTO}
+{ALERT.SUBJECT}
+{ALERT.MESSAGE}

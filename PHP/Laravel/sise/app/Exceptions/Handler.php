@@ -47,12 +47,14 @@ class Handler extends ExceptionHandler
         // if(app()->environment() === 'testing') throw $exception;  // 此处加上一行
         if($exception instanceof \Illuminate\Validation\ValidationException){
             if ($request->expectsJson()){
-                return response('Validation failed.',422);
+                // return response('Validation failed.',422);
+                return response('验证失败。',422);
             };
         }
 
         if($exception instanceof \App\Exceptions\ThrottleException){
-            return response('You are posting too frequently.',429);
+            // return response('You are posting too frequently.',429);
+            return response('您发布过于频繁。',429);
         }
 
         return parent::render($request, $exception);

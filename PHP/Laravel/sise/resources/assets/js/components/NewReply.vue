@@ -64,7 +64,8 @@
                     .then(({data}) => {
                        this.body = '';
 
-                       flash('Your reply has been posted.');
+                    //    flash('Your reply has been posted.');
+                       flash('成功发表回复。');
 
                        this.$emit('created',data);
                     });

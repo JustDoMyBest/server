@@ -17,7 +17,8 @@ export default {
 
             this.$emit('removed');
 
-            flash('Reply has been deleted!');
+            // flash('Reply has been deleted!');
+            flash('成功删除回复！');
         }
     }
 }
