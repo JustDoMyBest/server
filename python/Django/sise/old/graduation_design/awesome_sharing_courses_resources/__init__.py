@@ -1,2 +1,0 @@
-# default_app_config = 'awesome_sharing_courses_resources.apps.awesome_sharing_courses_resourcesAppConfig'
-default_app_config = 'awesome_sharing_courses_resources.apps.AwesomeSharingCoursesResourcesConfig'

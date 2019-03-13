@@ -1,2 +1,10 @@
 brew
 open *.dmg
+
+chflags hidden ~/路径/文件夹名（文件名）
+chflags nohidden ~/路径/文件夹名（文件名）
+ctl+shift+.
+defaults write com.apple.finder AppleShowAllFiles -bool true; KillAll Finder
+defaults write com.apple.finder AppleShowAllFiles -bool false; KillAll Finder
+
+cmd+option+V

@@ -1,6 +1,6 @@
 
     {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900" rel="stylesheet"> --}}
-    <link href="{{ asset('sise/frontend/fonts/google_fonts.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('sise/frontend/fonts/google_fonts.css') }}" rel="stylesheet"> --}}
 
     <link rel="stylesheet" href="{{ asset('sise/frontend/css/bootstrap.css')  }}">
     <link rel="stylesheet" href="{{ asset('sise/frontend/css/animate.css')  }}">
