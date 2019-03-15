@@ -78,6 +78,7 @@ mkfs -t ext4 /dev/vg_test/lv_test
 
 #CMD
 lsblk
+blkid
 mount -a
 free -m
 cat /proc/swaps

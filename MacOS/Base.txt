@@ -8,3 +8,5 @@ defaults write com.apple.finder AppleShowAllFiles -bool true; KillAll Finder
 defaults write com.apple.finder AppleShowAllFiles -bool false; KillAll Finder
 
 cmd+option+V
+
+kernel.waet.enable=0 

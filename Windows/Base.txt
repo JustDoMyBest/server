@@ -16,4 +16,6 @@ shell:startup
 regedit
 ms-settings:network
 drivers
+
 netsh winsock reset
+netsh int ip reset reset.log
