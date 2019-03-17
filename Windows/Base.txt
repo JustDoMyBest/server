@@ -1,4 +1,4 @@
-ntsd -c q -pn ***.exe £¨***.exe Îª½ø³ÌÃû,exe²»ÄÜÊ¡£©
+ntsd -c q -pn ***.exe ï¼ˆ***.exe ä¸ºè¿›ç¨‹å,exeä¸èƒ½çœï¼‰
 ntsd -c q -p PID
 
 netstat -aon|findstr "8080"
@@ -7,8 +7,8 @@ taskkill /pid 4136 -t -f
 tasklist|findstr "127704"
 taskkill /f /t /im java.exe
 
-del /F /S /Q C£º\TimeEventNSIS.log
-del /F /S /Q C£º\XXXÎÄ¼þ¼Ð
+del /F /S /Q Cï¼š\TimeEventNSIS.log
+del /F /S /Q Cï¼š\XXXæ–‡ä»¶å¤¹
 Process Explorer
 
 eventvwr
@@ -19,3 +19,11 @@ drivers
 
 netsh winsock reset
 netsh int ip reset reset.log
+
+How to Turn off Windows Updates in Windows 10
+In the Services window, scroll down to Windows Update and turn off the process.
+To turn it off, right-click on the process, click on Properties and select Disabled. 
+
+How to disable Windows Defender using Local Group Policy
+gpedit.msc
+Computer Configuration > Administrative Templates > Windows Components > Windows Defender Antivi

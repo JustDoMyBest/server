@@ -1,12 +1,12 @@
 brew
 open *.dmg
 
-chflags hidden ~/Â·¾¶/ÎÄ¼ş¼ĞÃû£¨ÎÄ¼şÃû£©
-chflags nohidden ~/Â·¾¶/ÎÄ¼ş¼ĞÃû£¨ÎÄ¼şÃû£©
+chflags hidden ~/è·¯å¾„/æ–‡ä»¶å¤¹åï¼ˆæ–‡ä»¶åï¼‰
+chflags nohidden ~/è·¯å¾„/æ–‡ä»¶å¤¹åï¼ˆæ–‡ä»¶åï¼‰
 ctl+shift+.
 defaults write com.apple.finder AppleShowAllFiles -bool true; KillAll Finder
 defaults write com.apple.finder AppleShowAllFiles -bool false; KillAll Finder
 
 cmd+option+V
 
-kernel.waet.enable=0 
+kernel.waet.enable=0
