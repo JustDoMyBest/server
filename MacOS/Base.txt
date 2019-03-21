@@ -10,3 +10,24 @@ defaults write com.apple.finder AppleShowAllFiles -bool false; KillAll Finder
 cmd+option+V
 
 kernel.waet.enable=0
+
+/usr/local/bin/emacs --daemon
+
+brew cask install osxfuse
+brew install ntfs-3g
+Command+R
+csrutil disable
+csrutil status
+sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.original
+sudo ln -s /usr/local/sbin/mount_ntfs /sbin/mount_ntfs
+csrutil enable
+
+/usr/local/bin/emacsclient -nc -a /usr/local/bin/emacs "$@"
+
+ sudo find /private/var/folders/ -name com.apple.dock.iconcache -exec rm {} \;
+ sudo find /private/var/folders/ -name com.apple.iconservices -exec rm -rf {} \;
+ sudo rm -rf /Library/Caches/com.apple.iconservices.store
+
+/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user
+
+sudo lsof | grep /Volumes/External

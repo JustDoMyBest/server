@@ -20,6 +20,7 @@ cd /home/db_backup
 innobackupex --user=user --password=passwd --stream=tar | gzip > `date +'%Y%m%d_%H%M%S'.tgz`
 innobackupex --defaults-file='my.cnf' -uroot -pgoj355 --stream=tar ./ > gzip - > mysqlbackup-`date +'%Y%d%m_%H:%M:%S'`.tar.gz
 mysqldump -u... -p... mydb t1 t2 t3 > mydb_tables.sql
+create table ej_export_customs_order_backup_s_2 as select * from ej_export_customs_order WHERE customs_id <'12382569';
 
 ## recovery
 tar -I pigz -xf filename -C  date/
@@ -30,6 +31,7 @@ mysqldump¡¡-t¡¡Êý¾Ý¿âÃû¡¡-uroot¡¡-p¡¡>¡¡xxx.sql # only data
 
 ## copy
 set global max_allowed_packet=100000000; 
+set global innodb_lock_wait_timeout=300;
 
 set global net_buffer_length=100000; 
 SET GLOBAL  interactive_timeout=28800000;
@@ -55,6 +57,8 @@ max_connections = 1000
 max_connect_errors = 10
 max_allowed_packet = 16M
 
+skip-name-resolve=ON
+bind-address=0.0.0.0
 
 init-file=file_name.sql
 init-connect='sql' # disable when user is root

@@ -24,6 +24,7 @@ echo $passwd
 df -lhT
 du -lh --max-depth=1 /
 du -sh *
+du -sh `ls /|grep -v home|grep -v proc|sed 's/\(.*\)/\/\1/g'` 2>/dev/null
 time -f  "start:`date` \truntime:\%E  file:file_name  " /usr/bin/bash $script_name &> ${log_dir}${log_name}
 time -f  "start:`date` \truntime:\%E  file:file_name  " /usr/bin/bash $script_name >> ${log_dir}${log_name} 2>1
 rpm -ivh your-package.rpm
